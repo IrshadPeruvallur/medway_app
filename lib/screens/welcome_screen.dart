@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/screens/login_screen.dart';
 import 'package:medway_app/screens/onboarding/onboard_screen_1.dart';
-import 'package:medway_app/widgets/text_widgets.dart';
+import 'package:medway_app/widgets/small_widgets.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class WelcomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 35,
                   ),
-                  titleText(context,
+                  WTitleText(context,
                       text: 'Your Ultimate Doctor Appointment Booking App',
                       size: .07,
                       color: Color.fromARGB(255, 16, 105, 140)),
@@ -36,30 +37,14 @@ class WelcomeScreen extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  SizedBox(
-                    width: screenSize.width * .7,
-                    height: screenSize.width * .13,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => OnboardScreen1(),
-                              ));
-                        },
-                        child: Text(
-                          '''Let's Gets Start''',
-                          style: TextStyle(fontSize: screenSize.width * .05),
-                        ),
-                        style: ButtonStyle(
-                            shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        screenSize.width * .04))),
-                            backgroundColor: MaterialStatePropertyAll(
-                              Color.fromARGB(255, 16, 105, 140),
-                            ))),
-                  ),
+                  WElevatedButton(
+                    context,
+                    text: '''Let's Gets Start''',
+                    navigator: () =>
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => OnboardScreen1(),
+                    )),
+                  )
                 ],
               ),
             ),
