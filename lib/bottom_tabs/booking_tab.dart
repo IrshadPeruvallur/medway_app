@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:medway_app/booking_tabs/canceled.dart';
 import 'package:medway_app/booking_tabs/completed.dart';
 import 'package:medway_app/booking_tabs/upcoming.dart';
-import 'package:medway_app/widgets/small_widgets.dart';
 
 class BookingTab extends StatefulWidget {
   const BookingTab({super.key});
@@ -14,7 +13,6 @@ class BookingTab extends StatefulWidget {
 class _BookingTabState extends State<BookingTab> {
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return DefaultTabController(
       length: 3,
       child: Scaffold(

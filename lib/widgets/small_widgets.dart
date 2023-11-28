@@ -252,3 +252,45 @@ Widget doctorsList(context) {
     ),
   );
 }
+
+Widget doctersCard(context) {
+  var screenSize = MediaQuery.of(context).size;
+  return Row(
+    children: [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(
+                    'asset/modern-flat-illustration-doctor-wearing-mask-stethoscope_115122-1428.jpg')),
+            borderRadius: BorderRadius.circular(10),
+            color: const Color.fromARGB(255, 97, 97, 97),
+          ),
+          height: 120,
+          width: 100,
+        ),
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(
+              5,
+              (index) => Icon(
+                Icons.star,
+                size: screenSize.width * 0.05,
+                color: const Color.fromARGB(255, 255, 199, 59),
+              ),
+            ),
+          ),
+          WTitleText(context, text: 'Dr.Arun', size: 0.05),
+          captiontext(context, text: 'Mentelist'),
+          captiontext(context, text: 'Booking id:51516551'),
+        ],
+      )
+    ],
+  );
+}
