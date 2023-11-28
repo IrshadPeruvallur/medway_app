@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/screens/home_screen.dart';
+import 'package:medway_app/screens/main_screen.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
                 text: 'Login',
                 navigator: () =>
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => MainScreen(),
                 )),
               )
             ],

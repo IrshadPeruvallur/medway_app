@@ -181,9 +181,14 @@ Widget doctorsList(context) {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     child: Column(
       children: [
+        SizedBox(
+          height: 10,
+        ),
         ListTile(
           leading: Container(
             decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('asset/doctor.png'), fit: BoxFit.cover),
               borderRadius:
                   BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
               color: const Color.fromARGB(255, 19, 19, 19),

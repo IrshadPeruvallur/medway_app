@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/bottom_tabs/booking_tab.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeTab extends StatelessWidget {
+  const HomeTab({super.key});
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      extendBody: true,
+      appBar: WAppBar(),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -21,7 +24,6 @@ class HomeScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                WAppBar(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -30,7 +32,14 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(
                         height: screenSize.width * .05,
                       ),
-                      WSpaceBetweenText(context, 'Upcoming Shediule', () {}),
+                      WSpaceBetweenText(context, 'Upcoming Shediule', () {
+                        print('object');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BookingTab(),
+                            ));
+                      }),
                       WDoctorNameCard(context,
                           name: "Dr.Jack", subtitle: 'Mentelist'),
                       SizedBox(
