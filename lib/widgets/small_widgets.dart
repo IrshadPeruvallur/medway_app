@@ -182,17 +182,39 @@ Widget doctorsList(context) {
     child: Column(
       children: [
         ListTile(
-          leading: CircleAvatar(
-            radius: screenSize.width * .1,
+          leading: Container(
+            decoration: BoxDecoration(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
+              color: const Color.fromARGB(255, 19, 19, 19),
+            ),
+            height: screenSize.width * 0.2,
+            width: screenSize.width * 0.15,
           ),
           title: Text(
             "Name",
             style: TextStyle(
                 fontSize: screenSize.width * .05, fontWeight: FontWeight.w500),
           ),
-          subtitle: Text(
-            'Mentelist',
-            style: TextStyle(fontSize: screenSize.width * .03),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Mentelist',
+                style: TextStyle(fontSize: screenSize.width * .03),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(
+                  5,
+                  (index) => Icon(
+                    Icons.star,
+                    size: screenSize.width * 0.05,
+                    color: Colors.yellow,
+                  ),
+                ),
+              ),
+            ],
           ),
           trailing: Icon(Icons.favorite_border),
         ),
@@ -204,7 +226,7 @@ Widget doctorsList(context) {
             child: ElevatedButton(
               onPressed: () {},
               child: Text(
-                'Text',
+                'Make Appointment ',
                 style: TextStyle(
                     fontSize: screenSize.width * .05,
                     color: Color.fromARGB(255, 16, 105, 140)),
