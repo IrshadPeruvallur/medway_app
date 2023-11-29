@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/screens/empty_screen.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 

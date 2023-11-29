@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/screens/login_screen.dart';
-import 'package:medway_app/screens/onboarding/onboard_screen_2.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
 class OnboardScreen3 extends StatelessWidget {

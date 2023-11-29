@@ -1,12 +1,17 @@
 // ignore_for_file: dead_code
 
 import 'package:flutter/material.dart';
+import 'package:medway_app/screens/appointment.dart';
 
 captiontext(context, {required text, required}) {
-  return Text(
-    text,
-    textAlign: TextAlign.center,
-    style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.040),
+  return Padding(
+    padding: EdgeInsets.symmetric(
+        vertical: MediaQuery.of(context).size.width * 0.01),
+    child: Text(
+      text,
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.040),
+    ),
   );
 }
 
@@ -43,25 +48,29 @@ WRoundButton(context, {navigator}) {
   );
 }
 
-Widget WTextformFeild(context, {required label, required hint}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      captiontext(
-        context,
-        text: label,
-      ),
-      SizedBox(height: MediaQuery.of(context).size.width * .02),
-      TextFormField(
-          decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide:
-                      BorderSide(color: Color.fromARGB(255, 16, 105, 140))),
-              hintText: hint,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)))))
-    ],
+Widget WTextformFeild(context, {required label, required hint, controller}) {
+  return Padding(
+    padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.04),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        captiontext(
+          context,
+          text: label,
+        ),
+        SizedBox(height: MediaQuery.of(context).size.width * .01),
+        TextFormField(
+            controller: controller,
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 16, 105, 140))),
+                hintText: hint,
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)))))
+      ],
+    ),
   );
 }
 
@@ -160,7 +169,7 @@ Widget WSpecialistCircle(context, imagepath) {
   );
 }
 
-Widget WSpaceBetweenText(context, text, VoidCallback navigator) {
+Widget WSpaceBetweenText(context, {text, required VoidCallback navigator}) {
   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
     WTitleText(
       context,
@@ -169,13 +178,13 @@ Widget WSpaceBetweenText(context, text, VoidCallback navigator) {
     ),
     TextButton(
         onPressed: () {
-          navigator;
+          navigator();
         },
         child: Text('See All'))
   ]);
 }
 
-Widget doctorsList(context) {
+Widget doctorsList(context, {required name, required speciality}) {
   var screenSize = MediaQuery.of(context).size;
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -197,7 +206,7 @@ Widget doctorsList(context) {
             width: screenSize.width * 0.15,
           ),
           title: Text(
-            "Name",
+            name,
             style: TextStyle(
                 fontSize: screenSize.width * .05, fontWeight: FontWeight.w500),
           ),
@@ -205,7 +214,7 @@ Widget doctorsList(context) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Mentelist',
+                speciality,
                 style: TextStyle(fontSize: screenSize.width * .03),
               ),
               Row(
@@ -229,7 +238,11 @@ Widget doctorsList(context) {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Appointment(),
+                ));
+              },
               child: Text(
                 'Make Appointment ',
                 style: TextStyle(
@@ -255,42 +268,81 @@ Widget doctorsList(context) {
 
 Widget doctersCard(context) {
   var screenSize = MediaQuery.of(context).size;
-  return Row(
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                    'asset/modern-flat-illustration-doctor-wearing-mask-stethoscope_115122-1428.jpg')),
-            borderRadius: BorderRadius.circular(10),
-            color: const Color.fromARGB(255, 97, 97, 97),
-          ),
-          height: 120,
-          width: 100,
-        ),
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  return Card(
+    shape: RoundedRectangleBorder(
+        borderRadius:
+            BorderRadius.all(Radius.circular(screenSize.width * 0.04))),
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: List.generate(
-              5,
-              (index) => Icon(
-                Icons.star,
-                size: screenSize.width * 0.05,
-                color: const Color.fromARGB(255, 255, 199, 59),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: AssetImage('asset/doctor.png')),
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromARGB(255, 97, 97, 97),
               ),
+              height: 120,
+              width: 100,
             ),
           ),
-          WTitleText(context, text: 'Dr.Arun', size: 0.05),
-          captiontext(context, text: 'Mentelist'),
-          captiontext(context, text: 'Booking id:51516551'),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(
+                  5,
+                  (index) => Icon(
+                    Icons.star,
+                    size: screenSize.width * 0.05,
+                    color: const Color.fromARGB(255, 255, 199, 59),
+                  ),
+                ),
+              ),
+              WTitleText(context, text: 'Dr.Arun', size: 0.05),
+              captiontext(context, text: 'Mentelist'),
+              captiontext(context, text: 'Booking id:51516551'),
+            ],
+          )
         ],
-      )
-    ],
+      ),
+    ),
   );
 }
+
+doubleText(context, {text1, text2}) {
+  return Padding(
+    padding: EdgeInsets.symmetric(
+        vertical: MediaQuery.of(context).size.width * 0.02),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        captiontext(context, text: text1),
+        captiontext(context, text: text2)
+      ],
+    ),
+  );
+}
+
+// wDropDown(items) {
+//   return DropdownButtonFormField(
+//     decoration: InputDecoration(
+//         focusedBorder: OutlineInputBorder(
+//             borderRadius: BorderRadius.all(Radius.circular(10)),
+//             borderSide: BorderSide(color: Color.fromARGB(255, 16, 105, 140))),
+//         border: OutlineInputBorder(
+//             borderRadius: BorderRadius.all(Radius.circular(10)))),
+//     value: items[0],
+//     items: items.map((String value) {
+//       return DropdownMenuItem<String>(
+//         value: value,
+//         child: Text(value),
+//       );
+//     }).toList(),
+//     onChanged: (value) {},
+//   );
+// }

@@ -18,3 +18,16 @@ WAppBar() {
     foregroundColor: Color.fromARGB(255, 16, 105, 140),
   );
 }
+
+WNormalAppBar() {
+  return AppBar(
+    toolbarHeight: 60,
+    actions: [IconButton(onPressed: () {}, icon: Icon(Icons.notifications))],
+    elevation: 0,
+    title: TextField(
+      decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
+    ),
+    backgroundColor: Colors.transparent,
+    foregroundColor: Color.fromARGB(255, 16, 105, 140),
+  );
+}
