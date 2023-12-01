@@ -15,7 +15,7 @@ class MyAppointment extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            doctersCard(context),
+            doctersCard(context, name: 'name', speciality: 'speciality'),
             Divider(
               color: Colors.black,
             ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/screens/datepage.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
@@ -68,7 +67,7 @@ class _AppointmentState extends State<Appointment> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              doctersCard(context),
+              doctersCard(context, name: 'name', speciality: 'speciality'),
               SizedBox(
                 height: screenSize.width * 0.05,
               ),
@@ -99,7 +98,7 @@ class _AppointmentState extends State<Appointment> {
                   ),
                 ),
                 value: items[0],
-                items: items.map((String value) {
+                items: items.map((value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),

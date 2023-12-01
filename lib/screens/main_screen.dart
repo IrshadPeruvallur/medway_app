@@ -1,6 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:medway_app/bottom_tabs/account_tab.dart';
+import 'package:medway_app/bottom_tabs/profile_tab.dart';
 import 'package:medway_app/bottom_tabs/home_tab.dart';
 import 'package:medway_app/bottom_tabs/booking_tab.dart';
 
@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     Icon(Icons.person),
   ];
 
-  final List<Widget> tabs = [HomeTab(), BookingTab(), AccountTab()];
+  final List<Widget> tabs = [HomeTab(), BookingTab(), ProfileTab()];
 
   @override
   Widget build(BuildContext context) {

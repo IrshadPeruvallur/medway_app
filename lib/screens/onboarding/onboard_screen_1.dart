@@ -41,26 +41,22 @@ class OnboardScreen1 extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * .15,
-                    height: MediaQuery.of(context).size.width * 0.15,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                              Color.fromARGB(255, 16, 105, 140)),
-                          shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50)))),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => OnboardScreen2()));
-                      },
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: MediaQuery.of(context).size.width * .05,
-                      ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * .15,
+                  height: MediaQuery.of(context).size.width * 0.15,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 16, 105, 140)),
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)))),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => OnboardScreen2()));
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: MediaQuery.of(context).size.width * .05,
                     ),
                   ),
                 ),

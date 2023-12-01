@@ -9,7 +9,7 @@ WAppBar() {
       width: 20,
       color: Color.fromARGB(255, 16, 105, 140),
     ),
-    actions: [IconButton(onPressed: () {}, icon: Icon(Icons.notifications))],
+    actions: [IconButton(onPressed: () {}, icon: Icon(Icons.favorite_outline))],
     elevation: 0,
     title: TextField(
       decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
@@ -29,5 +29,15 @@ WNormalAppBar() {
     ),
     backgroundColor: Colors.transparent,
     foregroundColor: Color.fromARGB(255, 16, 105, 140),
+  );
+}
+
+titleAppBar({required title}) {
+  return AppBar(
+    title: Text(title),
+    centerTitle: true,
+    elevation: 0,
+    backgroundColor: Colors.white,
+    foregroundColor: Color.fromARGB(255, 0, 0, 0),
   );
 }

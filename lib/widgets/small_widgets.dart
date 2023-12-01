@@ -16,13 +16,16 @@ captiontext(context, {required text, required}) {
 }
 
 WTitleText(context, {required text, required double? size, color}) {
-  return Text(
-    text,
-    textAlign: TextAlign.center,
-    style: TextStyle(
-      color: color,
-      fontSize: MediaQuery.of(context).size.width * size!,
-      fontWeight: FontWeight.bold,
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Text(
+      text,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: color,
+        fontSize: MediaQuery.of(context).size.width * size!,
+        fontWeight: FontWeight.bold,
+      ),
     ),
   );
 }
@@ -194,44 +197,47 @@ Widget doctorsList(context, {required name, required speciality}) {
           height: 10,
         ),
         ListTile(
-          leading: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('asset/doctor.png'), fit: BoxFit.cover),
-              borderRadius:
-                  BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
-              color: const Color.fromARGB(255, 19, 19, 19),
-            ),
-            height: screenSize.width * 0.2,
-            width: screenSize.width * 0.15,
-          ),
-          title: Text(
-            name,
-            style: TextStyle(
-                fontSize: screenSize.width * .05, fontWeight: FontWeight.w500),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                speciality,
-                style: TextStyle(fontSize: screenSize.width * .03),
+            leading: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('asset/doctor.png'), fit: BoxFit.cover),
+                borderRadius:
+                    BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
+                color: const Color.fromARGB(255, 19, 19, 19),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(
-                  5,
-                  (index) => Icon(
-                    Icons.star,
-                    size: screenSize.width * 0.05,
-                    color: Colors.yellow,
+              height: screenSize.width * 0.2,
+              width: screenSize.width * 0.15,
+            ),
+            title: Text(
+              name,
+              style: TextStyle(
+                  fontSize: screenSize.width * .05,
+                  fontWeight: FontWeight.w500),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  speciality,
+                  style: TextStyle(fontSize: screenSize.width * .03),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: List.generate(
+                    5,
+                    (index) => Icon(
+                      Icons.star,
+                      size: screenSize.width * 0.05,
+                      color: Colors.yellow,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          trailing: Icon(Icons.favorite_border),
-        ),
+              ],
+            ),
+            trailing: IconButton(
+                selectedIcon: Icon(Icons.favorite),
+                onPressed: () {},
+                icon: Icon(Icons.favorite_border))),
         SizedBox(
           width: double.infinity,
           height: screenSize.width * .18,
@@ -266,7 +272,7 @@ Widget doctorsList(context, {required name, required speciality}) {
   );
 }
 
-Widget doctersCard(context) {
+Widget doctersCard(context, {required name, required speciality}) {
   var screenSize = MediaQuery.of(context).size;
   return Card(
     shape: RoundedRectangleBorder(
@@ -303,8 +309,8 @@ Widget doctersCard(context) {
                   ),
                 ),
               ),
-              WTitleText(context, text: 'Dr.Arun', size: 0.05),
-              captiontext(context, text: 'Mentelist'),
+              WTitleText(context, text: name, size: 0.05),
+              captiontext(context, text: speciality),
               captiontext(context, text: 'Booking id:51516551'),
             ],
           )
