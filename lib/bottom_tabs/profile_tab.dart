@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/screens/profile/favourite_screen.dart';
+import 'package:medway_app/screens/profile/help_center.dart';
+import 'package:medway_app/screens/profile/privacy_policy.dart';
 import 'package:medway_app/screens/profile/settings.dart';
 import 'package:medway_app/screens/profile/your_profile.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
@@ -28,9 +30,9 @@ class ProfileTab extends StatelessWidget {
     YourProfile(),
     FavouriteScreen(),
     Settings(),
-    YourProfile(),
-    YourProfile(),
-    YourProfile(),
+    HelpCenter(),
+    PrivacyPolicy(),
+    HelpCenter(),
   ];
 
   @override

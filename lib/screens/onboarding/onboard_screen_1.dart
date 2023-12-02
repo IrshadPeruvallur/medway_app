@@ -49,7 +49,8 @@ class OnboardScreen1 extends StatelessWidget {
                         backgroundColor: MaterialStatePropertyAll(
                             Color.fromARGB(255, 16, 105, 140)),
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)))),
+                            borderRadius: BorderRadius.circular(
+                                screenSize.width * 0.5)))),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => OnboardScreen2()));

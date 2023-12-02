@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medway_app/bottom_tabs/booking_tab.dart';
 import 'package:medway_app/screens/doctors_list.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
+import 'package:medway_app/screens/profile/favourite_screen.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
@@ -15,9 +16,35 @@ class HomeTab extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       extendBody: true,
-      appBar: WAppBar(),
+      appBar: AppBar(
+        toolbarHeight: 60,
+        // automaticallyImplyLeading: false,
+        leading: Image(
+          image: AssetImage('asset/medcalway-white-logo.png'),
+          width: 20,
+          color: Color.fromARGB(255, 16, 105, 140),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FavouriteScreen(),
+                    ));
+              },
+              icon: Icon(Icons.favorite_outline))
+        ],
+        elevation: 0,
+        title: TextField(
+          decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
+        ),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Color.fromARGB(255, 16, 105, 140),
+      ),
       body: SafeArea(
         child: Container(
+          height: screenSize.height * 1,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('asset/background.jpg'),
@@ -38,7 +65,6 @@ class HomeTab extends StatelessWidget {
                       ),
                       WSpaceBetweenText(context, text: 'Upcoming Shediule',
                           navigator: () {
-                        print('object');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -57,8 +83,14 @@ class HomeTab extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                      WSpaceBetweenText(context,
-                          text: 'Docter Speciality ', navigator: () {}),
+                      WSpaceBetweenText(context, text: 'Docter Speciality ',
+                          navigator: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DoctorsList(),
+                            ));
+                      }),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [

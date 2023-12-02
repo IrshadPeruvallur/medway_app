@@ -51,7 +51,8 @@ WRoundButton(context, {navigator}) {
   );
 }
 
-Widget WTextformFeild(context, {required label, required hint, controller}) {
+Widget WTextformFeild(context,
+    {required label, required hint, controller, validator}) {
   return Padding(
     padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.04),
     child: Column(
@@ -62,16 +63,27 @@ Widget WTextformFeild(context, {required label, required hint, controller}) {
           text: label,
         ),
         SizedBox(height: MediaQuery.of(context).size.width * .01),
-        TextFormField(
-            controller: controller,
-            decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 16, 105, 140))),
-                hintText: hint,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)))))
+        SizedBox(
+          height: MediaQuery.of(context).size.width * .2,
+          child: TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Please Enter $label";
+                } else
+                  (null);
+              },
+              controller: controller,
+              decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 16, 105, 140))),
+                  hintStyle: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * .04),
+                  hintText: hint,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))))),
+        )
       ],
     ),
   );
@@ -106,7 +118,8 @@ Widget WElevatedButton(BuildContext context,
 Widget WDoctorNameCard(context, {required name, required subtitle}) {
   var screenSize = MediaQuery.of(context).size;
   return Card(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(screenSize.width * 0.03)),
     color: Color.fromARGB(255, 16, 105, 140),
     child: Column(
       children: [
@@ -120,14 +133,19 @@ Widget WDoctorNameCard(context, {required name, required subtitle}) {
             ),
             subtitle: Text(
               subtitle,
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w300,
+                  fontSize: screenSize.width * 0.04),
             ),
             trailing: Icon(
+              size: screenSize.width * 0.08,
               Icons.call_rounded,
               color: Colors.white,
             ),
+            // minLeadingWidth: screenSize.width * .2,
             leading: CircleAvatar(
+              radius: screenSize.width * .08,
               backgroundColor: Colors.white,
             )),
         Padding(
@@ -138,16 +156,21 @@ Widget WDoctorNameCard(context, {required name, required subtitle}) {
                   BorderRadius.all(Radius.circular(screenSize.width * .02)),
               color: Colors.white,
             ),
-            height: screenSize.height * .05,
             width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Icon(Icons.calendar_month),
+                  Icon(
+                    Icons.calendar_month,
+                    size: screenSize.width * 0.05,
+                  ),
                   captiontext(context, text: 'Monday, 16 July'),
-                  Icon(Icons.timer_sharp),
+                  Icon(
+                    Icons.timer_sharp,
+                    size: screenSize.width * 0.05,
+                  ),
                   captiontext(context, text: '09.00-10.00'),
                 ],
               ),

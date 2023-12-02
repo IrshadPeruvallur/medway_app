@@ -68,7 +68,8 @@ class OnboardScreen3 extends StatelessWidget {
                         backgroundColor: MaterialStatePropertyAll(
                             Color.fromARGB(255, 16, 105, 140)),
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)))),
+                            borderRadius: BorderRadius.circular(
+                                screenSize.width * 0.5)))),
                     onPressed: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => LoginScreen()));

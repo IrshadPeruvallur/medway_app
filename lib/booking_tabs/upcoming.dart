@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
+import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
 class UpComingTab extends StatelessWidget {
@@ -119,7 +120,14 @@ class UpComingTab extends StatelessWidget {
                                                       BorderRadius.circular(
                                                           screenSize.width *
                                                               5)))),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ResheduleAppointment(),
+                                            ));
+                                      },
                                       child: Text('Reshedule')),
                                 ),
                               ],
