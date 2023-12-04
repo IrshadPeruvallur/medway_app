@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medway_app/screens/main_screen.dart';
 import 'package:medway_app/screens/splash_screen.dart';
 
+const save_key_name = 'userloggedin';
 void main(List<String> args) {
   runApp(MyApp());
 }

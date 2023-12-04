@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/main.dart';
 import 'package:medway_app/screens/main_screen.dart';
+import 'package:medway_app/screens/welcome_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 bottomSheet(context) {
   return showBottomSheet(
@@ -19,11 +22,13 @@ bottomSheet(context) {
   );
 }
 
-checklogin(context, controller1, controller2) {
+checklogin(context, controller1, controller2) async {
   final _email = controller1.text;
   final _password = controller2.text;
   if (_email == 'irshadpukayoor@gmail.com' && _password == '123') {
     print('match');
+    final _shardPrefrs = await SharedPreferences.getInstance();
+    await _shardPrefrs.setBool(save_key_name, true);
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -43,15 +48,28 @@ checklogin(context, controller1, controller2) {
   }
 }
 
-// WShowAlerDilogue() {
-//   BuildContext? context;
-//   return showDialog(
-//     context: context!,
-//     builder: (context) {
-//       return AlertDialog(
-//         title: Text("data"),
-//         actions: [Icon(Icons.close)],
-//       );
-//     },
-//   );
-// }
+Future gotoLogin(context) async {
+  await Future.delayed(Duration(seconds: 3));
+  Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => WelcomeScreen()));
+}
+
+checkedUserLoggedIn(context) async {
+  final _sharedPrfs = await SharedPreferences.getInstance();
+  final userloggedin = _sharedPrfs.getBool(save_key_name);
+  if (userloggedin == null || userloggedin == false) {
+    gotoLogin(context);
+  } else {
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MainScreen(),
+        ),
+        (route) => false);
+  }
+}
+
+fsignout() async {
+  final _shardPrfs = await SharedPreferences.getInstance();
+  await _shardPrfs.clear();
+}

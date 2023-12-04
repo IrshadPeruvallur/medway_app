@@ -375,3 +375,42 @@ doubleText(context, {text1, text2}) {
 //     onChanged: (value) {},
 //   );
 // }
+
+WshowBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo),
+                title: Text('Gallery'),
+                onTap: () {
+                  // Handle gallery option
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.camera),
+                title: Text('Camera'),
+                onTap: () {
+                  // Handle camera option
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.close),
+                title: Text('Cancel'),
+                onTap: () {
+                  // Close the bottom sheet
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      });
+}

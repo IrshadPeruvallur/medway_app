@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/bottom_tabs/booking_tab.dart';
+import 'package:medway_app/screens/bottom_tabs/booking_tab.dart';
 import 'package:medway_app/screens/doctors_list.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/screens/profile/favourite_screen.dart';

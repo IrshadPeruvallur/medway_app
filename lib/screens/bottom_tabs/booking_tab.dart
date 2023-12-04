@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/booking_tabs/canceled.dart';
-import 'package:medway_app/booking_tabs/completed.dart';
-import 'package:medway_app/booking_tabs/upcoming.dart';
+import 'package:medway_app/screens/booking_tabs/canceled.dart';
+import 'package:medway_app/screens/booking_tabs/completed.dart';
+import 'package:medway_app/screens/booking_tabs/upcoming.dart';
 
 class BookingTab extends StatefulWidget {
   const BookingTab({super.key});

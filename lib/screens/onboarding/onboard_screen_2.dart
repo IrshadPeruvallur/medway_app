@@ -31,8 +31,8 @@ class OnboardScreen2 extends StatelessWidget {
               ),
               captiontext(
                 context,
-                text:
-                    'Book appointments effortlessly and manage your health journey',
+                text: '''Book appointment's effortlessly
+                     and manage your health journey''',
               ),
             ],
           ),

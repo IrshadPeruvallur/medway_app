@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/function/functio_normal.dart';
 import 'package:medway_app/screens/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,8 +12,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    gotoLogin();
+    // gotoLogin(context);
     // TODO: implement initState
+    checkedUserLoggedIn(context);
     super.initState();
   }
 
@@ -27,11 +29,5 @@ class _SplashScreenState extends State<SplashScreen> {
         width: screenSize.width * 0.3,
       )),
     );
-  }
-
-  Future gotoLogin() async {
-    await Future.delayed(Duration(seconds: 3));
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => WelcomeScreen()));
   }
 }

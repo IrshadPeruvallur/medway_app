@@ -3,6 +3,7 @@ import 'package:medway_app/screens/profile/favourite_screen.dart';
 import 'package:medway_app/screens/profile/help_center.dart';
 import 'package:medway_app/screens/profile/privacy_policy.dart';
 import 'package:medway_app/screens/profile/settings.dart';
+import 'package:medway_app/screens/profile/signout.dart';
 import 'package:medway_app/screens/profile/your_profile.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
@@ -32,7 +33,7 @@ class ProfileTab extends StatelessWidget {
     Settings(),
     HelpCenter(),
     PrivacyPolicy(),
-    HelpCenter(),
+    Synout()
   ];
 
   @override

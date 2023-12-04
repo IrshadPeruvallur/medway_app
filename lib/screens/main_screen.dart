@@ -1,8 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:medway_app/bottom_tabs/profile_tab.dart';
-import 'package:medway_app/bottom_tabs/home_tab.dart';
-import 'package:medway_app/bottom_tabs/booking_tab.dart';
+import 'package:medway_app/screens/bottom_tabs/booking_tab.dart';
+import 'package:medway_app/screens/bottom_tabs/home_tab.dart';
+import 'package:medway_app/screens/bottom_tabs/profile_tab.dart';
 
 class MainScreen extends StatefulWidget {
   MainScreen({Key? key});
