@@ -24,30 +24,34 @@ checklogin(context, controller1, controller2) {
   final _password = controller2.text;
   if (_email == 'irshadpukayoor@gmail.com' && _password == '123') {
     print('match');
-    Navigator.pushReplacement(
+    Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => MainScreen(),
-        ));
+        ),
+        (route) => false);
   } else {
-    final _errorMessage = "Username password does not match";
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Color.fromARGB(255, 39, 39, 39),
-        margin: EdgeInsets.all(10),
-        duration: Duration(seconds: 5),
-        content: Text(_errorMessage)));
+      content: Text('Username password does not match'),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.red,
+      margin: EdgeInsets.all(15),
+      duration: Duration(seconds: 3),
+    ));
 
-    // showDialog(context: context, builder:(context1){
-    //   return AlertDialog(
-    //     title: Text("Error"),
-    //     content: Text(_errorMessage),
-    //     actions: [TextButton(onPressed: (){
-    //       Navigator.of(context1).pop();
-    //     }, child:Text("Close"))],
-
-    //   );
-    // } );
     print("Username password doesnot match");
   }
 }
+
+// WShowAlerDilogue() {
+//   BuildContext? context;
+//   return showDialog(
+//     context: context!,
+//     builder: (context) {
+//       return AlertDialog(
+//         title: Text("data"),
+//         actions: [Icon(Icons.close)],
+//       );
+//     },
+//   );
+// }
