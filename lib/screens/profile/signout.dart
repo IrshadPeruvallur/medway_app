@@ -25,7 +25,7 @@ class Synout extends StatelessWidget {
                 ],
               ),
               WElevatedButton(context, navigator: () {
-                fsignout();
+                fsignout(context);
               }, text: 'Signout')
             ]),
       ),

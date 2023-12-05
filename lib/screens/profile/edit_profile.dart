@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
-class YourProfile extends StatelessWidget {
-  YourProfile({super.key});
+class EditProfile extends StatelessWidget {
+  EditProfile({super.key});
   final List labelText = [
     'Name',
     'Phone Number',

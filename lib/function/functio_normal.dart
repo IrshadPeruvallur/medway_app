@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/main.dart';
+import 'package:medway_app/screens/login_screen.dart';
 import 'package:medway_app/screens/main_screen.dart';
 import 'package:medway_app/screens/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +26,7 @@ bottomSheet(context) {
 checklogin(context, controller1, controller2) async {
   final _email = controller1.text;
   final _password = controller2.text;
-  if (_email == 'irshadpukayoor@gmail.com' && _password == '123') {
+  if (_email == _password) {
     print('match');
     final _shardPrefrs = await SharedPreferences.getInstance();
     await _shardPrefrs.setBool(save_key_name, true);
@@ -69,7 +70,13 @@ checkedUserLoggedIn(context) async {
   }
 }
 
-fsignout() async {
+fsignout(BuildContext context) async {
   final _shardPrfs = await SharedPreferences.getInstance();
   await _shardPrfs.clear();
+  Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginScreen(),
+      ),
+      (route) => false);
 }
