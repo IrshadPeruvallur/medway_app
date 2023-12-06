@@ -46,6 +46,7 @@ class UpComingTab extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => MyAppointment(
+                                          index: index,
                                           doctorspicture: data.doctorpic,
                                           doctorname: data.doctorname,
                                           doctorspeciality:
@@ -67,8 +68,7 @@ class UpComingTab extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                             fit: BoxFit.cover,
-                                            image: AssetImage(
-                                                'asset/modern-flat-illustration-doctor-wearing-mask-stethoscope_115122-1428.jpg')),
+                                            image: AssetImage(data.doctorpic)),
                                         borderRadius: BorderRadius.circular(10),
                                         color: const Color.fromARGB(
                                             255, 97, 97, 97),
@@ -125,7 +125,9 @@ class UpComingTab extends StatelessWidget {
                                                       BorderRadius.circular(
                                                           screenSize.width *
                                                               5)))),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        cancelAppointment(index);
+                                      },
                                       child: Text('Cancel')),
                                 ),
                                 SizedBox(

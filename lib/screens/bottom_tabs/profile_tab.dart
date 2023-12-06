@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/function/nrml_function.dart';
+import 'package:medway_app/screens/profile/Account.dart';
 import 'package:medway_app/screens/profile/favourite_screen.dart';
 import 'package:medway_app/screens/profile/help_center.dart';
 import 'package:medway_app/screens/profile/my_profile.dart';
@@ -15,6 +16,7 @@ class ProfileTab extends StatelessWidget {
     'Settings',
     'Help Center',
     'Privicy Policy',
+    'Delete Account',
   ];
   final List profileIcons = [
     Icon(Icons.person_2_outlined),
@@ -22,6 +24,7 @@ class ProfileTab extends StatelessWidget {
     Icon(Icons.settings),
     Icon(Icons.help),
     Icon(Icons.lock_outline),
+    Icon(Icons.delete_rounded),
   ];
 
   final List profileTabs = [
@@ -30,6 +33,7 @@ class ProfileTab extends StatelessWidget {
     Settings(),
     HelpCenter(),
     PrivacyPolicy(),
+    DeleteAccount()
   ];
 
   @override
