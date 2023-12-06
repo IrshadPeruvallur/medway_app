@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+part 'data_model.g.dart';
 
 @HiveType(typeId: 1)
 class PatientModel {
@@ -6,20 +7,23 @@ class PatientModel {
   int? index;
   @HiveField(1)
   late final String doctorpic;
-  late final String doctorname;
-  late final String doctorspecality;
-  late final String name;
   @HiveField(2)
-  late final String phone;
+  late final String doctorname;
   @HiveField(3)
-  late final String age;
+  late final String doctorspecality;
   @HiveField(4)
-  late final String gender;
+  late final String name;
   @HiveField(5)
-  late final String problem;
+  late final String phone;
   @HiveField(6)
-  late final String time;
+  late final String age;
   @HiveField(7)
+  late final String gender;
+  @HiveField(8)
+  late final String problem;
+  @HiveField(9)
+  late final String time;
+  @HiveField(10)
   late final String date;
 
   PatientModel(
