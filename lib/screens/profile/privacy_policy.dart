@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/screens/doctors_list.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
@@ -8,7 +7,6 @@ class PrivacyPolicy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: titleAppBar(title: 'Favourite'),
       body: Padding(

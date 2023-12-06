@@ -1,25 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/function/db_function.dart';
+import 'package:medway_app/model/data_model.dart';
+import 'package:medway_app/screens/booking_tabs/upcoming.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 import 'package:intl/intl.dart';
 
-// ignore: must_be_immutable
 class Appointment extends StatefulWidget {
-  Appointment({Key? key}) : super(key: key);
+  final String docterPic;
+  final String docterName;
+  final String docterspeciality;
+
+  Appointment(
+      {super.key,
+      required this.docterPic,
+      required this.docterName,
+      required this.docterspeciality});
 
   @override
   State<Appointment> createState() => _AppointmentState();
 }
 
 class _AppointmentState extends State<Appointment> {
-  // dynamic name = TextEditingController();
-  // dynamic phone = TextEditingController();
-  // dynamic gender = TextEditingController();
-  // dynamic age = TextEditingController();
-  // dynamic bookingfor = TextEditingController();
-  dynamic dateController = TextEditingController();
-  dynamic timeController = TextEditingController();
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  dynamic genderController = '';
+  final ageController = TextEditingController();
+  final problemController = TextEditingController();
+  final dateController = TextEditingController();
+  final timeController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   List<String> items = ['Male', 'Female', 'Other'];
   Future<void> _selectDate(BuildContext context) async {
@@ -61,148 +72,203 @@ class _AppointmentState extends State<Appointment> {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: WNormalAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              doctersCard(context, name: 'name', speciality: 'speciality'),
-              SizedBox(
-                height: screenSize.width * 0.05,
-              ),
-              WTextformFeild(
-                context,
-                label: 'Name',
-                hint: 'Full Name',
-              ),
-              WTextformFeild(
-                context,
-                label: 'Phone',
-                hint: 'Mobile Number',
-              ),
-              SizedBox(
-                height: screenSize.width * 0.04,
-              ),
-              captiontext(context, text: 'Gender'),
-              DropdownButtonFormField(
-                // key: gender,
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                doctersCard(context,
+                    picture: widget.docterPic,
+                    name: widget.docterName,
+                    speciality: widget.docterspeciality),
+                SizedBox(
+                  height: screenSize.width * 0.05,
                 ),
-                value: items[0],
-                items: items.map((value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (value) {},
-              ),
-              WTextformFeild(
-                context,
-                label: 'Age',
-                hint: 'Age',
-              ),
-              SizedBox(
-                height: screenSize.width * 0.04,
-              ),
-              captiontext(context, text: 'Booking For'),
-              DropdownButtonFormField(
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                ),
-                value: items[0],
-                items: items.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (value) {},
-              ),
-              WTextformFeild(context, label: 'Problem', hint: "Your Problem"),
-              SizedBox(
-                height: screenSize.width * 0.04,
-              ),
-              captiontext(context, text: 'Time'),
-              TextFormField(
-                controller: timeController,
-                keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      _selectTime(context);
-                    },
-                    icon: Icon(Icons.calendar_today),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: screenSize.width * 0.04,
-              ),
-              captiontext(context, text: 'Date'),
-              TextFormField(
-                controller: dateController,
-                keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      _selectDate(context);
-                    },
-                    icon: Icon(Icons.calendar_today),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: screenSize.width * 0.04,
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: WElevatedButton(
+                WTextformField(
+                  keyboardType: TextInputType.name,
+                  controller: nameController,
                   context,
-                  text: 'Submit Info.',
-                  navigator: () => Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return MyAppointment();
-                    },
-                  )),
+                  label: 'Name',
+                  hint: 'Full Name',
                 ),
-              ),
-            ],
+                WTextformField(
+                  keyboardType: TextInputType.number,
+                  controller: phoneController,
+                  context,
+                  label: 'Phone',
+                  hint: 'Mobile Number',
+                ),
+                SizedBox(
+                  height: screenSize.width * 0.04,
+                ),
+                // captiontext(context, text: 'Gender'),
+                // DropdownButtonFormField(
+                //   // key: gender,
+                //   decoration: InputDecoration(
+                //     focusedBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.all(Radius.circular(10)),
+                //       borderSide:
+                //           BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
+                //     ),
+                //     border: OutlineInputBorder(
+                //       borderRadius: BorderRadius.all(Radius.circular(10)),
+                //     ),
+                //   ),
+                //   value: genderController,
+                //   items: items.map((value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   }).toList(),
+                //   onChanged: (NewValue) {
+                //     setState(() {
+                //       genderController = NewValue;
+                //     });
+                //   },
+                // ),
+                WTextformField(
+                  keyboardType: TextInputType.number,
+                  controller: ageController,
+                  context,
+                  label: 'Age',
+                  hint: 'Age',
+                ),
+                SizedBox(
+                  height: screenSize.width * 0.04,
+                ),
+                WTextformField(
+                    controller: problemController,
+                    keyboardType: TextInputType.text,
+                    context,
+                    label: 'Problem',
+                    hint: "Your Problem"),
+                SizedBox(
+                  height: screenSize.width * 0.04,
+                ),
+                captiontext(context, text: 'Time'),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please select Time";
+                    } else {
+                      null;
+                    }
+                  },
+                  controller: timeController,
+                  keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        _selectTime(context);
+                      },
+                      icon: Icon(Icons.calendar_today),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: screenSize.width * 0.04,
+                ),
+                captiontext(context, text: 'Date'),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please select Date";
+                    } else {
+                      null;
+                    }
+                  },
+                  controller: dateController,
+                  keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        _selectDate(context);
+                      },
+                      icon: Icon(Icons.calendar_today),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: screenSize.width * 0.04,
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: WElevatedButton(context, text: 'Submit Info.',
+                      navigator: () {
+                    if (_formKey.currentState!.validate()) {
+                      onAddPatientButtonClicked();
+                    }
+                  }),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void onAddPatientButtonClicked() async {
+    final _name = nameController.text.trim();
+    final _age = ageController.text.trim();
+    final _phone = phoneController.text.trim();
+    final _problem = problemController.text.trim();
+    final _gender = genderController;
+    final _time = timeController.text.trim();
+    final _date = dateController.text.trim();
+
+    if (_name.isEmpty ||
+        _age.isEmpty ||
+        _phone.isEmpty ||
+        _problem.isEmpty ||
+        _date.isEmpty ||
+        _time.isEmpty) {
+      return;
+    }
+    final _patient = PatientModel(
+        doctorpic: widget.docterPic,
+        doctorname: widget.docterName,
+        doctorspecality: widget.docterspeciality,
+        name: _name,
+        phone: _phone,
+        age: _age,
+        gender: _gender,
+        problem: _problem,
+        time: _time,
+        date: _date);
+    addAppointment(_patient);
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MyAppointment(
+                doctorname: widget.docterName,
+                doctorspeciality: widget.docterspeciality,
+                doctorspicture: widget.docterPic,
+                name: _name,
+                phone: _phone,
+                age: _age,
+                problem: _problem,
+                date: _date,
+                time: _time)));
   }
 }

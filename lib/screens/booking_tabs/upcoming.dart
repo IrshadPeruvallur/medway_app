@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/function/db_function.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
@@ -13,13 +14,18 @@ class UpComingTab extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Expanded(
-            child: ListView.separated(
-                separatorBuilder: (context, index) => SizedBox(
-                      height: 15,
-                    ),
-                itemCount: 5,
-                itemBuilder: (context, index) => Card(
+          ValueListenableBuilder(
+            valueListenable: patientListNotifier,
+            builder: (context, patientList, child) {
+              return Expanded(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: 15,
+                  ),
+                  itemCount: patientList.length,
+                  itemBuilder: (context, index) {
+                    final data = patientList[index];
+                    return Card(
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                           borderRadius:
@@ -30,7 +36,7 @@ class UpComingTab extends StatelessWidget {
                         child: Column(
                           children: [
                             captiontext(context,
-                                text: 'November 20, 2023 - 10.00'),
+                                text: '${data.date} | ${data.time}'),
                             Divider(
                               color: Colors.black,
                             ),
@@ -39,7 +45,18 @@ class UpComingTab extends StatelessWidget {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => MyAppointment(),
+                                      builder: (context) => MyAppointment(
+                                          doctorspicture: data.doctorpic,
+                                          doctorname: data.doctorname,
+                                          doctorspeciality:
+                                              data.doctorspecality,
+                                          name: data.name,
+                                          age: data.age,
+                                          // gender: data.gender,
+                                          phone: data.phone,
+                                          problem: data.problem,
+                                          date: data.date,
+                                          time: data.time),
                                     ));
                               },
                               child: Row(
@@ -76,11 +93,16 @@ class UpComingTab extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      WTitleText(context,
-                                          text: 'Dr.Arun', size: 0.05),
-                                      captiontext(context, text: 'Mentelist'),
+                                      SizedBox(
+                                        child: WTitleTextLeft(context,
+                                            text: data.doctorname, size: 0.05),
+                                        width: screenSize.width * 0.55,
+                                      ),
                                       captiontext(context,
-                                          text: 'Booking id:51516551'),
+                                          text: data.doctorspecality),
+                                      captiontext(context,
+                                          text:
+                                              'Booking id:MDWY00${index + 1}'),
                                     ],
                                   )
                                 ],
@@ -135,7 +157,11 @@ class UpComingTab extends StatelessWidget {
                           ],
                         ),
                       ),
-                    )),
+                    );
+                  },
+                ),
+              );
+            },
           )
         ],
       ),

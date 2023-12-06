@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/function/functio_normal.dart';
+import 'package:medway_app/function/nrml_function.dart';
 import 'package:medway_app/screens/profile/favourite_screen.dart';
 import 'package:medway_app/screens/profile/help_center.dart';
 import 'package:medway_app/screens/profile/my_profile.dart';
 import 'package:medway_app/screens/profile/privacy_policy.dart';
 import 'package:medway_app/screens/profile/settings.dart';
-import 'package:medway_app/screens/profile/signout.dart';
-import 'package:medway_app/screens/profile/edit_profile.dart';
-import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
 class ProfileTab extends StatelessWidget {

@@ -5,23 +5,23 @@ import 'package:medway_app/screens/main_screen.dart';
 import 'package:medway_app/screens/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-bottomSheet(context) {
-  return showBottomSheet(
-    context: context,
-    builder: (BuildContext context) {
-      return Container(
-        // Customize the appearance of the bottom sheet
-        height: 200,
-        child: Center(
-          child: Text(
-            'This is a Bottom Sheet!',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-      );
-    },
-  );
-}
+// bottomSheet(context) {
+//   return showBottomSheet(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return Container(
+//         // Customize the appearance of the bottom sheet
+//         height: 200,
+//         child: Center(
+//           child: Text(
+//             'This is a Bottom Sheet!',
+//             style: TextStyle(fontSize: 20),
+//           ),
+//         ),
+//       );
+//     },
+//   );
+// }
 
 checklogin(context, controller1, controller2) async {
   final _email = controller1.text;

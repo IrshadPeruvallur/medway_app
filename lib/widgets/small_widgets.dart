@@ -1,5 +1,7 @@
 // ignore_for_file: dead_code
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:medway_app/screens/appointment.dart';
 
@@ -17,10 +19,25 @@ captiontext(context, {required text, required}) {
 
 WTitleText(context, {required text, required double? size, color}) {
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.symmetric(vertical: 8),
     child: Text(
       text,
       textAlign: TextAlign.center,
+      style: TextStyle(
+        color: color,
+        fontSize: MediaQuery.of(context).size.width * size!,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  );
+}
+
+WTitleTextLeft(context, {required text, required double? size, color}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    child: Text(
+      text,
+      textAlign: TextAlign.start,
       style: TextStyle(
         color: color,
         fontSize: MediaQuery.of(context).size.width * size!,
@@ -51,10 +68,16 @@ WRoundButton(context, {navigator}) {
   );
 }
 
-Widget WTextformFeild(context,
-    {required label, required hint, controller, validator}) {
+Widget WTextformField(
+  BuildContext context, {
+  required String label,
+  required String hint,
+  TextEditingController? controller,
+  String? Function(String?)? validator,
+  TextInputType keyboardType = TextInputType.text,
+}) {
   return Padding(
-    padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.04),
+    padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.02),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -66,24 +89,26 @@ Widget WTextformFeild(context,
         SizedBox(
           height: MediaQuery.of(context).size.width * .2,
           child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "Please Enter $label";
-                } else
-                  (null);
-              },
-              controller: controller,
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 16, 105, 140))),
-                  hintStyle: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * .04),
-                  hintText: hint,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10))))),
-        )
+            validator: validator,
+            keyboardType: keyboardType,
+            controller: controller,
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderSide: BorderSide(
+                  color: Color.fromARGB(255, 16, 105, 140),
+                ),
+              ),
+              hintStyle: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * .04,
+              ),
+              hintText: hint,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+            ),
+          ),
+        ),
       ],
     ),
   );
@@ -115,69 +140,82 @@ Widget WElevatedButton(BuildContext context,
   );
 }
 
-Widget WDoctorNameCard(context, {required name, required subtitle}) {
+Widget WDoctorNameCard(context,
+    {required name, required subtitle, date, time, picture}) {
   var screenSize = MediaQuery.of(context).size;
   return Card(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(screenSize.width * 0.03)),
     color: Color.fromARGB(255, 16, 105, 140),
-    child: Column(
-      children: [
-        ListTile(
-            title: Text(
-              name,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: screenSize.width * .05,
-                  fontWeight: FontWeight.w600),
-            ),
-            subtitle: Text(
-              subtitle,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300,
-                  fontSize: screenSize.width * 0.04),
-            ),
-            trailing: Icon(
-              size: screenSize.width * 0.08,
-              Icons.call_rounded,
-              color: Colors.white,
-            ),
-            // minLeadingWidth: screenSize.width * .2,
-            leading: CircleAvatar(
-              radius: screenSize.width * .08,
-              backgroundColor: Colors.white,
-            )),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 6, 15, 15),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(screenSize.width * .02)),
-              color: Colors.white,
-            ),
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                    Icons.calendar_month,
-                    size: screenSize.width * 0.05,
-                  ),
-                  captiontext(context, text: 'Monday, 16 July'),
-                  Icon(
-                    Icons.timer_sharp,
-                    size: screenSize.width * 0.05,
-                  ),
-                  captiontext(context, text: '09.00-10.00'),
-                ],
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          ListTile(
+              title: Text(
+                name,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: screenSize.width * .05,
+                    fontWeight: FontWeight.w600),
+              ),
+              subtitle: Text(
+                subtitle,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300,
+                    fontSize: screenSize.width * 0.04),
+              ),
+              trailing: Icon(
+                size: screenSize.width * 0.08,
+                Icons.call_rounded,
+                color: Colors.white,
+              ),
+              // minLeadingWidth: screenSize.width * .2,
+              leading: CircleAvatar(
+                radius: screenSize.width * .08,
+                backgroundImage: AssetImage(picture),
+              )),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 6, 15, 15),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.all(Radius.circular(screenSize.width * .02)),
+                color: Colors.white,
+              ),
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.calendar_month,
+                      size: screenSize.width * 0.05,
+                    ),
+                    SizedBox(
+                      width: screenSize.width * 0.02,
+                    ),
+                    captiontext(context, text: date),
+                    SizedBox(
+                      width: screenSize.width * 0.08,
+                    ),
+                    Icon(
+                      Icons.timer_sharp,
+                      size: screenSize.width * 0.05,
+                    ),
+                    SizedBox(
+                      width: screenSize.width * 0.02,
+                    ),
+                    captiontext(context, text: time),
+                  ],
+                ),
               ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     ),
   );
 }
@@ -210,7 +248,8 @@ Widget WSpaceBetweenText(context, {text, required VoidCallback navigator}) {
   ]);
 }
 
-Widget doctorsList(context, {required name, required speciality}) {
+Widget doctorsList(context,
+    {required name, required speciality, required imagepath}) {
   var screenSize = MediaQuery.of(context).size;
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -223,7 +262,7 @@ Widget doctorsList(context, {required name, required speciality}) {
             leading: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('asset/doctor.png'), fit: BoxFit.cover),
+                    image: AssetImage(imagepath), fit: BoxFit.cover),
                 borderRadius:
                     BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
                 color: const Color.fromARGB(255, 19, 19, 19),
@@ -269,7 +308,10 @@ Widget doctorsList(context, {required name, required speciality}) {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => Appointment(),
+                  builder: (context) => Appointment(
+                      docterPic: imagepath,
+                      docterName: name,
+                      docterspeciality: speciality),
                 ));
               },
               child: Text(
@@ -295,7 +337,8 @@ Widget doctorsList(context, {required name, required speciality}) {
   );
 }
 
-Widget doctersCard(context, {required name, required speciality}) {
+Widget doctersCard(context,
+    {required name, required speciality, required picture}) {
   var screenSize = MediaQuery.of(context).size;
   return Card(
     shape: RoundedRectangleBorder(
@@ -310,12 +353,12 @@ Widget doctersCard(context, {required name, required speciality}) {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    fit: BoxFit.cover, image: AssetImage('asset/doctor.png')),
-                borderRadius: BorderRadius.circular(10),
+                    fit: BoxFit.cover, image: AssetImage(picture)),
+                borderRadius: BorderRadius.circular(screenSize.width * .05),
                 color: const Color.fromARGB(255, 97, 97, 97),
               ),
-              height: 120,
-              width: 100,
+              height: screenSize.width * 0.3,
+              width: screenSize.width * 0.25,
             ),
           ),
           Column(
@@ -332,9 +375,11 @@ Widget doctersCard(context, {required name, required speciality}) {
                   ),
                 ),
               ),
-              WTitleText(context, text: name, size: 0.05),
+              SizedBox(
+                width: screenSize.width * .5,
+                child: WTitleTextLeft(context, text: name, size: 0.05),
+              ),
               captiontext(context, text: speciality),
-              captiontext(context, text: 'Booking id:51516551'),
             ],
           )
         ],

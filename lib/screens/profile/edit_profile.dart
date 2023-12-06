@@ -35,7 +35,7 @@ class EditProfile extends StatelessWidget {
                           height: 10,
                         ),
                     itemCount: labelText.length,
-                    itemBuilder: (context, index) => WTextformFeild(context,
+                    itemBuilder: (context, index) => WTextformField(context,
                         label: labelText[index], hint: labelText[index])),
                 SizedBox(
                   height: screenSize.width * 0.05,

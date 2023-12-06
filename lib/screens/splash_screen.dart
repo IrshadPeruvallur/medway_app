@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/function/functio_normal.dart';
+import 'package:medway_app/function/nrml_function.dart';
 import 'package:medway_app/screens/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {

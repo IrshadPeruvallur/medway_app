@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/function/db_function.dart';
 import 'package:medway_app/screens/bottom_tabs/booking_tab.dart';
 import 'package:medway_app/screens/doctors_list.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/screens/profile/favourite_screen.dart';
-import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
-// ignore: must_be_immutable
 class HomeTab extends StatelessWidget {
-  HomeTab({super.key});
-  List doctosname = ['Rahul', 'Shareef', 'Muneer'];
-  List doctorspeciality = ['Mentalist', 'Dentalist', 'Neurology'];
+  HomeTab({Key? key});
+
+  List<String> doctorsName = [
+    'Dr. Ethan Reynolds - MBChB,',
+    'Dr. Olivia Carter - MD, PhD ',
+    'Dr. Benjamin Taylor - DO, MS ',
+  ];
+  List<String> doctorSpeciality = [
+    'Cardiology',
+    'Neurosurgery',
+    'Pediatric Oncology',
+  ];
+  final List doctersimage = [
+    'asset/d1.jpg',
+    'asset/d2.jpg',
+    'asset/d3.jpg',
+  ];
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
         toolbarHeight: 60,
-        // automaticallyImplyLeading: false,
         leading: Image(
           image: AssetImage('asset/medcalway-white-logo.png'),
           width: 20,
@@ -26,14 +40,16 @@ class HomeTab extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FavouriteScreen(),
-                    ));
-              },
-              icon: Icon(Icons.favorite_outline))
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FavouriteScreen(),
+                ),
+              );
+            },
+            icon: Icon(Icons.favorite_outline),
+          )
         ],
         elevation: 0,
         title: TextField(
@@ -53,75 +69,116 @@ class HomeTab extends StatelessWidget {
             ),
           ),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: screenSize.width * .05),
+                  Container(
+                    // height: screenSize.width * 0.4,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 1,
+                      itemBuilder: (context, index) {
+                        return ValueListenableBuilder(
+                          valueListenable: patientListNotifier,
+                          builder: (context, patientList, child) {
+                            if (patientList.isEmpty) {
+                              return SizedBox(
+                                width: double.infinity,
+                                // height: screenSize.width * .3,
+                                child: Image(
+                                  image: AssetImage('asset/Hospital-HITN.jpg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              );
+                            }
+
+                            final data = patientList[patientList.length - 1];
+                            return Column(
+                              children: [
+                                WSpaceBetweenText(
+                                  context,
+                                  text: 'Upcoming Schedule',
+                                  navigator: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => BookingTab(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    // Navigator.of(context).push(MaterialPageRoute(
+                                    //   builder: (context) => MyAppointment(),
+                                    // ));
+                                  },
+                                  child: WDoctorNameCard(
+                                    context,
+                                    picture: data.doctorpic,
+                                    name: data.doctorname,
+                                    subtitle: data.doctorspecality,
+                                    date: data.date,
+                                    time: data.time,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  WSpaceBetweenText(
+                    context,
+                    text: 'Doctor Speciality',
+                    navigator: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DoctorsList(),
+                        ),
+                      );
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      SizedBox(
-                        height: screenSize.width * .05,
-                      ),
-                      WSpaceBetweenText(context, text: 'Upcoming Shediule',
-                          navigator: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BookingTab(),
-                            ));
-                      }),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => MyAppointment(),
-                          ));
-                        },
-                        child: WDoctorNameCard(context,
-                            name: "Dr.Jack", subtitle: 'Mentelist'),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      WSpaceBetweenText(context, text: 'Docter Speciality ',
-                          navigator: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DoctorsList(),
-                            ));
-                      }),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          WSpecialistCircle(context, 'asset/dental.png'),
-                          WSpecialistCircle(context, 'asset/ell.png'),
-                          WSpecialistCircle(context, 'asset/heart.png'),
-                          WSpecialistCircle(context, 'asset/neuron.png'),
-                        ],
-                      ),
-                      SizedBox(
-                        height: screenSize.width * .02,
-                      ),
-                      WSpaceBetweenText(context, text: 'Top Specialist',
-                          navigator: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return DoctorsList();
-                        }));
-                      }),
-                      ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: doctosname.length,
-                        itemBuilder: (context, index) => doctorsList(context,
-                            name: doctosname[index],
-                            speciality: doctorspeciality[index]),
-                      )
+                      WSpecialistCircle(context, 'asset/dental.png'),
+                      WSpecialistCircle(context, 'asset/ell.png'),
+                      WSpecialistCircle(context, 'asset/heart.png'),
+                      WSpecialistCircle(context, 'asset/neuron.png'),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(height: screenSize.width * 0.02),
+                  WSpaceBetweenText(
+                    context,
+                    text: 'Top Specialist',
+                    navigator: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return DoctorsList();
+                      }));
+                    },
+                  ),
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: doctorsName.length,
+                    itemBuilder: (context, index) => doctorsList(
+                      context,
+                      imagepath: doctersimage[index],
+                      name: doctorsName[index],
+                      speciality: doctorSpeciality[index],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

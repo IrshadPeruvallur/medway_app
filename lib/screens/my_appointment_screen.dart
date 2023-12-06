@@ -1,21 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
 class MyAppointment extends StatelessWidget {
-  const MyAppointment({super.key});
+  const MyAppointment(
+      {super.key,
+      required this.doctorname,
+      required this.doctorspeciality,
+      required this.doctorspicture,
+      required this.name,
+      //  required this.gender,
+      required this.phone,
+      required this.age,
+      required this.problem,
+      required this.date,
+      required this.time});
+  final String doctorname;
+  final String doctorspeciality;
+  final String name;
+  final String doctorspicture;
+
+  // final String gender;
+  final String phone;
+  final String age;
+  final String problem;
+  final String date;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: WNormalAppBar(),
+      appBar: titleAppBar(title: "My Appointment"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            doctersCard(context, name: 'name', speciality: 'speciality'),
+            doctersCard(context,
+                name: doctorname,
+                speciality: doctorspeciality,
+                picture: doctorspicture),
             Divider(
               color: Colors.black,
             ),
@@ -29,10 +55,11 @@ class MyAppointment extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     WTitleText(context, text: 'Patient Info.', size: 0.05),
-                    doubleText(context, text1: 'Full Name', text2: 'Irshad'),
-                    doubleText(context, text1: 'Gender', text2: 'Male'),
-                    doubleText(context, text1: 'Age', text2: '21'),
-                    doubleText(context, text1: 'Problem', text2: 'Headche'),
+                    doubleText(context, text1: 'Full Name', text2: name),
+                    doubleText(context, text1: 'Mobile Number', text2: phone),
+                    // doubleText(context, text1: 'Gender', text2: gender),
+                    doubleText(context, text1: 'Age', text2: age),
+                    doubleText(context, text1: 'Problem', text2: problem),
                   ],
                 ),
               ),
@@ -51,12 +78,50 @@ class MyAppointment extends StatelessWidget {
                   children: [
                     WTitleText(context,
                         text: 'Scheduled Appointment', size: 0.05),
-                    doubleText(context,
-                        text1: 'Date', text2: 'August 24, 2023'),
-                    doubleText(context, text1: 'Time', text2: '10.00-10.30'),
-                    doubleText(context, text1: 'Booking For', text2: 'Self'),
+                    doubleText(context, text1: 'Date', text2: date),
+                    doubleText(context, text1: 'Time', text2: time),
                   ],
                 ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: 150,
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                Color.fromARGB(255, 16, 105, 140)),
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        screenSize.width * 5)))),
+                        onPressed: () {},
+                        child: Text('Cancel')),
+                  ),
+                  SizedBox(
+                    width: 150,
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                Color.fromARGB(255, 16, 105, 140)),
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        screenSize.width * 5)))),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ResheduleAppointment(),
+                              ));
+                        },
+                        child: Text('Reshedule')),
+                  ),
+                ],
               ),
             )
           ],

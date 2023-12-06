@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/screens/booking_tabs/upcoming.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
@@ -67,16 +68,17 @@ class _AppointmentState extends State<ResheduleAppointment> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              doctersCard(context, name: 'name', speciality: 'speciality'),
+              doctersCard(context,
+                  name: 'name', speciality: 'speciality', picture: ''),
               SizedBox(
                 height: screenSize.width * 0.05,
               ),
-              WTextformFeild(
+              WTextformField(
                 context,
                 label: 'Name',
                 hint: 'Full Name',
               ),
-              WTextformFeild(
+              WTextformField(
                 context,
                 label: 'Phone',
                 hint: 'Mobile Number',
@@ -106,7 +108,7 @@ class _AppointmentState extends State<ResheduleAppointment> {
                 }).toList(),
                 onChanged: (value) {},
               ),
-              WTextformFeild(
+              WTextformField(
                 context,
                 label: 'Age',
                 hint: 'Age',
@@ -135,7 +137,7 @@ class _AppointmentState extends State<ResheduleAppointment> {
                 }).toList(),
                 onChanged: (value) {},
               ),
-              WTextformFeild(context, label: 'Problem', hint: "Your Problem"),
+              WTextformField(context, label: 'Problem', hint: "Your Problem"),
               SizedBox(
                 height: screenSize.width * 0.04,
               ),
@@ -194,7 +196,7 @@ class _AppointmentState extends State<ResheduleAppointment> {
                   text: 'Submit Info.',
                   navigator: () => Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return MyAppointment();
+                      return UpComingTab();
                     },
                   )),
                 ),
