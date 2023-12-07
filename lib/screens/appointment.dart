@@ -11,9 +11,11 @@ class Appointment extends StatefulWidget {
   final String docterPic;
   final String docterName;
   final String docterspeciality;
+  final int index;
 
   Appointment(
       {super.key,
+      required this.index,
       required this.docterPic,
       required this.docterName,
       required this.docterspeciality});
@@ -25,14 +27,13 @@ class Appointment extends StatefulWidget {
 class _AppointmentState extends State<Appointment> {
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
-  dynamic genderController = '';
   final ageController = TextEditingController();
   final problemController = TextEditingController();
   final dateController = TextEditingController();
   final timeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-  List<String> items = ['Male', 'Female', 'Other'];
+  final genderController = TextEditingController();
+  String dropdownvalue = "Select One";
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -104,32 +105,42 @@ class _AppointmentState extends State<Appointment> {
                 SizedBox(
                   height: screenSize.width * 0.04,
                 ),
-                // captiontext(context, text: 'Gender'),
-                // DropdownButtonFormField(
-                //   // key: gender,
-                //   decoration: InputDecoration(
-                //     focusedBorder: OutlineInputBorder(
-                //       borderRadius: BorderRadius.all(Radius.circular(10)),
-                //       borderSide:
-                //           BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
-                //     ),
-                //     border: OutlineInputBorder(
-                //       borderRadius: BorderRadius.all(Radius.circular(10)),
-                //     ),
-                //   ),
-                //   value: genderController,
-                //   items: items.map((value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(value),
-                //     );
-                //   }).toList(),
-                //   onChanged: (NewValue) {
-                //     setState(() {
-                //       genderController = NewValue;
-                //     });
-                //   },
-                // ),
+                captiontext(context, text: 'Gender'),
+                DropdownButtonFormField<String>(
+                  validator: (value) {
+                    if (value == "Select One") {
+                      return "Plese Choose one";
+                    } else {
+                      null;
+                    }
+                  },
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ),
+                  borderRadius: BorderRadius.circular(screenSize.width * 0.02),
+                  isExpanded: true,
+                  value: dropdownvalue,
+                  onChanged: (String? newvalue) {
+                    setState(() {
+                      dropdownvalue = newvalue.toString();
+                      genderController.text = dropdownvalue;
+                    });
+                  },
+                  items: [
+                    DropdownMenuItem(
+                        value: "Select One", child: Text('Select One')),
+                    DropdownMenuItem(value: "Male", child: Text('Male')),
+                    DropdownMenuItem(value: "Female", child: Text('Female')),
+                    DropdownMenuItem(value: "Other", child: Text('Other')),
+                  ],
+                ),
                 WTextformField(
                   keyboardType: TextInputType.number,
                   controller: ageController,
@@ -233,7 +244,7 @@ class _AppointmentState extends State<Appointment> {
     final _age = ageController.text.trim();
     final _phone = phoneController.text.trim();
     final _problem = problemController.text.trim();
-    final _gender = genderController;
+    final _gender = genderController.text.trim();
     final _time = timeController.text.trim();
     final _date = dateController.text.trim();
 
@@ -261,11 +272,13 @@ class _AppointmentState extends State<Appointment> {
         context,
         MaterialPageRoute(
             builder: (context) => MyAppointment(
+                index: widget.index,
                 doctorname: widget.docterName,
                 doctorspeciality: widget.docterspeciality,
                 doctorspicture: widget.docterPic,
                 name: _name,
                 phone: _phone,
+                gender: _gender,
                 age: _age,
                 problem: _problem,
                 date: _date,

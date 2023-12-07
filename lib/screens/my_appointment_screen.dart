@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/function/db_function.dart';
 import 'package:medway_app/screens/bottom_tabs/booking_tab.dart';
+import 'package:medway_app/screens/main_screen.dart';
 import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
@@ -13,7 +14,7 @@ class MyAppointment extends StatelessWidget {
       required this.doctorspeciality,
       required this.doctorspicture,
       required this.name,
-      //  required this.gender,
+      required this.gender,
       required this.phone,
       required this.age,
       required this.problem,
@@ -25,7 +26,7 @@ class MyAppointment extends StatelessWidget {
   final String name;
   final String doctorspicture;
 
-  // final String gender;
+  final String gender;
   final String phone;
   final String age;
   final String problem;
@@ -61,7 +62,7 @@ class MyAppointment extends StatelessWidget {
                     WTitleText(context, text: 'Patient Info.', size: 0.05),
                     doubleText(context, text1: 'Full Name', text2: name),
                     doubleText(context, text1: 'Mobile Number', text2: phone),
-                    // doubleText(context, text1: 'Gender', text2: gender),
+                    doubleText(context, text1: 'Gender', text2: gender),
                     doubleText(context, text1: 'Age', text2: age),
                     doubleText(context, text1: 'Problem', text2: problem),
                   ],
@@ -134,10 +135,11 @@ class MyAppointment extends StatelessWidget {
                                     onPressed: () {
                                       cancelAppointment(index!);
                                       Navigator.pop(context);
+                                      Navigator.pop(context);
                                       // Navigator.pushReplacement(
                                       //     context,
                                       //     MaterialPageRoute(
-                                      //       builder: (context) => BookingTab(),
+                                      //       builder: (context) => MainScreen(),
                                       //     ));
                                     },
                                     child: Text("Yes, Cancel")),
@@ -157,13 +159,7 @@ class MyAppointment extends StatelessWidget {
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
                                         screenSize.width * 5)))),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ResheduleAppointment(),
-                              ));
-                        },
+                        onPressed: () {},
                         child: Text('Reshedule')),
                   ),
                 ],

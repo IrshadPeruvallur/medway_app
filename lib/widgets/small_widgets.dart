@@ -73,7 +73,7 @@ Widget WTextformField(
   required String label,
   required String hint,
   TextEditingController? controller,
-  String? Function(String?)? validator,
+  // String? Function(String?)? validator,
   TextInputType keyboardType = TextInputType.text,
 }) {
   return Padding(
@@ -89,7 +89,13 @@ Widget WTextformField(
         SizedBox(
           height: MediaQuery.of(context).size.width * .2,
           child: TextFormField(
-            validator: validator,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Enter $label";
+              } else {
+                null;
+              }
+            },
             keyboardType: keyboardType,
             controller: controller,
             decoration: InputDecoration(
@@ -249,7 +255,7 @@ Widget WSpaceBetweenText(context, {text, required VoidCallback navigator}) {
 }
 
 Widget doctorsList(context,
-    {required name, required speciality, required imagepath}) {
+    {required name, required speciality, required imagepath, required index}) {
   var screenSize = MediaQuery.of(context).size;
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -309,6 +315,7 @@ Widget doctorsList(context,
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => Appointment(
+                      index: index,
                       docterPic: imagepath,
                       docterName: name,
                       docterspeciality: speciality),

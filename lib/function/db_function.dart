@@ -44,3 +44,32 @@ cancelAppointment(int index) async {
   await patientDB.deleteAt(index);
   getAllAppoitnment();
 }
+
+reSheduleAppointment(int index,
+    {required doctornameController,
+    required doctorspecalityController,
+    required doctorpicController,
+    required nameController,
+    required phoneController,
+    required ageController,
+    required genderController,
+    required problemController,
+    required timeController,
+    required dateController}) async {
+  final patientDB = await Hive.openBox<PatientModel>('patient_db');
+  if (index >= 0 && index < patientDB.length) {
+    final updateList = PatientModel(
+        doctorname: doctornameController,
+        doctorspecality: doctorspecalityController,
+        doctorpic: doctorpicController,
+        name: nameController,
+        phone: phoneController,
+        age: ageController,
+        gender: genderController,
+        problem: problemController,
+        time: timeController,
+        date: dateController);
+    patientDB.putAt(index, updateList);
+    getAllAppoitnment();
+  }
+}

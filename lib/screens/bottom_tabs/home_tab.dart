@@ -172,6 +172,7 @@ class HomeTab extends StatelessWidget {
                     itemCount: doctorsName.length,
                     itemBuilder: (context, index) => doctorsList(
                       context,
+                      index: index,
                       imagepath: doctersimage[index],
                       name: doctorsName[index],
                       speciality: doctorSpeciality[index],

@@ -53,7 +53,7 @@ class UpComingTab extends StatelessWidget {
                                               data.doctorspecality,
                                           name: data.name,
                                           age: data.age,
-                                          // gender: data.gender,
+                                          gender: data.gender,
                                           phone: data.phone,
                                           problem: data.problem,
                                           date: data.date,
@@ -126,7 +126,42 @@ class UpComingTab extends StatelessWidget {
                                                           screenSize.width *
                                                               5)))),
                                       onPressed: () {
-                                        cancelAppointment(index);
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            backgroundColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(
+                                                        screenSize.width *
+                                                            0.05))),
+                                            title: Column(
+                                              children: [
+                                                WTitleText(
+                                                  context,
+                                                  text: 'Cancel',
+                                                  size: 0.05,
+                                                ),
+                                                captiontext(context,
+                                                    text:
+                                                        '''Are you sure you want to cancel the Appointment? ''')
+                                              ],
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("Cancel")),
+                                              TextButton(
+                                                  onPressed: () {
+                                                    cancelAppointment(index);
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("Yes, Cancel")),
+                                            ],
+                                          ),
+                                        );
                                       },
                                       child: Text('Cancel')),
                                 ),
@@ -145,12 +180,12 @@ class UpComingTab extends StatelessWidget {
                                                           screenSize.width *
                                                               5)))),
                                       onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ResheduleAppointment(),
-                                            ));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           ResheduleAppointment(),
+                                        //     ));
                                       },
                                       child: Text('Reshedule')),
                                 ),

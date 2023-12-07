@@ -81,6 +81,7 @@ class DoctorsList extends StatelessWidget {
             child: ListView.builder(
               itemCount: doctorsname.length,
               itemBuilder: (context, index) => doctorsList(context,
+                  index: index,
                   imagepath: doctersimage[index],
                   name: doctorsname[index],
                   speciality: doctorsSpeciality[index]),
