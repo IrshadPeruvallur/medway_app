@@ -180,12 +180,25 @@ class UpComingTab extends StatelessWidget {
                                                           screenSize.width *
                                                               5)))),
                                       onPressed: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //       builder: (context) =>
-                                        //           ResheduleAppointment(),
-                                        //     ));
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ReSheduleAppointment(
+                                                      index: index,
+                                                      doctorname:
+                                                          data.doctorname,
+                                                      doctorpic: data.doctorpic,
+                                                      doctorspeciaility:
+                                                          data.doctorspecality,
+                                                      name: data.name,
+                                                      age: data.age,
+                                                      phone: data.phone,
+                                                      gender: data.gender,
+                                                      problem: data.problem,
+                                                      date: data.date,
+                                                      time: data.time),
+                                            ));
                                       },
                                       child: Text('Reshedule')),
                                 ),

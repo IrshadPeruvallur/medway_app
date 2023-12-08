@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/function/db_function.dart';
+import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
 class MyAppointment extends StatelessWidget {
   MyAppointment(
       {super.key,
-      this.index,
+      required this.index,
       required this.doctorname,
       required this.doctorspeciality,
       required this.doctorspicture,
@@ -17,7 +18,7 @@ class MyAppointment extends StatelessWidget {
       required this.problem,
       required this.date,
       required this.time});
-  int? index;
+  int index;
   final String doctorname;
   final String doctorspeciality;
   final String name;
@@ -133,11 +134,6 @@ class MyAppointment extends StatelessWidget {
                                       cancelAppointment(index!);
                                       Navigator.pop(context);
                                       Navigator.pop(context);
-                                      // Navigator.pushReplacement(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //       builder: (context) => MainScreen(),
-                                      //     ));
                                     },
                                     child: Text("Yes, Cancel")),
                               ],
@@ -156,7 +152,24 @@ class MyAppointment extends StatelessWidget {
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
                                         screenSize.width * 5)))),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return ReSheduleAppointment(
+                                  index: index,
+                                  doctorname: doctorname,
+                                  doctorpic: doctorspicture,
+                                  doctorspeciaility: doctorspeciality,
+                                  name: name,
+                                  age: age,
+                                  phone: phone,
+                                  gender: gender,
+                                  problem: problem,
+                                  date: date,
+                                  time: time);
+                            },
+                          ));
+                        },
                         child: Text('Reshedule')),
                   ),
                 ],

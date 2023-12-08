@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:medway_app/function/nrml_function.dart';
 import 'package:medway_app/model/data_model.dart';
+import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/screens/splash_screen.dart';
 import 'package:medway_app/screens/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,31 +46,21 @@ cancelAppointment(int index) async {
   getAllAppoitnment();
 }
 
-reSheduleAppointment(int index,
-    {required doctornameController,
-    required doctorspecalityController,
-    required doctorpicController,
-    required nameController,
-    required phoneController,
-    required ageController,
-    required genderController,
-    required problemController,
-    required timeController,
-    required dateController}) async {
+updateAppointment(int index, drname, drspeciality, drpic) async {
   final patientDB = await Hive.openBox<PatientModel>('patient_db');
   if (index >= 0 && index < patientDB.length) {
-    final updateList = PatientModel(
-        doctorname: doctornameController,
-        doctorspecality: doctorspecalityController,
-        doctorpic: doctorpicController,
-        name: nameController,
-        phone: phoneController,
-        age: ageController,
-        gender: genderController,
-        problem: problemController,
-        time: timeController,
-        date: dateController);
-    patientDB.putAt(index, updateList);
+    final updateDetails = PatientModel(
+        doctorname: drname,
+        doctorspecality: drspeciality,
+        doctorpic: drpic,
+        name: rnameController.text,
+        phone: rphoneController.text,
+        age: rageController.text,
+        gender: rgenderController.text,
+        problem: rproblemController.text,
+        time: rtimeController.text,
+        date: rdateController.text);
+    await patientDB.putAt(index, updateDetails);
     getAllAppoitnment();
   }
 }
