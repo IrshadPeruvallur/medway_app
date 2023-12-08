@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/function/nrml_function.dart';
-import 'package:medway_app/screens/main_screen.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
 class LoginScreen extends StatelessWidget {

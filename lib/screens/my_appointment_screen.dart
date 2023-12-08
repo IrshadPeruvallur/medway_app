@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/function/db_function.dart';
-import 'package:medway_app/screens/bottom_tabs/booking_tab.dart';
-import 'package:medway_app/screens/main_screen.dart';
-import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
