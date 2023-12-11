@@ -193,6 +193,9 @@ class _AppointmentState extends State<Appointment> {
                 ),
                 captiontext(context, text: 'Date'),
                 TextFormField(
+                  onChanged: (value) {
+                    _selectDate(context);
+                  },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please select Date";

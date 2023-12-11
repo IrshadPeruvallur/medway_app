@@ -7,25 +7,44 @@ import 'package:medway_app/model/profile_model.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
-class CreateProfile extends StatefulWidget {
-  CreateProfile({super.key});
+final nameController = TextEditingController();
+final phoneController = TextEditingController();
+final emailController = TextEditingController();
+final dobController = TextEditingController();
+final imagePicker = ImagePicker();
+File? picked;
+
+class EditProfile extends StatefulWidget {
+  final String name;
+  final String dob;
+  final String number;
+  final String email;
+  final String image;
+  final int index;
+  EditProfile(
+      {super.key,
+      required this.name,
+      required this.dob,
+      required this.number,
+      required this.email,
+      required this.image,
+      required this.index});
 
   @override
-  State<CreateProfile> createState() => _CreateProfileState();
+  State<EditProfile> createState() => _CreateProfileState();
 }
 
-class _CreateProfileState extends State<CreateProfile> {
-  final nameController = TextEditingController();
-
-  final phoneController = TextEditingController();
-
-  final emailController = TextEditingController();
-
-  final dobController = TextEditingController();
-
-  final imagePicker = ImagePicker();
-
-  File? picked;
+class _CreateProfileState extends State<EditProfile> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    nameController.text = widget.name;
+    phoneController.text = widget.number;
+    dobController.text = widget.dob;
+    emailController.text = widget.email;
+    picked = widget.image != null ? File(widget.image) : null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +66,13 @@ class _CreateProfileState extends State<CreateProfile> {
                       children: [
                         TextButton.icon(
                             onPressed: () {
-                              getImage(ImageSource.camera);
+                              updateImage(ImageSource.camera);
                             },
                             icon: Icon(Icons.camera_alt),
                             label: Text("Camera")),
                         TextButton.icon(
                             onPressed: () {
-                              getImage(ImageSource.gallery);
+                              updateImage(ImageSource.gallery);
                             },
                             icon: Icon(Icons.image),
                             label: Text("Gallery"))
@@ -87,7 +106,7 @@ class _CreateProfileState extends State<CreateProfile> {
                   context,
                   text: 'Submit',
                   navigator: () {
-                    onAddUserButtonClicked();
+                    updateProfile(widget.index);
                     Navigator.pop(context);
                   },
                 )
@@ -117,7 +136,7 @@ class _CreateProfileState extends State<CreateProfile> {
     addUser(_user);
   }
 
-  getImage(ImageSource source) async {
+  updateImage(ImageSource source) async {
     var img = await imagePicker.pickImage(source: source);
     setState(() {
       picked = File(img!.path);
