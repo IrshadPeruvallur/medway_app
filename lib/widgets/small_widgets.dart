@@ -8,7 +8,7 @@ import 'package:medway_app/screens/appointment.dart';
 captiontext(context, {required text, required}) {
   return Padding(
     padding: EdgeInsets.symmetric(
-        vertical: MediaQuery.of(context).size.width * 0.01),
+        vertical: MediaQuery.of(context).size.width * 0.003),
     child: Text(
       text,
       textAlign: TextAlign.center,
@@ -71,9 +71,8 @@ WRoundButton(context, {navigator}) {
 Widget WTextformField(
   BuildContext context, {
   required String label,
-  required String hint,
+  String? hint,
   TextEditingController? controller,
-  // String? Function(String?)? validator,
   TextInputType keyboardType = TextInputType.text,
 }) {
   return Padding(
@@ -81,10 +80,10 @@ Widget WTextformField(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        captiontext(
-          context,
-          text: label,
-        ),
+        // captiontext(
+        //   context,
+        //   text: label,
+        // ),
         SizedBox(height: MediaQuery.of(context).size.width * .01),
         SizedBox(
           height: MediaQuery.of(context).size.width * .2,
@@ -105,10 +104,10 @@ Widget WTextformField(
                   color: Color.fromARGB(255, 16, 105, 140),
                 ),
               ),
-              hintStyle: TextStyle(
+              labelText: label,
+              labelStyle: TextStyle(
                 fontSize: MediaQuery.of(context).size.width * .04,
               ),
-              hintText: hint,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),

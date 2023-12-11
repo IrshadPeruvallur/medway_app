@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                             context, _emailController, _passwordController);
                       }
                     },
-                  )
+                  ),
                 ],
               ),
             ),

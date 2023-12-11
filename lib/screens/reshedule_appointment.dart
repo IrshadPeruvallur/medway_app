@@ -118,14 +118,12 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   controller: rnameController,
                   context,
                   label: 'Name',
-                  hint: 'Full Name',
                 ),
                 WTextformField(
                   keyboardType: TextInputType.number,
                   controller: rphoneController,
                   context,
                   label: 'Phone',
-                  hint: 'Mobile Number',
                 ),
                 SizedBox(
                   height: screenSize.width * 0.04,
@@ -171,17 +169,16 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   controller: rageController,
                   context,
                   label: 'Age',
-                  hint: 'Age',
                 ),
                 SizedBox(
                   height: screenSize.width * 0.04,
                 ),
                 WTextformField(
-                    controller: rproblemController,
-                    keyboardType: TextInputType.text,
-                    context,
-                    label: 'Problem',
-                    hint: "Your Problem"),
+                  controller: rproblemController,
+                  keyboardType: TextInputType.text,
+                  context,
+                  label: 'Problem',
+                ),
                 SizedBox(
                   height: screenSize.width * 0.04,
                 ),

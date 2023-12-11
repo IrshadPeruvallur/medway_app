@@ -81,18 +81,18 @@ class UpComingTab extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: List.generate(
-                                          5,
-                                          (index) => Icon(
-                                            Icons.star,
-                                            size: screenSize.width * 0.05,
-                                            color: const Color.fromARGB(
-                                                255, 255, 199, 59),
-                                          ),
-                                        ),
-                                      ),
+                                      // Row(
+                                      //   mainAxisSize: MainAxisSize.min,
+                                      //   children: List.generate(
+                                      //     5,
+                                      //     (index) => Icon(
+                                      //       Icons.star,
+                                      //       size: screenSize.width * 0.05,
+                                      //       color: const Color.fromARGB(
+                                      //           255, 255, 199, 59),
+                                      //     ),
+                                      //   ),
+                                      // ),
                                       SizedBox(
                                         child: WTitleTextLeft(context,
                                             text: data.doctorname, size: 0.05),
@@ -100,6 +100,7 @@ class UpComingTab extends StatelessWidget {
                                       ),
                                       captiontext(context,
                                           text: data.doctorspecality),
+                                      captiontext(context, text: data.name),
                                       captiontext(context,
                                           text:
                                               'Booking id:MDWY00${index + 1}'),
