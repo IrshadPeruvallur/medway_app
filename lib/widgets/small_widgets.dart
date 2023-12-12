@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:medway_app/screens/appointment.dart';
+import 'package:medway_app/screens/doctors_list.dart';
 
 captiontext(context, {required text, required}) {
   return Padding(
@@ -227,7 +228,13 @@ Widget WDoctorNameCard(context,
 
 Widget WSpecialistCircle(context, imagepath) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DoctorsList(),
+          ));
+    },
     child: CircleAvatar(
       radius: MediaQuery.of(context).size.width * .09,
       backgroundColor: Color.fromARGB(210, 223, 245, 255),

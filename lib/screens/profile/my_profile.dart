@@ -76,16 +76,13 @@ class MyProfile extends StatelessWidget {
                         final data = userList[index];
                         return Column(
                           children: [
-                            ClipOval(
-                              child: CircleAvatar(
-                                radius: screenSize.width * 0.15,
-                                backgroundColor: Colors.white,
-                                backgroundImage: data.image != null
-                                    ? FileImage(File(data.image))
-                                        as ImageProvider
-                                    : AssetImage('asset/profile_icons.png')
-                                        as ImageProvider, // Corrected asset path
-                              ),
+                            CircleAvatar(
+                              radius: screenSize.width * 0.15,
+                              backgroundColor: Colors.white,
+                              backgroundImage: data.image != null
+                                  ? FileImage(File(data.image))
+                                  : AssetImage('asset/profile_icons.png')
+                                      as ImageProvider<Object>?,
                             ),
                             WTitleText(context,
                                 text: data.name.toUpperCase(), size: 0.05),

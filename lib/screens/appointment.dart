@@ -170,6 +170,9 @@ class _AppointmentState extends State<Appointment> {
                     }
                   },
                   controller: timeController,
+                  onTap: () {
+                    _selectTime(context);
+                  },
                   keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
@@ -193,7 +196,7 @@ class _AppointmentState extends State<Appointment> {
                 ),
                 captiontext(context, text: 'Date'),
                 TextFormField(
-                  onChanged: (value) {
+                  onTap: () {
                     _selectDate(context);
                   },
                   validator: (value) {

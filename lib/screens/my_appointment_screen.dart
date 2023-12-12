@@ -38,144 +38,146 @@ class MyAppointment extends StatelessWidget {
       appBar: titleAppBar(title: "My Appointment"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            doctersCard(context,
-                name: doctorname,
-                speciality: doctorspeciality,
-                picture: doctorspicture),
-            Divider(
-              color: Colors.black,
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(screenSize.width * 0.04))),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WTitleText(context, text: 'Patient Info.', size: 0.05),
-                    doubleText(context, text1: 'Full Name', text2: name),
-                    doubleText(context, text1: 'Mobile Number', text2: phone),
-                    doubleText(context, text1: 'Gender', text2: gender),
-                    doubleText(context, text1: 'Age', text2: age),
-                    doubleText(context, text1: 'Problem', text2: problem),
-                  ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              doctersCard(context,
+                  name: doctorname,
+                  speciality: doctorspeciality,
+                  picture: doctorspicture),
+              Divider(
+                color: Colors.black,
+              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(screenSize.width * 0.04))),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      WTitleText(context, text: 'Patient Info.', size: 0.05),
+                      doubleText(context, text1: 'Full Name', text2: name),
+                      doubleText(context, text1: 'Mobile Number', text2: phone),
+                      doubleText(context, text1: 'Gender', text2: gender),
+                      doubleText(context, text1: 'Age', text2: age),
+                      doubleText(context, text1: 'Problem', text2: problem),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: screenSize.width * 0.04,
-            ),
-            Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(screenSize.width * 0.04))),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WTitleText(context,
-                        text: 'Scheduled Appointment', size: 0.05),
-                    doubleText(context, text1: 'Date', text2: date),
-                    doubleText(context, text1: 'Time', text2: time),
-                  ],
+              SizedBox(
+                height: screenSize.width * 0.04,
+              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(screenSize.width * 0.04))),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      WTitleText(context,
+                          text: 'Scheduled Appointment', size: 0.05),
+                      doubleText(context, text1: 'Date', text2: date),
+                      doubleText(context, text1: 'Time', text2: time),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    width: 150,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
-                                Color.fromARGB(255, 16, 105, 140)),
-                            shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        screenSize.width * 5)))),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          screenSize.width * 0.05))),
-                              title: Column(
-                                children: [
-                                  WTitleText(
-                                    context,
-                                    text: 'Cancel',
-                                    size: 0.05,
-                                  ),
-                                  captiontext(context,
-                                      text:
-                                          '''Are you sure you want to cancel the Appointment? ''')
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 150,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(
+                                  Color.fromARGB(255, 16, 105, 140)),
+                              shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          screenSize.width * 5)))),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            screenSize.width * 0.05))),
+                                title: Column(
+                                  children: [
+                                    WTitleText(
+                                      context,
+                                      text: 'Cancel',
+                                      size: 0.05,
+                                    ),
+                                    captiontext(context,
+                                        text:
+                                            '''Are you sure you want to cancel the Appointment? ''')
+                                  ],
+                                ),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Cancel")),
+                                  TextButton(
+                                      onPressed: () {
+                                        cancelAppointment(index!);
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Yes, Cancel")),
                                 ],
                               ),
-                              actions: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Cancel")),
-                                TextButton(
-                                    onPressed: () {
-                                      cancelAppointment(index!);
-                                      Navigator.pop(context);
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Yes, Cancel")),
-                              ],
-                            ),
-                          );
-                        },
-                        child: Text('Cancel')),
-                  ),
-                  SizedBox(
-                    width: 150,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
-                                Color.fromARGB(255, 16, 105, 140)),
-                            shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        screenSize.width * 5)))),
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return ReSheduleAppointment(
-                                  index: index,
-                                  doctorname: doctorname,
-                                  doctorpic: doctorspicture,
-                                  doctorspeciaility: doctorspeciality,
-                                  name: name,
-                                  age: age,
-                                  phone: phone,
-                                  gender: gender,
-                                  problem: problem,
-                                  date: date,
-                                  time: time);
-                            },
-                          ));
-                        },
-                        child: Text('Reshedule')),
-                  ),
-                ],
-              ),
-            )
-          ],
+                            );
+                          },
+                          child: Text('Cancel')),
+                    ),
+                    SizedBox(
+                      width: 150,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(
+                                  Color.fromARGB(255, 16, 105, 140)),
+                              shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          screenSize.width * 5)))),
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return ReSheduleAppointment(
+                                    index: index,
+                                    doctorname: doctorname,
+                                    doctorpic: doctorspicture,
+                                    doctorspeciaility: doctorspeciality,
+                                    name: name,
+                                    age: age,
+                                    phone: phone,
+                                    gender: gender,
+                                    problem: problem,
+                                    date: date,
+                                    time: time);
+                              },
+                            ));
+                          },
+                          child: Text('Reshedule')),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
