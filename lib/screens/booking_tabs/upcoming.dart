@@ -24,7 +24,8 @@ class UpComingTab extends StatelessWidget {
                   ),
                   itemCount: patientList.length,
                   itemBuilder: (context, index) {
-                    final data = patientList[index];
+                    final revesedIndex = patientList.length - 1 - index;
+                    final data = patientList[revesedIndex];
                     return Card(
                       elevation: 0,
                       shape: RoundedRectangleBorder(
