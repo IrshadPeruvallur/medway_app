@@ -71,16 +71,21 @@ class MyProfile extends StatelessWidget {
                       ],
                     )
                   : ListView.builder(
-                      itemCount: 1,
+                      itemCount: userList.length,
                       itemBuilder: (context, index) {
                         final data = userList[index];
                         return Column(
                           children: [
-                            CircleAvatar(
-                              radius: screenSize.width * 0.15,
-                              backgroundColor: Colors.white,
-                              backgroundImage: /* data.image == null ? AssetImage('asset/profile icons.png') : */
-                                  FileImage(File(data.image)),
+                            ClipOval(
+                              child: CircleAvatar(
+                                radius: screenSize.width * 0.15,
+                                backgroundColor: Colors.white,
+                                backgroundImage: data.image != null
+                                    ? FileImage(File(data.image))
+                                        as ImageProvider
+                                    : AssetImage('asset/profile_icons.png')
+                                        as ImageProvider, // Corrected asset path
+                              ),
                             ),
                             WTitleText(context,
                                 text: data.name.toUpperCase(), size: 0.05),

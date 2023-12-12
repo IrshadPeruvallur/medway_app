@@ -113,9 +113,21 @@ class HomeTab extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    // Navigator.of(context).push(MaterialPageRoute(
-                                    //   builder: (context) => MyAppointment(),
-                                    // ));
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) => MyAppointment(
+                                                index: index,
+                                                doctorname: data.doctorname,
+                                                doctorspeciality:
+                                                    data.doctorspecality,
+                                                doctorspicture: data.doctorpic,
+                                                name: data.name,
+                                                gender: data.gender,
+                                                phone: data.phone,
+                                                age: data.age,
+                                                problem: data.problem,
+                                                date: data.date,
+                                                time: data.time)));
                                   },
                                   child: WDoctorNameCard(
                                     context,
