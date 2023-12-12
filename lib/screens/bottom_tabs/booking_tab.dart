@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medway_app/screens/booking_tabs/canceled.dart';
 import 'package:medway_app/screens/booking_tabs/completed.dart';
 import 'package:medway_app/screens/booking_tabs/upcoming.dart';
+import 'package:medway_app/screens/search/search.dart';
 
 class BookingTab extends StatefulWidget {
   const BookingTab({super.key});
@@ -40,7 +41,17 @@ class _BookingTabState extends State<BookingTab> {
           backgroundColor: Colors.white,
           foregroundColor: Color.fromARGB(255, 16, 105, 140),
           title: Text('My Booking'),
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Search(),
+                      ));
+                },
+                icon: Icon(Icons.search))
+          ],
         ),
         body: Container(
           decoration: BoxDecoration(

@@ -4,6 +4,7 @@ import 'package:medway_app/screens/bottom_tabs/booking_tab.dart';
 import 'package:medway_app/screens/doctors_list.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/screens/profile/favourite_screen.dart';
+import 'package:medway_app/screens/search/search.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
 class HomeTab extends StatelessWidget {
@@ -49,11 +50,24 @@ class HomeTab extends StatelessWidget {
               );
             },
             icon: Icon(Icons.favorite_outline),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Search(),
+                ),
+              );
+            },
+            icon: Icon(Icons.search),
           )
         ],
         elevation: 0,
-        title: TextField(
-          decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
+        centerTitle: true,
+        title: Image(
+          image: AssetImage('asset/medway Text.png'),
+          width: screenSize.width * 0.3,
         ),
         backgroundColor: Colors.transparent,
         foregroundColor: Color.fromARGB(255, 16, 105, 140),

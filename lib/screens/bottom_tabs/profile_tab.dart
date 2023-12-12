@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:medway_app/function/nrml_function.dart';
 import 'package:medway_app/screens/profile/Account.dart';
 import 'package:medway_app/screens/profile/favourite_screen.dart';
@@ -86,11 +87,11 @@ class ProfileTab extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              CircleAvatar(
-                radius: screenSize.width * 0.15,
-                backgroundImage: AssetImage('asset/irshad.jpeg'),
-              ),
-              WTitleText(context, text: 'Irshad Ali', size: 0.05),
+              SizedBox(
+                  height: screenSize.width * 0.4,
+                  child: Lottie.asset(
+                    'asset/profile lottiee.json',
+                  )),
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (context, index) => SizedBox(

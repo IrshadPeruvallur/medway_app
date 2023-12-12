@@ -42,23 +42,59 @@ class _CreateProfileState extends State<CreateProfile> {
                   onTap: () => showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                        title: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextButton.icon(
-                            onPressed: () {
-                              getImage(ImageSource.camera);
-                            },
-                            icon: Icon(Icons.camera_alt),
-                            label: Text("Camera")),
-                        TextButton.icon(
-                            onPressed: () {
-                              getImage(ImageSource.gallery);
-                            },
-                            icon: Icon(Icons.image),
-                            label: Text("Gallery"))
-                      ],
-                    )),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenSize.width * .05))),
+                        title: Column(
+                          children: [
+                            WTitleText(context, text: "Choose from", size: .05),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton.icon(
+                                    style: ButtonStyle(
+                                        shape: MaterialStatePropertyAll(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        screenSize.width *
+                                                            0.02))),
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                                Colors.white),
+                                        elevation:
+                                            MaterialStatePropertyAll(02)),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      getImage(ImageSource.camera);
+                                    },
+                                    icon: Icon(Icons.camera_alt),
+                                    label: Text("Camera")),
+                                SizedBox(
+                                  width: screenSize.width * 0.05,
+                                ),
+                                TextButton.icon(
+                                    style: ButtonStyle(
+                                        shape: MaterialStatePropertyAll(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        screenSize.width *
+                                                            0.02))),
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                                Colors.white),
+                                        elevation:
+                                            MaterialStatePropertyAll(02)),
+                                    onPressed: () {
+                                      getImage(ImageSource.gallery);
+                                    },
+                                    icon: Icon(Icons.image),
+                                    label: Text("Gallery"))
+                              ],
+                            ),
+                          ],
+                        )),
                   ),
                   child: CircleAvatar(
                     radius: screenSize.width * 0.15,
@@ -69,6 +105,8 @@ class _CreateProfileState extends State<CreateProfile> {
                             child: Image.file(
                             picked!,
                             fit: BoxFit.cover,
+                            height: 200,
+                            width: 200,
                           )),
                   ),
                 ),
