@@ -72,172 +72,178 @@ class _AppointmentState extends State<Appointment> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: WNormalAppBar(),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                doctersCard(context,
-                    picture: widget.docterPic,
-                    name: widget.docterName,
-                    speciality: widget.docterspeciality),
-                SizedBox(
-                  height: screenSize.width * 0.05,
-                ),
-                WTextformField(
-                  keyboardType: TextInputType.name,
-                  controller: nameController,
-                  context,
-                  label: 'Name',
-                  hint: 'Full Name',
-                ),
-                WTextformField(
-                  keyboardType: TextInputType.number,
-                  controller: phoneController,
-                  context,
-                  label: 'Phone',
-                  hint: 'Mobile Number',
-                ),
-                SizedBox(
-                  height: screenSize.width * 0.04,
-                ),
-                captiontext(context, text: 'Gender'),
-                DropdownButtonFormField<String>(
-                  validator: (value) {
-                    if (value == "Select One") {
-                      return "Plese Choose one";
-                    } else {
-                      null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
+      // appBar: WNormalAppBar(),
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: screenSize.width * .054,
                   ),
-                  borderRadius: BorderRadius.circular(screenSize.width * 0.02),
-                  isExpanded: true,
-                  value: dropdownvalue,
-                  onChanged: (String? newvalue) {
-                    setState(() {
-                      dropdownvalue = newvalue.toString();
-                      genderController.text = dropdownvalue;
-                    });
-                  },
-                  items: [
-                    DropdownMenuItem(
-                        value: "Select One", child: Text('Select One')),
-                    DropdownMenuItem(value: "Male", child: Text('Male')),
-                    DropdownMenuItem(value: "Female", child: Text('Female')),
-                    DropdownMenuItem(value: "Other", child: Text('Other')),
-                  ],
-                ),
-                WTextformField(
-                  keyboardType: TextInputType.number,
-                  controller: ageController,
-                  context,
-                  label: 'Age',
-                  hint: 'Age',
-                ),
-                SizedBox(
-                  height: screenSize.width * 0.04,
-                ),
-                WTextformField(
-                    controller: problemController,
-                    keyboardType: TextInputType.text,
+                  doctersCard(context,
+                      picture: widget.docterPic,
+                      name: widget.docterName,
+                      speciality: widget.docterspeciality),
+                  SizedBox(
+                    height: screenSize.width * 0.05,
+                  ),
+                  WTextformField(
+                    keyboardType: TextInputType.name,
+                    controller: nameController,
                     context,
-                    label: 'Problem',
-                    hint: "Your Problem"),
-                SizedBox(
-                  height: screenSize.width * 0.04,
-                ),
-                captiontext(context, text: 'Time'),
-                TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please select Time";
-                    } else {
-                      null;
-                    }
-                  },
-                  controller: timeController,
-                  onTap: () {
-                    _selectTime(context);
-                  },
-                  keyboardType: TextInputType.datetime,
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        _selectTime(context);
-                      },
-                      icon: Icon(Icons.calendar_today),
+                    label: 'Name',
+                    hint: 'Full Name',
+                  ),
+                  WTextformField(
+                    keyboardType: TextInputType.number,
+                    controller: phoneController,
+                    context,
+                    label: 'Phone',
+                    hint: 'Mobile Number',
+                  ),
+                  SizedBox(
+                    height: screenSize.width * 0.04,
+                  ),
+                  captiontext(context, text: 'Gender'),
+                  DropdownButtonFormField<String>(
+                    validator: (value) {
+                      if (value == "Select One") {
+                        return "Plese Choose one";
+                      } else {
+                        null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 16, 105, 140)),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderRadius:
+                        BorderRadius.circular(screenSize.width * 0.02),
+                    isExpanded: true,
+                    value: dropdownvalue,
+                    onChanged: (String? newvalue) {
+                      setState(() {
+                        dropdownvalue = newvalue.toString();
+                        genderController.text = dropdownvalue;
+                      });
+                    },
+                    items: [
+                      DropdownMenuItem(
+                          value: "Select One", child: Text('Select One')),
+                      DropdownMenuItem(value: "Male", child: Text('Male')),
+                      DropdownMenuItem(value: "Female", child: Text('Female')),
+                      DropdownMenuItem(value: "Other", child: Text('Other')),
+                    ],
+                  ),
+                  WTextformField(
+                    keyboardType: TextInputType.number,
+                    controller: ageController,
+                    context,
+                    label: 'Age',
+                    hint: 'Age',
+                  ),
+                  SizedBox(
+                    height: screenSize.width * 0.04,
+                  ),
+                  WTextformField(
+                      controller: problemController,
+                      keyboardType: TextInputType.text,
+                      context,
+                      label: 'Problem',
+                      hint: "Your Problem"),
+                  SizedBox(
+                    height: screenSize.width * 0.04,
+                  ),
+                  captiontext(context, text: 'Time'),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please select Time";
+                      } else {
+                        null;
+                      }
+                    },
+                    controller: timeController,
+                    onTap: () {
+                      _selectTime(context);
+                    },
+                    keyboardType: TextInputType.datetime,
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          _selectTime(context);
+                        },
+                        icon: Icon(Icons.calendar_today),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 16, 105, 140)),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: screenSize.width * 0.04,
-                ),
-                captiontext(context, text: 'Date'),
-                TextFormField(
-                  onTap: () {
-                    _selectDate(context);
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please select Date";
-                    } else {
-                      null;
-                    }
-                  },
-                  controller: dateController,
-                  keyboardType: TextInputType.datetime,
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        _selectDate(context);
-                      },
-                      icon: Icon(Icons.calendar_today),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 16, 105, 140)),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                  SizedBox(
+                    height: screenSize.width * 0.04,
+                  ),
+                  captiontext(context, text: 'Date'),
+                  TextFormField(
+                    onTap: () {
+                      _selectDate(context);
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please select Date";
+                      } else {
+                        null;
+                      }
+                    },
+                    controller: dateController,
+                    keyboardType: TextInputType.datetime,
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          _selectDate(context);
+                        },
+                        icon: Icon(Icons.calendar_today),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 16, 105, 140)),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: screenSize.width * 0.04,
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: WElevatedButton(context, text: 'Submit Info.',
-                      navigator: () {
-                    if (_formKey.currentState!.validate()) {
-                      onAddPatientButtonClicked();
-                    }
-                  }),
-                ),
-              ],
+                  SizedBox(
+                    height: screenSize.width * 0.04,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: WElevatedButton(context, text: 'Submit Info.',
+                        navigator: () {
+                      if (_formKey.currentState!.validate()) {
+                        onAddPatientButtonClicked();
+                      }
+                    }),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
