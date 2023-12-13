@@ -4,7 +4,7 @@ import 'package:medway_app/screens/bottom_tabs/booking_tab.dart';
 import 'package:medway_app/screens/doctors_list.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/screens/profile/favourite_screen.dart';
-import 'package:medway_app/screens/search/search.dart';
+import 'package:medway_app/screens/search/search_paitent.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
 class HomeTab extends StatelessWidget {
@@ -56,7 +56,7 @@ class HomeTab extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Search(),
+                  builder: (context) => SearchPatient(),
                 ),
               );
             },

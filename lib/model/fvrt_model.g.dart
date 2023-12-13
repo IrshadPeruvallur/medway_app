@@ -1,47 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'profile_model.dart';
+part of 'fvrt_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserModelAdapter extends TypeAdapter<UserModel> {
+class FavouriteModelAdapter extends TypeAdapter<FavouriteModel> {
   @override
-  final int typeId = 2;
+  final int typeId = 3;
 
   @override
-  UserModel read(BinaryReader reader) {
+  FavouriteModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return UserModel(
+    return FavouriteModel(
+      dName: fields[1] as String,
+      dSpeciality: fields[2] as String,
+      dPhoto: fields[4] as String,
       index: fields[0] as int?,
-      name: fields[1] as String,
-      phone: fields[2] as String,
-      email: fields[3] as String,
-      dob: fields[4] as String,
-      image: fields[5] as dynamic,
     );
   }
 
   @override
-  void write(BinaryWriter writer, UserModel obj) {
+  void write(BinaryWriter writer, FavouriteModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.index)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.dName)
       ..writeByte(2)
-      ..write(obj.phone)
-      ..writeByte(3)
-      ..write(obj.email)
+      ..write(obj.dSpeciality)
       ..writeByte(4)
-      ..write(obj.dob)
-      ..writeByte(5)
-      ..write(obj.image);
+      ..write(obj.dPhoto);
   }
 
   @override
@@ -50,7 +44,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserModelAdapter &&
+      other is FavouriteModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

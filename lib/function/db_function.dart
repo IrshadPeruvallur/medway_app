@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:medway_app/function/favourite_db_function.dart';
 import 'package:medway_app/function/nrml_function.dart';
 import 'package:medway_app/function/user_db_function.dart';
 import 'package:medway_app/model/data_model.dart';
+import 'package:medway_app/model/fvrt_model.dart';
 import 'package:medway_app/model/profile_model.dart';
 import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/screens/splash_screen.dart';
@@ -35,6 +37,9 @@ void deleteAccount(BuildContext context) async {
   final userDB = await Hive.openBox<UserModel>("User_db");
   userDB.clear();
   userListNotifier.value.clear();
+  final fvrtDB = await Hive.openBox<FavouriteModel>("fvrt_db");
+  fvrtDB.clear();
+  favouriteListNotifier.value.clear();
 
   Navigator.pushAndRemoveUntil(
     context,

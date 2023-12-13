@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/function/favourite_db_function.dart';
 import 'package:medway_app/main.dart';
+import 'package:medway_app/model/fvrt_model.dart';
 import 'package:medway_app/screens/login_screen.dart';
 import 'package:medway_app/screens/main_screen.dart';
 import 'package:medway_app/screens/welcome_screen.dart';
@@ -79,4 +81,10 @@ fsignout(BuildContext context) async {
         builder: (context) => LoginScreen(),
       ),
       (route) => false);
+}
+
+onAddToFvrt(name, imagepath, speciality) async {
+  final favourite =
+      FavouriteModel(dName: name, dSpeciality: speciality, dPhoto: imagepath);
+  addToFavourite(favourite);
 }

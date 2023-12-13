@@ -8,15 +8,14 @@ import 'package:medway_app/model/data_model.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
-class Search extends StatefulWidget {
-  const Search({Key? key}) : super(key: key);
+class SearchPatient extends StatefulWidget {
+  const SearchPatient({Key? key}) : super(key: key);
 
   @override
-  State<Search> createState() => _SearchState();
+  State<SearchPatient> createState() => _SearchPatientState();
 }
 
-class _SearchState extends State<Search> {
-  final String defaultImage = 'assets/default_image.jpg';
+class _SearchPatientState extends State<SearchPatient> {
   List<PatientModel> _searchedPatient = [];
 
   loadFood() async {

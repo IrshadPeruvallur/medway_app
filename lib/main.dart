@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:medway_app/model/data_model.dart';
+import 'package:medway_app/model/fvrt_model.dart';
 import 'package:medway_app/model/profile_model.dart';
 import 'package:medway_app/screens/main_screen.dart';
 import 'package:medway_app/screens/splash_screen.dart';
@@ -15,6 +16,11 @@ void main(List<String> args) async {
   Hive.initFlutter();
   if (!Hive.isAdapterRegistered(UserModelAdapter().typeId)) {
     Hive.registerAdapter(UserModelAdapter());
+  }
+
+  Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(FavouriteModelAdapter().typeId)) {
+    Hive.registerAdapter(FavouriteModelAdapter());
   }
   runApp(MyApp());
 }

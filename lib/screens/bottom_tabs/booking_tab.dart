@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medway_app/screens/booking_tabs/canceled.dart';
 import 'package:medway_app/screens/booking_tabs/completed.dart';
 import 'package:medway_app/screens/booking_tabs/upcoming.dart';
-import 'package:medway_app/screens/search/search.dart';
+import 'package:medway_app/screens/search/search_paitent.dart';
 
 class BookingTab extends StatefulWidget {
   const BookingTab({super.key});
@@ -47,7 +47,7 @@ class _BookingTabState extends State<BookingTab> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Search(),
+                        builder: (context) => SearchPatient(),
                       ));
                 },
                 icon: Icon(Icons.search))

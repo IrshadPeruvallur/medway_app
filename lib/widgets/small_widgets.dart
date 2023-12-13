@@ -4,6 +4,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:medway_app/function/db_function.dart';
+import 'package:medway_app/function/favourite_db_function.dart';
+import 'package:medway_app/function/nrml_function.dart';
+import 'package:medway_app/model/fvrt_model.dart';
 import 'package:medway_app/screens/appointment.dart';
 import 'package:medway_app/screens/doctors_list.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
@@ -313,7 +316,10 @@ Widget doctorsList(context,
             ),
             trailing: IconButton(
                 selectedIcon: Icon(Icons.favorite),
-                onPressed: () {},
+                onPressed: () {
+                  print('object');
+                  onAddToFvrt(name, imagepath, speciality);
+                },
                 icon: Icon(Icons.favorite_border))),
         SizedBox(
           width: double.infinity,
