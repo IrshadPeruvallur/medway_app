@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/function/db_canceld.dart';
 import 'package:medway_app/function/favourite_db_function.dart';
 import 'package:medway_app/main.dart';
+import 'package:medway_app/model/canceled_model.dart';
 import 'package:medway_app/model/fvrt_model.dart';
 import 'package:medway_app/screens/login_screen.dart';
 import 'package:medway_app/screens/main_screen.dart';
@@ -87,4 +89,58 @@ onAddToFvrt(name, imagepath, speciality) async {
   final favourite =
       FavouriteModel(dName: name, dSpeciality: speciality, dPhoto: imagepath);
   addToFavourite(favourite);
+}
+
+void onAddToCancel({
+  required String doctorName,
+  required String doctorSpeciality,
+  required String doctorPic,
+  required String name,
+  required String phone,
+  required String age,
+  required String gender,
+  required String problem,
+  required String time,
+  required String date,
+}) {
+  final canceld = CanceldModel(
+    doctorname: doctorName,
+    doctorspecality: doctorSpeciality,
+    doctorpic: doctorPic,
+    name: name,
+    phone: phone,
+    age: age,
+    gender: gender,
+    problem: problem,
+    time: time,
+    date: date,
+  );
+  addToCancel(canceld);
+}
+
+void onAddToComplete({
+  required String doctorName,
+  required String doctorSpeciality,
+  required String doctorPic,
+  required String name,
+  required String phone,
+  required String age,
+  required String gender,
+  required String problem,
+  required String time,
+  required String date,
+}) {
+  final canceld = CanceldModel(
+    doctorname: doctorName,
+    doctorspecality: doctorSpeciality,
+    doctorpic: doctorPic,
+    name: name,
+    phone: phone,
+    age: age,
+    gender: gender,
+    problem: problem,
+    time: time,
+    date: date,
+  );
+  addToCancel(canceld);
 }

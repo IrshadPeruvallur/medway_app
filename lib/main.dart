@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:medway_app/model/canceled_model.dart';
 import 'package:medway_app/model/data_model.dart';
 import 'package:medway_app/model/fvrt_model.dart';
 import 'package:medway_app/model/profile_model.dart';
@@ -13,15 +14,17 @@ void main(List<String> args) async {
   if (!Hive.isAdapterRegistered(PatientModelAdapter().typeId)) {
     Hive.registerAdapter(PatientModelAdapter());
   }
-  Hive.initFlutter();
   if (!Hive.isAdapterRegistered(UserModelAdapter().typeId)) {
     Hive.registerAdapter(UserModelAdapter());
   }
 
-  Hive.initFlutter();
   if (!Hive.isAdapterRegistered(FavouriteModelAdapter().typeId)) {
     Hive.registerAdapter(FavouriteModelAdapter());
   }
+  if (!Hive.isAdapterRegistered(CanceldModelAdapter().typeId)) {
+    Hive.registerAdapter(CanceldModelAdapter());
+  }
+
   runApp(MyApp());
 }
 
