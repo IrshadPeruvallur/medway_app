@@ -15,7 +15,7 @@ class _BookingTabState extends State<BookingTab> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           // leading: IconButton(
@@ -28,9 +28,9 @@ class _BookingTabState extends State<BookingTab> {
                 Tab(
                   text: "Upcoming",
                 ),
-                Tab(
+                /* Tab(
                   text: "Completed",
-                ),
+                ), */
                 Tab(
                   text: "Cancled",
                 )
@@ -62,7 +62,7 @@ class _BookingTabState extends State<BookingTab> {
             ),
           ),
           child: TabBarView(
-              children: [UpComingTab(), CompletedTab(), CanceledTab()]),
+              children: [UpComingTab(), /*  CompletedTab(), */ CanceledTab()]),
         ),
       ),
     );

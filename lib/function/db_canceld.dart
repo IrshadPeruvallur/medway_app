@@ -25,22 +25,22 @@ deleteFromCanceld(int index) async {
   getAllCanceld();
 }
 
-addToConplete(CanceldModel value) async {
-  final cancelDB = await Hive.openBox<CanceldModel>("cancel_db");
-  cancelDB.add(value);
-  completeCanceldNotifierList.notifyListeners();
-  print('object');
-}
+// addToConplete(CanceldModel value) async {
+//   final cancelDB = await Hive.openBox<CanceldModel>("cancel_db");
+//   cancelDB.add(value);
+//   completeCanceldNotifierList.notifyListeners();
+//   print('object');
+// }
 
-getAllConplete() async {
-  final cancelDB = await Hive.openBox<CanceldModel>("cancel_db");
-  completeCanceldNotifierList.value.clear();
-  completeCanceldNotifierList.value.addAll(cancelDB.values);
-  completeCanceldNotifierList.notifyListeners();
-}
+// getAllConplete() async {
+//   final cancelDB = await Hive.openBox<CanceldModel>("cancel_db");
+//   completeCanceldNotifierList.value.clear();
+//   completeCanceldNotifierList.value.addAll(cancelDB.values);
+//   completeCanceldNotifierList.notifyListeners();
+// }
 
-deleteFromConplete(int index) async {
-  final cancelDB = await Hive.openBox<CanceldModel>("cancel_db");
-  cancelDB.deleteAt(index);
-  getAllCanceld();
-}
+// deleteFromConplete(int index) async {
+//   final cancelDB = await Hive.openBox<CanceldModel>("cancel_db");
+//   cancelDB.deleteAt(index);
+//   getAllCanceld();
+// }
