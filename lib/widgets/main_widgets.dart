@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/screens/profile/favourite_screen.dart';
 
-WNormalAppBar() {
+WNormalAppBar(context) {
   return AppBar(
     toolbarHeight: 60,
-    actions: [IconButton(onPressed: () {}, icon: Icon(Icons.notifications))],
+    actions: [
+      IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FavouriteScreen(),
+                ));
+          },
+          icon: Icon(Icons.favorite_border))
+    ],
     elevation: 0,
     title: TextField(
       decoration: InputDecoration(prefixIcon: Icon(Icons.search)),

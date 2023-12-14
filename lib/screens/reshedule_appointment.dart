@@ -97,7 +97,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: WNormalAppBar(),
+      appBar: WNormalAppBar(context),
       body: Form(
         key: _formKey,
         child: Padding(

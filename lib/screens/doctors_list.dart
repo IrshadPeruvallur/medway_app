@@ -81,23 +81,49 @@ class _DoctorsListState extends State<DoctorsList> {
     'asset/d9.jpg',
     'asset/d10.png',
   ];
+  String serchedList = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WNormalAppBar(),
+      appBar: titleAppBar(title: "Doctors List"),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  serchedList = value.toLowerCase();
+                });
+              },
+              decoration: InputDecoration(
+                focusColor: Color.fromARGB(255, 16, 105, 140),
+                hintText: 'Search doctors...',
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Color.fromARGB(255, 16, 105, 140),
+                ),
+              ),
+            ),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: doctorsname.length,
               itemBuilder: (context, index) {
-                return DoctorCard(
-                  index: index,
-                  imagepath: doctersimage[index],
-                  name: doctorsname[index],
-                  speciality: doctorsSpeciality[index],
-                );
+                if (doctorsname[index].toLowerCase().contains(serchedList) ||
+                    doctorsSpeciality[index]
+                        .toLowerCase()
+                        .contains(serchedList)) {
+                  return DoctorCard(
+                    index: index,
+                    imagepath: doctersimage[index],
+                    name: doctorsname[index],
+                    speciality: doctorsSpeciality[index],
+                  );
+                } else {
+                  return SizedBox.shrink();
+                }
               },
             ),
           ),
