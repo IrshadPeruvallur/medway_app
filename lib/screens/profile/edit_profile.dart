@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medway_app/function/user_db_function.dart';
 import 'package:medway_app/model/profile_model.dart';
@@ -130,13 +131,33 @@ class _CreateProfileState extends State<EditProfile> {
                   ),
                 ),
                 WTextformField(context,
-                    controller: nameController, label: "Name", hint: "Name"),
+                    keyboardType: TextInputType.name,
+                    inputformat:
+                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                    controller: nameController,
+                    label: "Name",
+                    hint: "Name"),
                 WTextformField(context,
-                    controller: phoneController, label: "Phone", hint: "Phone"),
+                    inputformat: FilteringTextInputFormatter.digitsOnly,
+                    keyboardType: TextInputType.phone,
+                    prificsText: '+91',
+                    maxlength: 10,
+                    controller: phoneController,
+                    label: "Phone",
+                    hint: "Phone"),
                 WTextformField(context,
-                    label: "DOB", hint: "DOB", controller: dobController),
+                    inputformat: FilteringTextInputFormatter.digitsOnly,
+                    keyboardType: TextInputType.number,
+                    label: "DOB",
+                    hint: "DOB",
+                    controller: dobController),
                 WTextformField(context,
-                    label: "Email", hint: "Email", controller: emailController),
+                    inputformat: FilteringTextInputFormatter.allow(
+                        RegExp(r'[0-9a-zA-Z]')),
+                    keyboardType: TextInputType.emailAddress,
+                    label: "Email",
+                    hint: "Email",
+                    controller: emailController),
                 SizedBox(
                   height: screenSize.width * 0.05,
                 ),

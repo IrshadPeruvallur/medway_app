@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:medway_app/function/db_function.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
@@ -114,12 +115,15 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   height: screenSize.width * 0.05,
                 ),
                 WTextformField(
+                  inputformat:
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
                   keyboardType: TextInputType.name,
                   controller: rnameController,
                   context,
                   label: 'Name',
                 ),
                 WTextformField(
+                  inputformat: FilteringTextInputFormatter.digitsOnly,
                   keyboardType: TextInputType.number,
                   controller: rphoneController,
                   context,
@@ -128,7 +132,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                 SizedBox(
                   height: screenSize.width * 0.04,
                 ),
-                captiontext(context, text: 'Gender'),
+                // captiontext(context, text: 'Gender'),
                 DropdownButtonFormField<String>(
                   validator: (value) {
                     if (value == "Select One") {
@@ -138,6 +142,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                     }
                   },
                   decoration: InputDecoration(
+                    labelText: 'Gender',
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       borderSide:
@@ -165,6 +170,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   ],
                 ),
                 WTextformField(
+                  inputformat: FilteringTextInputFormatter.digitsOnly,
                   keyboardType: TextInputType.number,
                   controller: rageController,
                   context,
@@ -174,6 +180,8 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   height: screenSize.width * 0.04,
                 ),
                 WTextformField(
+                  inputformat:
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
                   controller: rproblemController,
                   keyboardType: TextInputType.text,
                   context,
@@ -182,7 +190,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                 SizedBox(
                   height: screenSize.width * 0.04,
                 ),
-                captiontext(context, text: 'Time'),
+                // captiontext(context, text: 'Time'),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -194,6 +202,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   controller: rtimeController,
                   keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
+                    labelText: 'Time',
                     suffixIcon: IconButton(
                       onPressed: () {
                         _selectTime(context);
@@ -213,7 +222,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                 SizedBox(
                   height: screenSize.width * 0.04,
                 ),
-                captiontext(context, text: 'Date'),
+                // captiontext(context, text: 'Date'),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -225,6 +234,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   controller: rdateController,
                   keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
+                    labelText: 'Date',
                     suffixIcon: IconButton(
                       onPressed: () {
                         _selectDate(context);

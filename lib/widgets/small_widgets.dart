@@ -3,6 +3,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:medway_app/function/db_function.dart';
 import 'package:medway_app/function/favourite_db_function.dart';
 import 'package:medway_app/function/nrml_function.dart';
@@ -77,6 +78,9 @@ WRoundButton(context, {navigator}) {
 
 Widget WTextformField(
   BuildContext context, {
+  prificsText,
+  maxlength,
+  required TextInputFormatter inputformat,
   required String label,
   String? hint,
   TextEditingController? controller,
@@ -95,16 +99,19 @@ Widget WTextformField(
         SizedBox(
           height: MediaQuery.of(context).size.width * .2,
           child: TextFormField(
+            maxLength: maxlength,
+            inputFormatters: [inputformat],
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "Enter $label";
               } else {
-                null;
+                return null;
               }
             },
             keyboardType: keyboardType,
             controller: controller,
             decoration: InputDecoration(
+              prefixText: prificsText,
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:medway_app/function/nrml_function.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
@@ -24,13 +25,19 @@ class LoginScreen extends StatelessWidget {
                   WTitleText(context, text: 'Login', size: .08),
                   SizedBox(height: screenSize.width * .2),
                   WTextformField(
+                    inputformat: FilteringTextInputFormatter.allow(
+                        RegExp(r'[0-9a-zA-Z]')),
                     context,
+                    keyboardType: TextInputType.emailAddress,
                     hint: 'example@gmail.com',
                     label: 'Email',
                     controller: _emailController,
                   ),
                   SizedBox(height: screenSize.width * .008),
                   WTextformField(
+                    inputformat: FilteringTextInputFormatter.allow(
+                        RegExp(r'[0-9a-zA-Z]')),
+                    keyboardType: TextInputType.visiblePassword,
                     context,
                     hint: 'A92@39',
                     label: 'Password',

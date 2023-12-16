@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:medway_app/function/db_function.dart';
 import 'package:medway_app/model/data_model.dart';
 import 'package:medway_app/screens/booking_tabs/upcoming.dart';
@@ -93,23 +94,25 @@ class _AppointmentState extends State<Appointment> {
                     height: screenSize.width * 0.05,
                   ),
                   WTextformField(
+                    inputformat:
+                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
                     keyboardType: TextInputType.name,
                     controller: nameController,
                     context,
                     label: 'Name',
-                    hint: 'Full Name',
                   ),
                   WTextformField(
-                    keyboardType: TextInputType.number,
-                    controller: phoneController,
-                    context,
-                    label: 'Phone',
-                    hint: 'Mobile Number',
-                  ),
+                      maxlength: 10,
+                      inputformat: FilteringTextInputFormatter.digitsOnly,
+                      keyboardType: TextInputType.number,
+                      controller: phoneController,
+                      context,
+                      label: 'Phone',
+                      prificsText: '+91'),
                   SizedBox(
                     height: screenSize.width * 0.04,
                   ),
-                  captiontext(context, text: 'Gender'),
+                  // captiontext(context, text: 'Gender'),
                   DropdownButtonFormField<String>(
                     validator: (value) {
                       if (value == "Select One") {
@@ -119,6 +122,7 @@ class _AppointmentState extends State<Appointment> {
                       }
                     },
                     decoration: InputDecoration(
+                      labelText: 'Gender',
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
@@ -147,26 +151,30 @@ class _AppointmentState extends State<Appointment> {
                     ],
                   ),
                   WTextformField(
+                    maxlength: 2,
+                    inputformat: FilteringTextInputFormatter.digitsOnly,
                     keyboardType: TextInputType.number,
                     controller: ageController,
                     context,
                     label: 'Age',
-                    hint: 'Age',
                   ),
                   SizedBox(
                     height: screenSize.width * 0.04,
                   ),
                   WTextformField(
-                      controller: problemController,
-                      keyboardType: TextInputType.text,
-                      context,
-                      label: 'Problem',
-                      hint: "Your Problem"),
+                    inputformat:
+                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                    controller: problemController,
+                    keyboardType: TextInputType.text,
+                    context,
+                    label: 'Problem',
+                  ),
                   SizedBox(
                     height: screenSize.width * 0.04,
                   ),
-                  captiontext(context, text: 'Time'),
+                  // captiontext(context, text: 'Time'),
                   TextFormField(
+                    onTap: () => _selectTime(context),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please select Time";
@@ -175,11 +183,9 @@ class _AppointmentState extends State<Appointment> {
                       }
                     },
                     controller: timeController,
-                    onTap: () {
-                      _selectTime(context);
-                    },
                     keyboardType: TextInputType.datetime,
                     decoration: InputDecoration(
+                      labelText: 'Time',
                       suffixIcon: IconButton(
                         onPressed: () {
                           _selectTime(context);
@@ -199,11 +205,9 @@ class _AppointmentState extends State<Appointment> {
                   SizedBox(
                     height: screenSize.width * 0.04,
                   ),
-                  captiontext(context, text: 'Date'),
+                  // captiontext(context, text: 'Date'),
                   TextFormField(
-                    onTap: () {
-                      _selectDate(context);
-                    },
+                    onTap: () => _selectDate(context),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please select Date";
@@ -214,6 +218,7 @@ class _AppointmentState extends State<Appointment> {
                     controller: dateController,
                     keyboardType: TextInputType.datetime,
                     decoration: InputDecoration(
+                      labelText: 'Date',
                       suffixIcon: IconButton(
                         onPressed: () {
                           _selectDate(context);
@@ -235,10 +240,12 @@ class _AppointmentState extends State<Appointment> {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: WElevatedButton(context, text: 'Submit Info.',
+                    child: WElevatedButton(context, text: 'Reshedule',
                         navigator: () {
                       if (_formKey.currentState!.validate()) {
                         onAddPatientButtonClicked();
+                        Navigator.pop(context);
+                        print('object');
                       }
                     }),
                   ),

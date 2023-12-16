@@ -110,9 +110,14 @@ class CanceledTab extends StatelessWidget {
                                                   ),
                                                 ),
                                               ),
-                                              WTitleText(context,
+                                              SizedBox(
+                                                child: WTitleTextLeft(
+                                                  context,
                                                   text: data.doctorname,
-                                                  size: 0.05),
+                                                  size: 0.05,
+                                                ),
+                                                width: screenSize.width * 0.55,
+                                              ),
                                               captiontext(context,
                                                   text: data.doctorspecality),
                                               captiontext(context,
