@@ -4,9 +4,9 @@ import 'package:medway_app/model/canceled_model.dart';
 import 'package:medway_app/model/data_model.dart';
 import 'package:medway_app/model/fvrt_model.dart';
 import 'package:medway_app/model/profile_model.dart';
-import 'package:medway_app/screens/main_screen.dart';
 import 'package:medway_app/screens/splash_screen.dart';
 
+// ignore: constant_identifier_names
 const save_key_name = 'userloggedin';
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ void main(List<String> args) async {
     Hive.registerAdapter(CanceldModelAdapter());
   }
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );

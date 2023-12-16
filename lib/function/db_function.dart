@@ -1,13 +1,13 @@
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member, no_leading_underscores_for_local_identifiers, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:medway_app/function/favourite_db_function.dart';
-import 'package:medway_app/function/nrml_function.dart';
 import 'package:medway_app/function/user_db_function.dart';
 import 'package:medway_app/model/data_model.dart';
 import 'package:medway_app/model/fvrt_model.dart';
 import 'package:medway_app/model/profile_model.dart';
 import 'package:medway_app/screens/reshedule_appointment.dart';
-import 'package:medway_app/screens/splash_screen.dart';
 import 'package:medway_app/screens/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +18,6 @@ addAppointment(PatientModel value) async {
   final patientDB = await Hive.openBox<PatientModel>('patient_db');
   patientDB.add(value);
   patientListNotifier.notifyListeners();
-  print('sa');
 }
 
 getAllAppoitnment() async {
@@ -44,7 +43,7 @@ void deleteAccount(BuildContext context) async {
   Navigator.pushAndRemoveUntil(
     context,
     MaterialPageRoute(
-      builder: (context) => WelcomeScreen(),
+      builder: (context) => const WelcomeScreen(),
     ),
     (route) => false,
   );

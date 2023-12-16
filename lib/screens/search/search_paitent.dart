@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
@@ -47,7 +45,7 @@ class _SearchPatientState extends State<SearchPatient> {
     return Scaffold(
       appBar: titleAppBar(title: 'Search'),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('asset/background.jpg'), fit: BoxFit.cover)),
         child: Column(
@@ -76,7 +74,7 @@ class _SearchPatientState extends State<SearchPatient> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Expanded(

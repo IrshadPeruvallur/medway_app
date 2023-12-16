@@ -1,13 +1,10 @@
-// ignore_for_file: dead_code
-
-import 'dart:ui';
+// ignore_for_file: dead_code, sort_child_properties_last, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medway_app/function/db_function.dart';
 import 'package:medway_app/function/favourite_db_function.dart';
 import 'package:medway_app/function/nrml_function.dart';
-import 'package:medway_app/model/fvrt_model.dart';
 import 'package:medway_app/screens/appointment.dart';
 import 'package:medway_app/screens/doctors_list.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
@@ -62,7 +59,7 @@ WRoundButton(context, {navigator}) {
     child: ElevatedButton(
       style: ButtonStyle(
           backgroundColor:
-              MaterialStatePropertyAll(Color.fromARGB(255, 16, 105, 140)),
+              const MaterialStatePropertyAll(Color.fromARGB(255, 16, 105, 140)),
           shape: MaterialStatePropertyAll(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)))),
       onPressed: () {
@@ -112,7 +109,7 @@ Widget WTextformField(
             controller: controller,
             decoration: InputDecoration(
               prefixText: prificsText,
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 borderSide: BorderSide(
                   color: Color.fromARGB(255, 16, 105, 140),
@@ -122,7 +119,7 @@ Widget WTextformField(
               labelStyle: TextStyle(
                 fontSize: MediaQuery.of(context).size.width * .04,
               ),
-              border: OutlineInputBorder(
+              border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
             ),
@@ -151,7 +148,7 @@ Widget WElevatedButton(BuildContext context,
         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(screenSize.width * .04),
         )),
-        backgroundColor: MaterialStatePropertyAll(
+        backgroundColor: const MaterialStatePropertyAll(
           Color.fromARGB(255, 16, 105, 140),
         ),
       ),
@@ -165,7 +162,7 @@ Widget WDoctorNameCard(context,
   return Card(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(screenSize.width * 0.03)),
-    color: Color.fromARGB(255, 16, 105, 140),
+    color: const Color.fromARGB(255, 16, 105, 140),
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -245,12 +242,12 @@ Widget WSpecialistCircle(context, imagepath) {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DoctorsList(),
+            builder: (context) => const DoctorsList(),
           ));
     },
     child: CircleAvatar(
       radius: MediaQuery.of(context).size.width * .09,
-      backgroundColor: Color.fromARGB(210, 223, 245, 255),
+      backgroundColor: const Color.fromARGB(210, 223, 245, 255),
       backgroundImage: AssetImage(
         imagepath,
       ),
@@ -269,7 +266,7 @@ Widget WSpaceBetweenText(context, {text, required VoidCallback navigator}) {
         onPressed: () {
           navigator();
         },
-        child: Text('See All'))
+        child: const Text('See All'))
   ]);
 }
 
@@ -285,7 +282,7 @@ Widget doctorsList(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     child: Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         ListTile(
@@ -331,23 +328,24 @@ Widget doctorsList(
           ),
           trailing: IconButton(
             icon: IsDoctorInFvrt(name)
-                ? Icon(
+                ? const Icon(
                     Icons.favorite,
                     color: Colors.red,
                   )
-                : Icon(Icons.favorite_border),
+                : const Icon(Icons.favorite_border),
             onPressed: () {
               if (IsDoctorInFvrt(name)) {
                 deleteFromFvrt(index);
-                final snackBar = SnackBar(
+                const snackBar = SnackBar(
                   content:
                       Text("Doctor has been removed from the favorite list"),
-                  backgroundColor: const Color.fromARGB(255, 116, 10, 2),
+                  backgroundColor: Color.fromARGB(255, 116, 10, 2),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               } else {
                 onAddToFvrt(name, imagepath, speciality);
-                final snackBar = SnackBar(
+                // ignore: prefer_const_declarations
+                final snackBar = const SnackBar(
                   content: Text("Doctor has been added to the favorite list"),
                   backgroundColor: Color.fromARGB(255, 19, 19, 19),
                 );
@@ -376,7 +374,7 @@ Widget doctorsList(
                 'Make Appointment ',
                 style: TextStyle(
                   fontSize: screenSize.width * .05,
-                  color: Color.fromARGB(255, 16, 105, 140),
+                  color: const Color.fromARGB(255, 16, 105, 140),
                 ),
               ),
               style: ButtonStyle(
@@ -385,7 +383,7 @@ Widget doctorsList(
                   borderRadius: BorderRadius.circular(screenSize.width * .03),
                 )),
                 backgroundColor: MaterialStateProperty.all(
-                  Color.fromARGB(255, 223, 246, 255),
+                  const Color.fromARGB(255, 223, 246, 255),
                 ),
               ),
             ),
@@ -485,29 +483,29 @@ WshowBottomSheet(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                leading: Icon(Icons.photo),
-                title: Text('Gallery'),
+                leading: const Icon(Icons.photo),
+                title: const Text('Gallery'),
                 onTap: () {
                   // Handle gallery option
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.camera),
-                title: Text('Camera'),
+                leading: const Icon(Icons.camera),
+                title: const Text('Camera'),
                 onTap: () {
                   // Handle camera option
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.close),
-                title: Text('Cancel'),
+                leading: const Icon(Icons.close),
+                title: const Text('Cancel'),
                 onTap: () {
                   // Close the bottom sheet
                   Navigator.pop(context);
@@ -525,13 +523,13 @@ appointmentCard(data, context, index) {
     elevation: 0,
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(screenSize.width * .03)),
-    color: Color.fromARGB(255, 255, 255, 255),
+    color: const Color.fromARGB(255, 255, 255, 255),
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
           captiontext(context, text: '${data.date} | ${data.time}'),
-          Divider(
+          const Divider(
             color: Colors.black,
           ),
           GestureDetector(
@@ -603,7 +601,7 @@ appointmentCard(data, context, index) {
                 width: 150,
                 child: ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
+                        backgroundColor: const MaterialStatePropertyAll(
                             Color.fromARGB(255, 16, 105, 140)),
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius:
@@ -633,24 +631,24 @@ appointmentCard(data, context, index) {
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Text("Cancel")),
+                                child: const Text("Cancel")),
                             TextButton(
                                 onPressed: () {
                                   cancelAppointment(index);
                                   Navigator.pop(context);
                                 },
-                                child: Text("Yes, Cancel")),
+                                child: const Text("Yes, Cancel")),
                           ],
                         ),
                       );
                     },
-                    child: Text('Cancel')),
+                    child: const Text('Cancel')),
               ),
               SizedBox(
                 width: 150,
                 child: ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
+                        backgroundColor: const MaterialStatePropertyAll(
                             Color.fromARGB(255, 16, 105, 140)),
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius:
@@ -673,7 +671,7 @@ appointmentCard(data, context, index) {
                                 time: data.time),
                           ));
                     },
-                    child: Text('Reshedule')),
+                    child: const Text('Reshedule')),
               ),
             ],
           )

@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, unnecessary_null_comparison
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class EditProfile extends StatefulWidget {
   final String email;
   final String image;
   final int index;
-  EditProfile(
+  const EditProfile(
       {super.key,
       required this.name,
       required this.dob,
@@ -38,7 +40,6 @@ class EditProfile extends StatefulWidget {
 class _CreateProfileState extends State<EditProfile> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     nameController.text = widget.name;
     phoneController.text = widget.number;
@@ -80,16 +81,16 @@ class _CreateProfileState extends State<EditProfile> {
                                                         screenSize.width *
                                                             0.02))),
                                         backgroundColor:
-                                            MaterialStatePropertyAll(
+                                            const MaterialStatePropertyAll(
                                                 Colors.white),
                                         elevation:
-                                            MaterialStatePropertyAll(02)),
+                                            const MaterialStatePropertyAll(02)),
                                     onPressed: () {
                                       updateImage(ImageSource.camera);
                                       Navigator.pop(context);
                                     },
-                                    icon: Icon(Icons.camera_alt),
-                                    label: Text("Camera")),
+                                    icon: const Icon(Icons.camera_alt),
+                                    label: const Text("Camera")),
                                 SizedBox(
                                   width: screenSize.width * 0.05,
                                 ),
@@ -102,15 +103,15 @@ class _CreateProfileState extends State<EditProfile> {
                                                         screenSize.width *
                                                             0.02))),
                                         backgroundColor:
-                                            MaterialStatePropertyAll(
+                                            const MaterialStatePropertyAll(
                                                 Colors.white),
                                         elevation:
-                                            MaterialStatePropertyAll(02)),
+                                            const MaterialStatePropertyAll(02)),
                                     onPressed: () {
                                       updateImage(ImageSource.gallery);
                                     },
-                                    icon: Icon(Icons.image),
-                                    label: Text("Gallery"))
+                                    icon: const Icon(Icons.image),
+                                    label: const Text("Gallery"))
                               ],
                             ),
                           ],
@@ -120,7 +121,8 @@ class _CreateProfileState extends State<EditProfile> {
                     radius: screenSize.width * 0.15,
                     backgroundColor: Colors.white,
                     child: picked == null
-                        ? Image(image: AssetImage('asset/addprofile icon.png'))
+                        ? const Image(
+                            image: AssetImage('asset/addprofile icon.png'))
                         : ClipOval(
                             child: Image.file(
                             picked!,

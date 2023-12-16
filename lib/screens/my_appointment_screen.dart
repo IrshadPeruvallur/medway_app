@@ -4,6 +4,7 @@ import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 
+// ignore: must_be_immutable
 class MyAppointment extends StatelessWidget {
   MyAppointment(
       {super.key,
@@ -46,7 +47,7 @@ class MyAppointment extends StatelessWidget {
                   name: doctorname,
                   speciality: doctorspeciality,
                   picture: doctorspicture),
-              Divider(
+              const Divider(
                 color: Colors.black,
               ),
               Card(
@@ -97,7 +98,7 @@ class MyAppointment extends StatelessWidget {
                       width: 150,
                       child: ElevatedButton(
                           style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
+                              backgroundColor: const MaterialStatePropertyAll(
                                   Color.fromARGB(255, 16, 105, 140)),
                               shape: MaterialStatePropertyAll(
                                   RoundedRectangleBorder(
@@ -129,25 +130,25 @@ class MyAppointment extends StatelessWidget {
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Text("Cancel")),
+                                      child: const Text("Cancel")),
                                   TextButton(
                                       onPressed: () {
-                                        cancelAppointment(index!);
+                                        cancelAppointment(index);
                                         Navigator.pop(context);
                                         Navigator.pop(context);
                                       },
-                                      child: Text("Yes, Cancel")),
+                                      child: const Text("Yes, Cancel")),
                                 ],
                               ),
                             );
                           },
-                          child: Text('Cancel')),
+                          child: const Text('Cancel')),
                     ),
                     SizedBox(
                       width: 150,
                       child: ElevatedButton(
                           style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
+                              backgroundColor: const MaterialStatePropertyAll(
                                   Color.fromARGB(255, 16, 105, 140)),
                               shape: MaterialStatePropertyAll(
                                   RoundedRectangleBorder(
@@ -171,7 +172,7 @@ class MyAppointment extends StatelessWidget {
                               },
                             ));
                           },
-                          child: Text('Reshedule')),
+                          child: const Text('Reshedule')),
                     ),
                   ],
                 ),

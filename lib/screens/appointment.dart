@@ -1,10 +1,10 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medway_app/function/db_function.dart';
 import 'package:medway_app/model/data_model.dart';
-import 'package:medway_app/screens/booking_tabs/upcoming.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
-import 'package:medway_app/widgets/main_widgets.dart';
 import 'package:medway_app/widgets/small_widgets.dart';
 import 'package:intl/intl.dart';
 
@@ -14,7 +14,7 @@ class Appointment extends StatefulWidget {
   final String docterspeciality;
   final int index;
 
-  Appointment(
+  const Appointment(
       {super.key,
       required this.index,
       required this.docterPic,
@@ -118,10 +118,10 @@ class _AppointmentState extends State<Appointment> {
                       if (value == "Select One") {
                         return "Plese Choose one";
                       } else {
-                        null;
+                        return null;
                       }
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Gender',
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -142,7 +142,7 @@ class _AppointmentState extends State<Appointment> {
                         genderController.text = dropdownvalue;
                       });
                     },
-                    items: [
+                    items: const [
                       DropdownMenuItem(
                           value: "Select One", child: Text('Select One')),
                       DropdownMenuItem(value: "Male", child: Text('Male')),
@@ -179,7 +179,7 @@ class _AppointmentState extends State<Appointment> {
                       if (value == null || value.isEmpty) {
                         return "Please select Time";
                       } else {
-                        null;
+                        return null;
                       }
                     },
                     controller: timeController,
@@ -190,14 +190,14 @@ class _AppointmentState extends State<Appointment> {
                         onPressed: () {
                           _selectTime(context);
                         },
-                        icon: Icon(Icons.calendar_today),
+                        icon: const Icon(Icons.calendar_today),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: Color.fromARGB(255, 16, 105, 140)),
                       ),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                     ),
@@ -212,7 +212,7 @@ class _AppointmentState extends State<Appointment> {
                       if (value == null || value.isEmpty) {
                         return "Please select Date";
                       } else {
-                        null;
+                        return null;
                       }
                     },
                     controller: dateController,
@@ -223,14 +223,14 @@ class _AppointmentState extends State<Appointment> {
                         onPressed: () {
                           _selectDate(context);
                         },
-                        icon: Icon(Icons.calendar_today),
+                        icon: const Icon(Icons.calendar_today),
                       ),
-                      focusedBorder: OutlineInputBorder(
+                      focusedBorder: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         borderSide: BorderSide(
                             color: Color.fromARGB(255, 16, 105, 140)),
                       ),
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                     ),
@@ -245,7 +245,6 @@ class _AppointmentState extends State<Appointment> {
                       if (_formKey.currentState!.validate()) {
                         onAddPatientButtonClicked();
                         Navigator.pop(context);
-                        print('object');
                       }
                     }),
                   ),

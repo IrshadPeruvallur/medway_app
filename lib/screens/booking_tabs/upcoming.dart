@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/function/db_canceld.dart';
 import 'package:medway_app/function/db_function.dart';
 import 'package:medway_app/function/nrml_function.dart';
-import 'package:medway_app/model/canceled_model.dart';
 import 'package:medway_app/screens/my_appointment_screen.dart';
 import 'package:medway_app/screens/reshedule_appointment.dart';
 import 'package:medway_app/widgets/small_widgets.dart';

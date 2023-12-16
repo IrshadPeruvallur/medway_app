@@ -3,10 +3,9 @@ import 'package:medway_app/function/favourite_db_function.dart';
 import 'package:medway_app/function/nrml_function.dart';
 import 'package:medway_app/screens/appointment.dart';
 import 'package:medway_app/widgets/main_widgets.dart';
-import 'package:medway_app/widgets/small_widgets.dart';
 
 class DoctorsList extends StatefulWidget {
-  DoctorsList({super.key});
+  const DoctorsList({super.key});
 
   @override
   State<DoctorsList> createState() => _DoctorsListState();
@@ -97,7 +96,7 @@ class _DoctorsListState extends State<DoctorsList> {
                   serchedList = value.toLowerCase();
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 focusColor: Color.fromARGB(255, 16, 105, 140),
                 hintText: 'Search doctors...',
                 prefixIcon: Icon(
@@ -122,7 +121,7 @@ class _DoctorsListState extends State<DoctorsList> {
                     speciality: doctorsSpeciality[index],
                   );
                 } else {
-                  return SizedBox.shrink();
+                  return const SizedBox.shrink();
                 }
               },
             ),
@@ -132,6 +131,7 @@ class _DoctorsListState extends State<DoctorsList> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Widget DoctorCard(
       {required int index,
       required String name,
@@ -144,7 +144,7 @@ class _DoctorsListState extends State<DoctorsList> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ListTile(
@@ -190,24 +190,24 @@ class _DoctorsListState extends State<DoctorsList> {
               ),
               trailing: IconButton(
                 icon: IsDoctorInFvrt(name)
-                    ? Icon(
+                    ? const Icon(
                         Icons.favorite,
                         color: Colors.red,
                       )
-                    : Icon(Icons.favorite_border),
+                    : const Icon(Icons.favorite_border),
                 onPressed: () {
                   setState(() {
                     if (IsDoctorInFvrt(name)) {
                       // deleteFromFvrt(index);
-                      final snackBar = SnackBar(
+                      const snackBar = SnackBar(
                         content:
                             Text("Doctor is already in the favorite list."),
-                        backgroundColor: const Color.fromARGB(255, 116, 10, 2),
+                        backgroundColor: Color.fromARGB(255, 116, 10, 2),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } else {
                       onAddToFvrt(name, imagepath, speciality);
-                      final snackBar = SnackBar(
+                      const snackBar = SnackBar(
                         content:
                             Text("Doctor has been added to the favorite list."),
                         backgroundColor: Color.fromARGB(255, 19, 19, 19),
@@ -234,11 +234,12 @@ class _DoctorsListState extends State<DoctorsList> {
                       ),
                     ));
                   },
+                  // ignore: sort_child_properties_last
                   child: Text(
                     'Make Appointment ',
                     style: TextStyle(
                       fontSize: screenSize.width * .05,
-                      color: Color.fromARGB(255, 16, 105, 140),
+                      color: const Color.fromARGB(255, 16, 105, 140),
                     ),
                   ),
                   style: ButtonStyle(
@@ -248,7 +249,7 @@ class _DoctorsListState extends State<DoctorsList> {
                           BorderRadius.circular(screenSize.width * .03),
                     )),
                     backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 223, 246, 255),
+                      const Color.fromARGB(255, 223, 246, 255),
                     ),
                   ),
                 ),
