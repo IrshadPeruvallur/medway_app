@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/patient_controller.dart';
-import 'package:medway_app/controller/normal_controller.dart';
-import 'package:medway_app/screens/my_appointment_screen.dart';
-import 'package:medway_app/screens/reshedule_appointment.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/normal_controller.dart';
+import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
+import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class UpComingTab extends StatelessWidget {
   const UpComingTab({Key? key});
@@ -19,7 +19,7 @@ class UpComingTab extends StatelessWidget {
         builder: (context, patientList, child) {
           return patientList.isEmpty
               ? Lottie.asset('asset/empty.json')
-              : Flexible(
+              : Expanded(
                   child: ListView.separated(
                     shrinkWrap: true,
                     separatorBuilder: (context, index) => SizedBox(

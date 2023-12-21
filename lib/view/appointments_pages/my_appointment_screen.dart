@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/controller/patient_controller.dart';
-import 'package:medway_app/screens/reshedule_appointment.dart';
-import 'package:medway_app/screens/widgets/main_widgets.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
+import 'package:medway_app/view/widgets/main_widgets.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 // ignore: must_be_immutable
 class MyAppointment extends StatelessWidget {

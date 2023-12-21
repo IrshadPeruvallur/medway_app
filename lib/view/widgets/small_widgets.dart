@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medway_app/controller/patient_controller.dart';
-import 'package:medway_app/controller/favourite_controller.dart';
-import 'package:medway_app/controller/normal_controller.dart';
-import 'package:medway_app/screens/appointment.dart';
-import 'package:medway_app/screens/doctors_list_pages/doctors_list.dart';
-import 'package:medway_app/screens/my_appointment_screen.dart';
-import 'package:medway_app/screens/reshedule_appointment.dart';
+import 'package:medway_app/controller/functions/favourite_controller.dart';
+import 'package:medway_app/controller/functions/normal_controller.dart';
+import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/view/appointments_pages/appointment.dart';
+import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
+import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
+import 'package:medway_app/view/doctors_list_pages/doctors_list.dart';
 
 captiontext(context, {required text, required}) {
   return Padding(

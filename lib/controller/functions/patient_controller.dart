@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:medway_app/controller/favourite_controller.dart';
-import 'package:medway_app/controller/profile_controller.dart';
-import 'package:medway_app/model/patient_model.dart';
-import 'package:medway_app/model/fvrt_model.dart';
-import 'package:medway_app/model/profile_model.dart';
-import 'package:medway_app/screens/reshedule_appointment.dart';
-import 'package:medway_app/screens/welcome_screen.dart';
+import 'package:medway_app/controller/functions/favourite_controller.dart';
+import 'package:medway_app/controller/functions/profile_controller.dart';
+import 'package:medway_app/model/cancel_model/canceled_model.dart';
+import 'package:medway_app/model/favourite_model/fvrt_model.dart';
+import 'package:medway_app/model/patient_model/patient_model.dart';
+import 'package:medway_app/model/profile_model/profile_model.dart';
+import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
+import 'package:medway_app/view/welcome_pages/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ValueNotifier<List<PatientModel>> patientListNotifier = ValueNotifier([]);
@@ -39,6 +40,8 @@ void deleteAccount(BuildContext context) async {
   final fvrtDB = await Hive.openBox<FavouriteModel>("fvrt_db");
   fvrtDB.clear();
   favouriteListNotifier.value.clear();
+  final cancelDB = await Hive.openBox<CanceldModel>("cancel_db");
+  cancelDB.clear();
 
   Navigator.pushAndRemoveUntil(
     context,

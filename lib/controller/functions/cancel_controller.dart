@@ -2,22 +2,21 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:medway_app/model/canceled_model.dart';
+import 'package:medway_app/model/cancel_model/canceled_model.dart';
 
-ValueNotifier<List<CanceldModel>> completeCanceldNotifierList =
-    ValueNotifier([]);
+ValueNotifier<List<CanceldModel>> cancelNotifierList = ValueNotifier([]);
 
 addToCancel(CanceldModel value) async {
   final cancelDB = await Hive.openBox<CanceldModel>("cancel_db");
   cancelDB.add(value);
-  completeCanceldNotifierList.notifyListeners();
+  cancelNotifierList.notifyListeners();
 }
 
 getAllCanceld() async {
   final cancelDB = await Hive.openBox<CanceldModel>("cancel_db");
-  completeCanceldNotifierList.value.clear();
-  completeCanceldNotifierList.value.addAll(cancelDB.values);
-  completeCanceldNotifierList.notifyListeners();
+  cancelNotifierList.value.clear();
+  cancelNotifierList.value.addAll(cancelDB.values);
+  cancelNotifierList.notifyListeners();
 }
 
 deleteFromCanceld(int index) async {

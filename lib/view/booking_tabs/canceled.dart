@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/cancel_controller.dart';
-import 'package:medway_app/screens/complete_cancel_appointment.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/cancel_controller.dart';
+import 'package:medway_app/view/appointments_pages/complete_cancel_appointment.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class CanceledTab extends StatelessWidget {
   const CanceledTab({super.key});
@@ -15,7 +15,7 @@ class CanceledTab extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: ValueListenableBuilder(
-          valueListenable: completeCanceldNotifierList,
+          valueListenable: cancelNotifierList,
           builder: (context, value, child) {
             return value.isEmpty
                 ? Center(
@@ -43,20 +43,18 @@ class CanceledTab extends StatelessWidget {
                               onTap: () => Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        CompleteCancelAppointment(
-                                            index: index,
-                                            doctorname: data.doctorname,
-                                            doctorspeciality:
-                                                data.doctorspecality,
-                                            doctorspicture: data.doctorpic,
-                                            name: data.name,
-                                            gender: data.gender,
-                                            phone: data.phone,
-                                            age: data.age,
-                                            problem: data.problem,
-                                            date: data.date,
-                                            time: data.time),
+                                    builder: (context) => CancelAppointment(
+                                        index: index,
+                                        doctorname: data.doctorname,
+                                        doctorspeciality: data.doctorspecality,
+                                        doctorspicture: data.doctorpic,
+                                        name: data.name,
+                                        gender: data.gender,
+                                        phone: data.phone,
+                                        age: data.age,
+                                        problem: data.problem,
+                                        date: data.date,
+                                        time: data.time),
                                   )),
                               child: Card(
                                 elevation: 0,

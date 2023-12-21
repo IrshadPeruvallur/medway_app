@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/favourite_controller.dart';
-import 'package:medway_app/screens/appointment.dart';
-import 'package:medway_app/screens/widgets/main_widgets.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/favourite_controller.dart';
+import 'package:medway_app/view/appointments_pages/appointment.dart';
+import 'package:medway_app/view/widgets/main_widgets.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class FavouriteScreen extends StatelessWidget {
   FavouriteScreen({super.key});

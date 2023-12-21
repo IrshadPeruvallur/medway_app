@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:medway_app/model/fvrt_model.dart';
+import 'package:medway_app/model/favourite_model/fvrt_model.dart';
 
 ValueNotifier<List<FavouriteModel>> favouriteListNotifier = ValueNotifier([]);
 // List<FavouriteModel> favouritedList = [];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medway_app/controller/normal_controller.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/normal_controller.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});

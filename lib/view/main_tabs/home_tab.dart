@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/controller/patient_controller.dart';
-import 'package:medway_app/controller/favourite_controller.dart';
-import 'package:medway_app/controller/normal_controller.dart';
-import 'package:medway_app/screens/appointment.dart';
-import 'package:medway_app/screens/main_tabs/booking_tab.dart';
-import 'package:medway_app/screens/doctors_list_pages/doctors_list.dart';
-import 'package:medway_app/screens/my_appointment_screen.dart';
-import 'package:medway_app/screens/settings_tabs/favourite_screen.dart';
-import 'package:medway_app/screens/search/search_paitent.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/favourite_controller.dart';
+import 'package:medway_app/controller/functions/normal_controller.dart';
+import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/view/appointments_pages/appointment.dart';
+import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
+import 'package:medway_app/view/main_tabs/booking_tab.dart';
+import 'package:medway_app/view/doctors_list_pages/doctors_list.dart';
+import 'package:medway_app/view/settings_tabs/favourite_screen.dart';
+import 'package:medway_app/view/search/search_paitent.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class HomeTab extends StatefulWidget {
   HomeTab({Key? key});

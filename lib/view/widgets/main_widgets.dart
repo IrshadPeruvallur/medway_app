@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/screens/settings_tabs/favourite_screen.dart';
+import 'package:medway_app/view/settings_tabs/favourite_screen.dart';
 
 WNormalAppBar(context) {
   return AppBar(

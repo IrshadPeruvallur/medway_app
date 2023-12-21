@@ -2,13 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medway_app/controller/patient_controller.dart';
-import 'package:medway_app/model/patient_model.dart';
-import 'package:medway_app/screens/my_appointment_screen.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
-import 'package:intl/intl.dart';
+import 'package:medway_app/controller/providers/appointment_provider.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
-class Appointment extends StatefulWidget {
+import 'package:provider/provider.dart';
+
+class Appointment extends StatelessWidget {
   final String docterPic;
   final String docterName;
   final String docterspeciality;
@@ -22,61 +21,15 @@ class Appointment extends StatefulWidget {
       required this.docterspeciality});
 
   @override
-  State<Appointment> createState() => _AppointmentState();
-}
-
-class _AppointmentState extends State<Appointment> {
-  final nameController = TextEditingController();
-  final phoneController = TextEditingController();
-  final ageController = TextEditingController();
-  final problemController = TextEditingController();
-  final dateController = TextEditingController();
-  final timeController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  final genderController = TextEditingController();
-  String dropdownvalue = "Select One";
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-    );
-
-    if (pickedDate != null && pickedDate != DateTime.now()) {
-      setState(() {
-        dateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
-      });
-    }
-  }
-
-  void _selectTime(BuildContext context) async {
-    final TimeOfDay? pickedTime =
-        await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    if (pickedTime != null) {
-      DateTime now = DateTime.now();
-      DateTime selectedDateTime = DateTime(
-        now.year,
-        now.month,
-        now.day,
-        pickedTime.hour,
-        pickedTime.minute,
-      );
-
-      setState(() {
-        timeController.text = DateFormat.jm().format(selectedDateTime);
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final getProvider =
+        Provider.of<AppointmentProvider>(context, listen: false);
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       // appBar: WNormalAppBar(),
       body: SafeArea(
         child: Form(
-          key: _formKey,
+          key: getProvider.formKey,
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: SingleChildScrollView(
@@ -87,9 +40,9 @@ class _AppointmentState extends State<Appointment> {
                     height: screenSize.width * .054,
                   ),
                   doctersCard(context,
-                      picture: widget.docterPic,
-                      name: widget.docterName,
-                      speciality: widget.docterspeciality),
+                      picture: docterPic,
+                      name: docterName,
+                      speciality: docterspeciality),
                   SizedBox(
                     height: screenSize.width * 0.05,
                   ),
@@ -97,7 +50,7 @@ class _AppointmentState extends State<Appointment> {
                     inputformat:
                         FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
                     keyboardType: TextInputType.name,
-                    controller: nameController,
+                    controller: getProvider.nameController,
                     context,
                     label: 'Name',
                   ),
@@ -105,7 +58,7 @@ class _AppointmentState extends State<Appointment> {
                       maxlength: 10,
                       inputformat: FilteringTextInputFormatter.digitsOnly,
                       keyboardType: TextInputType.number,
-                      controller: phoneController,
+                      controller: getProvider.phoneController,
                       context,
                       label: 'Phone',
                       prificsText: '+91'),
@@ -135,12 +88,9 @@ class _AppointmentState extends State<Appointment> {
                     borderRadius:
                         BorderRadius.circular(screenSize.width * 0.02),
                     isExpanded: true,
-                    value: dropdownvalue,
+                    value: getProvider.dropdownvalue,
                     onChanged: (String? newvalue) {
-                      setState(() {
-                        dropdownvalue = newvalue.toString();
-                        genderController.text = dropdownvalue;
-                      });
+                      getProvider.changeGender(newvalue);
                     },
                     items: const [
                       DropdownMenuItem(
@@ -154,7 +104,7 @@ class _AppointmentState extends State<Appointment> {
                     maxlength: 2,
                     inputformat: FilteringTextInputFormatter.digitsOnly,
                     keyboardType: TextInputType.number,
-                    controller: ageController,
+                    controller: getProvider.ageController,
                     context,
                     label: 'Age',
                   ),
@@ -164,7 +114,7 @@ class _AppointmentState extends State<Appointment> {
                   WTextformField(
                     inputformat:
                         FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
-                    controller: problemController,
+                    controller: getProvider.problemController,
                     keyboardType: TextInputType.text,
                     context,
                     label: 'Problem',
@@ -174,7 +124,7 @@ class _AppointmentState extends State<Appointment> {
                   ),
                   // captiontext(context, text: 'Time'),
                   TextFormField(
-                    onTap: () => _selectTime(context),
+                    onTap: () => getProvider.selectTime(context),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please select Time";
@@ -182,13 +132,13 @@ class _AppointmentState extends State<Appointment> {
                         return null;
                       }
                     },
-                    controller: timeController,
+                    controller: getProvider.timeController,
                     keyboardType: TextInputType.datetime,
                     decoration: InputDecoration(
                       labelText: 'Time',
                       suffixIcon: IconButton(
                         onPressed: () {
-                          _selectTime(context);
+                          getProvider.selectTime(context);
                         },
                         icon: const Icon(Icons.calendar_today),
                       ),
@@ -207,7 +157,7 @@ class _AppointmentState extends State<Appointment> {
                   ),
                   // captiontext(context, text: 'Date'),
                   TextFormField(
-                    onTap: () => _selectDate(context),
+                    onTap: () => getProvider.selectDate(context),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please select Date";
@@ -215,13 +165,13 @@ class _AppointmentState extends State<Appointment> {
                         return null;
                       }
                     },
-                    controller: dateController,
+                    controller: getProvider.dateController,
                     keyboardType: TextInputType.datetime,
                     decoration: InputDecoration(
                       labelText: 'Date',
                       suffixIcon: IconButton(
                         onPressed: () {
-                          _selectDate(context);
+                          getProvider.selectDate(context);
                         },
                         icon: const Icon(Icons.calendar_today),
                       ),
@@ -240,11 +190,11 @@ class _AppointmentState extends State<Appointment> {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: WElevatedButton(context, text: 'Reshedule',
-                        navigator: () {
-                      if (_formKey.currentState!.validate()) {
-                        onAddPatientButtonClicked();
-                        Navigator.pop(context);
+                    child:
+                        WElevatedButton(context, text: 'Submit', navigator: () {
+                      if (getProvider.formKey.currentState!.validate()) {
+                        getProvider.onAddPatientButtonClicked(context,
+                            docterspeciality, docterName, docterPic, index);
                       }
                     }),
                   ),
@@ -255,51 +205,5 @@ class _AppointmentState extends State<Appointment> {
         ),
       ),
     );
-  }
-
-  void onAddPatientButtonClicked() async {
-    final _name = nameController.text.trim();
-    final _age = ageController.text.trim();
-    final _phone = phoneController.text.trim();
-    final _problem = problemController.text.trim();
-    final _gender = genderController.text.trim();
-    final _time = timeController.text.trim();
-    final _date = dateController.text.trim();
-
-    if (_name.isEmpty ||
-        _age.isEmpty ||
-        _phone.isEmpty ||
-        _problem.isEmpty ||
-        _date.isEmpty ||
-        _time.isEmpty) {
-      return;
-    }
-    final _patient = PatientModel(
-        doctorpic: widget.docterPic,
-        doctorname: widget.docterName,
-        doctorspecality: widget.docterspeciality,
-        name: _name,
-        phone: _phone,
-        age: _age,
-        gender: _gender,
-        problem: _problem,
-        time: _time,
-        date: _date);
-    addAppointment(_patient);
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MyAppointment(
-                index: widget.index,
-                doctorname: widget.docterName,
-                doctorspeciality: widget.docterspeciality,
-                doctorspicture: widget.docterPic,
-                name: _name,
-                phone: _phone,
-                gender: _gender,
-                age: _age,
-                problem: _problem,
-                date: _date,
-                time: _time)));
   }
 }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:medway_app/model/canceled_model.dart';
-import 'package:medway_app/model/patient_model.dart';
-import 'package:medway_app/model/fvrt_model.dart';
-import 'package:medway_app/model/profile_model.dart';
-import 'package:medway_app/screens/splash_screen.dart';
+import 'package:medway_app/controller/providers/appointment_provider.dart';
+import 'package:medway_app/controller/providers/doctors_list_provider.dart';
+import 'package:medway_app/controller/providers/main_screen_provider.dart';
+import 'package:medway_app/model/cancel_model/canceled_model.dart';
+import 'package:medway_app/model/favourite_model/fvrt_model.dart';
+import 'package:medway_app/model/patient_model/patient_model.dart';
+import 'package:medway_app/model/profile_model/profile_model.dart';
+import 'package:medway_app/view/welcome_pages/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 // ignore: constant_identifier_names
 const save_key_name = 'userloggedin';
@@ -33,9 +37,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<MainScreenProvider>(
+          create: (context) => MainScreenProvider(),
+        ),
+        ChangeNotifierProvider<AppointmentProvider>(
+          create: (context) => AppointmentProvider(),
+        ),
+        ChangeNotifierProvider<DoctorsListProvider>(
+          create: (context) => DoctorsListProvider(),
+        ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+      ),
     );
   }
 }

@@ -5,10 +5,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:medway_app/controller/profile_controller.dart';
-import 'package:medway_app/model/profile_model.dart';
-import 'package:medway_app/screens/widgets/main_widgets.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/profile_controller.dart';
+import 'package:medway_app/model/profile_model/profile_model.dart';
+import 'package:medway_app/view/widgets/main_widgets.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class CreateProfile extends StatefulWidget {
   CreateProfile({super.key});

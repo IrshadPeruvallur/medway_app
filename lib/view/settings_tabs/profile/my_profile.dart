@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:medway_app/controller/profile_controller.dart';
-import 'package:medway_app/screens/settings_tabs/profile/create_profile.dart';
-import 'package:medway_app/screens/settings_tabs/edit_profile.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/profile_controller.dart';
+import 'package:medway_app/view/settings_tabs/profile/create_profile.dart';
+import 'package:medway_app/view/settings_tabs/profile/edit_profile.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class MyProfile extends StatelessWidget {
   MyProfile({super.key});

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/controller/cancel_controller.dart';
-import 'package:medway_app/controller/favourite_controller.dart';
+import 'package:medway_app/controller/functions/cancel_controller.dart';
+import 'package:medway_app/controller/functions/favourite_controller.dart';
 import 'package:medway_app/main.dart';
-import 'package:medway_app/model/canceled_model.dart';
-import 'package:medway_app/model/fvrt_model.dart';
-import 'package:medway_app/screens/login_screen.dart';
-import 'package:medway_app/screens/main_screen.dart';
-import 'package:medway_app/screens/welcome_screen.dart';
+import 'package:medway_app/model/cancel_model/canceled_model.dart';
+import 'package:medway_app/model/favourite_model/fvrt_model.dart';
+import 'package:medway_app/view/welcome_pages/login_screen.dart';
+import 'package:medway_app/view/welcome_pages/main_screen.dart';
+import 'package:medway_app/view/welcome_pages/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // bottomSheet(context) {

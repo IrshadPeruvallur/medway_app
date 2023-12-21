@@ -2,8 +2,8 @@
 
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:medway_app/model/profile_model.dart';
-import 'package:medway_app/screens/settings_tabs/edit_profile.dart';
+import 'package:medway_app/model/profile_model/profile_model.dart';
+import 'package:medway_app/view/settings_tabs/profile/edit_profile.dart';
 
 ValueNotifier<List<UserModel>> userListNotifier = ValueNotifier([]);
 

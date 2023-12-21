@@ -35,6 +35,7 @@ dependencies:
   flutter_slidable: ^3.0.1
   hive_flutter: ^1.1.0
   image_picker: ^1.0.4
+  provider: ^6.1.1
   intl: ^0.17.0
   lottie: ^2.7.0
   shared_preferences: ^2.2.2

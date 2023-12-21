@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/normal_controller.dart';
-import 'package:medway_app/screens/settings_tabs/Account.dart';
-import 'package:medway_app/screens/settings_tabs/favourite_screen.dart';
-import 'package:medway_app/screens/settings_tabs/help_center.dart';
-import 'package:medway_app/screens/settings_tabs/my_profile.dart';
-import 'package:medway_app/screens/settings_tabs/privacy_policy.dart';
-import 'package:medway_app/screens/settings_tabs/settings.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/normal_controller.dart';
+import 'package:medway_app/view/settings_tabs/Account.dart';
+import 'package:medway_app/view/settings_tabs/favourite_screen.dart';
+import 'package:medway_app/view/settings_tabs/help_center.dart';
+import 'package:medway_app/view/settings_tabs/privacy_policy.dart';
+import 'package:medway_app/view/settings_tabs/profile/my_profile.dart';
+import 'package:medway_app/view/settings_tabs/settings.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class SettingsTab extends StatelessWidget {
   SettingsTab({super.key});

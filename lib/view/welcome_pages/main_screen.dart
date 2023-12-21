@@ -1,42 +1,32 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:medway_app/controller/patient_controller.dart';
-import 'package:medway_app/screens/main_tabs/booking_tab.dart';
-import 'package:medway_app/screens/main_tabs/home_tab.dart';
-import 'package:medway_app/screens/main_tabs/profile_tab.dart';
+import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/controller/providers/main_screen_provider.dart';
+import 'package:medway_app/view/main_tabs/booking_tab.dart';
+import 'package:medway_app/view/main_tabs/home_tab.dart';
+import 'package:medway_app/view/main_tabs/profile_tab.dart';
+import 'package:provider/provider.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   MainScreen({Key? key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int currentIndex = 0;
-
-  final items = [
-    Icon(Icons.home),
-    Icon(Icons.calendar_month),
-    Icon(Icons.person),
-  ];
-
-  final List<Widget> tabs = [HomeTab(), BookingTab(), SettingsTab()];
-
-  @override
   Widget build(BuildContext context) {
+    final getProvider = Provider.of<MainScreenProvider>(
+      context,
+    );
     getAllAppoitnment();
     return Scaffold(
-      body: tabs[currentIndex],
+      body: getProvider.tabs[getProvider.currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
-        index: currentIndex,
-        backgroundColor: Color.fromARGB(255, 16, 105, 140),
-        items: items,
+        index: getProvider.currentIndex,
+        backgroundColor: const Color.fromARGB(255, 16, 105, 140),
+        items: getProvider.items,
         height: 60,
         onTap: (int index) {
-          setState(() {
-            currentIndex = index;
-          });
+          getProvider.bottomFunction(index);
         },
       ),
     );

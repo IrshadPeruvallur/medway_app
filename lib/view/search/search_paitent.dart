@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/patient_controller.dart';
-import 'package:medway_app/model/patient_model.dart';
-import 'package:medway_app/screens/widgets/main_widgets.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/model/patient_model/patient_model.dart';
+import 'package:medway_app/view/widgets/main_widgets.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class SearchPatient extends StatefulWidget {
   const SearchPatient({Key? key}) : super(key: key);

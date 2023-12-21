@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/screens/onboarding/onboard_screen_1.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/view/onboarding/onboard_screen_1.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

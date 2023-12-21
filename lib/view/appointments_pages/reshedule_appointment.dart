@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:medway_app/controller/patient_controller.dart';
-import 'package:medway_app/screens/widgets/main_widgets.dart';
-import 'package:medway_app/screens/widgets/small_widgets.dart';
+import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/view/widgets/main_widgets.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 
 final rnameController = TextEditingController();
 final rphoneController = TextEditingController();
