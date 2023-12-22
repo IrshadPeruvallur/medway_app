@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/controller/providers/doctors_list_provider.dart';
+import 'package:medway_app/controller/doctors_list_provider.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/functions/normal_controller.dart';
+import 'package:medway_app/services/normal.dart';
 import 'package:medway_app/view/settings_tabs/Account.dart';
 import 'package:medway_app/view/settings_tabs/favourite_screen.dart';
 import 'package:medway_app/view/settings_tabs/help_center.dart';

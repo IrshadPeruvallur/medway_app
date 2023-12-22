@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:medway_app/controller/providers/appointment_provider.dart';
-import 'package:medway_app/controller/providers/doctors_list_provider.dart';
-import 'package:medway_app/controller/providers/search_provider.dart';
-import 'package:medway_app/controller/providers/main_screen_provider.dart';
+import 'package:medway_app/controller/appointment_provider.dart';
+import 'package:medway_app/controller/doctors_list_provider.dart';
+import 'package:medway_app/controller/search_provider.dart';
+import 'package:medway_app/controller/main_screen_provider.dart';
 import 'package:medway_app/model/cancel_model/canceled_model.dart';
 import 'package:medway_app/model/favourite_model/fvrt_model.dart';
 import 'package:medway_app/model/patient_model/patient_model.dart';

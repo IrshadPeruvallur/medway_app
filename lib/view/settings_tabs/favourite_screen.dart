@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/functions/favourite_controller.dart';
+import 'package:medway_app/services/favourite.dart';
 import 'package:medway_app/view/appointments_pages/appointment.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
@@ -17,16 +17,16 @@ class FavouriteScreen extends StatelessWidget {
       appBar: titleAppBar(title: 'Favourite'),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            ValueListenableBuilder(
-              valueListenable: favouriteListNotifier,
-              builder: (context, fvrtItem, child) {
-                return fvrtItem.isEmpty
-                    ? Center(
-                        child: Lottie.asset('asset/empty.json'),
-                      )
-                    : Expanded(
+        child: ValueListenableBuilder(
+          valueListenable: favouriteListNotifier,
+          builder: (context, fvrtItem, child) {
+            return fvrtItem.isEmpty
+                ? Center(
+                    child: Lottie.asset('asset/empty.json'),
+                  )
+                : Column(
+                    children: [
+                      Expanded(
                         child: ListView.separated(
                             separatorBuilder: (context, index) => SizedBox(
                                   height: 10,
@@ -77,10 +77,10 @@ class FavouriteScreen extends StatelessWidget {
                                       name: data.dName,
                                       speciality: data.dSpeciality));
                             }),
-                      );
-              },
-            ),
-          ],
+                      ),
+                    ],
+                  );
+          },
         ),
       ),
     );

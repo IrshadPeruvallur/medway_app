@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medway_app/controller/providers/appointment_provider.dart';
+import 'package:medway_app/controller/appointment_provider.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 
 import 'package:provider/provider.dart';

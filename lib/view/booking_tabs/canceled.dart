@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/functions/cancel_controller.dart';
+import 'package:medway_app/services/cancel.dart';
 import 'package:medway_app/view/appointments_pages/complete_cancel_appointment.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 
@@ -14,16 +14,16 @@ class CanceledTab extends StatelessWidget {
     getAllCanceld();
     return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            ValueListenableBuilder(
-              valueListenable: cancelNotifierList,
-              builder: (context, value, child) {
-                return value.isEmpty
-                    ? Center(
-                        child: Lottie.asset('asset/empty.json'),
-                      )
-                    : Expanded(
+        child: ValueListenableBuilder(
+          valueListenable: cancelNotifierList,
+          builder: (context, value, child) {
+            return value.isEmpty
+                ? Center(
+                    child: Lottie.asset('asset/empty.json'),
+                  )
+                : Column(
+                    children: [
+                      Expanded(
                         child: ListView.separated(
                             separatorBuilder: (context, index) => SizedBox(
                                   height: 15,
@@ -142,10 +142,10 @@ class CanceledTab extends StatelessWidget {
                                 ),
                               );
                             }),
-                      );
-              },
-            ),
-          ],
+                      ),
+                    ],
+                  );
+          },
         ));
   }
 }

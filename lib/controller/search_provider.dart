@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/services/patient.dart';
 import 'package:medway_app/model/patient_model/patient_model.dart';
 
 class SearchProvider extends ChangeNotifier {

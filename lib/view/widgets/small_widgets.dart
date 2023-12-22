@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medway_app/controller/functions/favourite_controller.dart';
-import 'package:medway_app/controller/functions/normal_controller.dart';
-import 'package:medway_app/controller/functions/patient_controller.dart';
-import 'package:medway_app/controller/providers/doctors_list_provider.dart';
-import 'package:medway_app/controller/providers/search_provider.dart';
+import 'package:medway_app/services/favourite.dart';
+import 'package:medway_app/services/normal.dart';
+import 'package:medway_app/services/patient.dart';
+import 'package:medway_app/controller/doctors_list_provider.dart';
+import 'package:medway_app/controller/search_provider.dart';
 import 'package:medway_app/view/appointments_pages/appointment.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';

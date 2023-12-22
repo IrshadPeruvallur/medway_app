@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/providers/search_provider.dart';
+import 'package:medway_app/controller/search_provider.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';

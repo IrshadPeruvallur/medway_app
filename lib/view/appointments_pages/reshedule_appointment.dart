@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/services/patient.dart';
+import 'package:medway_app/controller/appointment_provider.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
+import 'package:provider/provider.dart';
 
 final rnameController = TextEditingController();
 final rphoneController = TextEditingController();
@@ -60,42 +62,10 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
     rtimeController.text = widget.time;
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2101),
-    );
-
-    if (pickedDate != null && pickedDate != DateTime.now()) {
-      setState(() {
-        rdateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
-      });
-    }
-  }
-
-  void _selectTime(BuildContext context) async {
-    final TimeOfDay? pickedTime =
-        await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    if (pickedTime != null) {
-      DateTime now = DateTime.now();
-      DateTime selectedDateTime = DateTime(
-        now.year,
-        now.month,
-        now.day,
-        pickedTime.hour,
-        pickedTime.minute,
-      );
-
-      setState(() {
-        rtimeController.text = DateFormat.jm().format(selectedDateTime);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final getProvider =
+        Provider.of<AppointmentProvider>(context, listen: false);
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: WNormalAppBar(context),
@@ -132,7 +102,6 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                 SizedBox(
                   height: screenSize.width * 0.04,
                 ),
-                // captiontext(context, text: 'Gender'),
                 DropdownButtonFormField<String>(
                   validator: (value) {
                     if (value == "Select One") {
@@ -156,10 +125,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   isExpanded: true,
                   value: dropdownvalue,
                   onChanged: (String? newvalue) {
-                    setState(() {
-                      dropdownvalue = newvalue.toString();
-                      rgenderController.text = dropdownvalue;
-                    });
+                    getProvider.changeGender;
                   },
                   items: const [
                     DropdownMenuItem(
@@ -205,7 +171,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                     labelText: 'Time',
                     suffixIcon: IconButton(
                       onPressed: () {
-                        _selectTime(context);
+                        getProvider.selectTime(context);
                       },
                       icon: const Icon(Icons.calendar_today),
                     ),
@@ -222,7 +188,6 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                 SizedBox(
                   height: screenSize.width * 0.04,
                 ),
-                // captiontext(context, text: 'Date'),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -237,7 +202,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                     labelText: 'Date',
                     suffixIcon: IconButton(
                       onPressed: () {
-                        _selectDate(context);
+                        getProvider.selectDate;
                       },
                       icon: const Icon(Icons.calendar_today),
                     ),
