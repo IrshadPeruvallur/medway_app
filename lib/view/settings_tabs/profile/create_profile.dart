@@ -129,14 +129,15 @@ class _CreateProfileState extends State<CreateProfile> {
                     label: "Phone",
                     hint: "Phone"),
                 WTextformField(context,
-                    inputformat: FilteringTextInputFormatter.digitsOnly,
+                    inputformat:
+                        FilteringTextInputFormatter.singleLineFormatter,
                     keyboardType: TextInputType.number,
                     label: "DOB",
                     hint: "DOB",
                     controller: dobController),
                 WTextformField(context,
                     inputformat: FilteringTextInputFormatter.allow(
-                        RegExp(r'[0-9a-zA-Z]')),
+                        RegExp(r'[a-zA-Z0-9@._-]')),
                     keyboardType: TextInputType.emailAddress,
                     label: "Email",
                     hint: "Email",
