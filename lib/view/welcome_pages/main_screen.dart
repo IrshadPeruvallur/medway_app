@@ -2,7 +2,7 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:medway_app/services/patient.dart';
+import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/controller/main_screen_provider.dart';
 import 'package:medway_app/view/main_tabs/booking_tab.dart';
 import 'package:medway_app/view/main_tabs/home_tab.dart';

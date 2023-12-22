@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:medway_app/services/favourite.dart';
-import 'package:medway_app/services/profile.dart';
+import 'package:medway_app/services/favourite_service.dart';
+import 'package:medway_app/services/profile_service.dart';
 import 'package:medway_app/model/cancel_model/canceled_model.dart';
 import 'package:medway_app/model/favourite_model/fvrt_model.dart';
 import 'package:medway_app/model/patient_model/patient_model.dart';

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medway_app/services/favourite.dart';
-import 'package:medway_app/services/normal.dart';
-import 'package:medway_app/services/patient.dart';
+import 'package:medway_app/services/favourite_service.dart';
+import 'package:medway_app/services/normal_service.dart';
+import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/controller/doctors_list_provider.dart';
 import 'package:medway_app/controller/search_provider.dart';
 import 'package:medway_app/view/appointments_pages/appointment.dart';

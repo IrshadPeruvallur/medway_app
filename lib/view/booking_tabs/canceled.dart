@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/services/cancel.dart';
+import 'package:medway_app/services/cancel_service.dart';
 import 'package:medway_app/view/appointments_pages/complete_cancel_appointment.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 

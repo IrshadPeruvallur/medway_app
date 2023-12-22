@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/services/favourite.dart';
-import 'package:medway_app/services/normal.dart';
+import 'package:medway_app/services/favourite_service.dart';
+import 'package:medway_app/services/normal_service.dart';
 
 class DoctorsListProvider extends ChangeNotifier {
   final List doctorsSpeciality = [
