@@ -17,63 +17,70 @@ class FavouriteScreen extends StatelessWidget {
       appBar: titleAppBar(title: 'Favourite'),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ValueListenableBuilder(
-          valueListenable: favouriteListNotifier,
-          builder: (context, fvrtItem, child) {
-            return fvrtItem.isEmpty
-                ? Center(
-                    child: Lottie.asset('asset/empty.json'),
-                  )
-                : Expanded(
-                    child: ListView.separated(
-                        separatorBuilder: (context, index) => SizedBox(
-                              height: 10,
-                            ),
-                        itemCount: fvrtItem.length,
-                        itemBuilder: (context, index) {
-                          final data = fvrtItem[index];
-                          return Slidable(
-                              startActionPane: ActionPane(
-                                  motion: StretchMotion(),
-                                  children: [
-                                    SlidableAction(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 121, 0, 0),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                      onPressed: (context) {
-                                        deleteFromFvrt(index);
-                                      },
-                                      icon: Icons.delete,
-                                    ),
-                                    SizedBox(
-                                      width: screenSize.width * .02,
-                                    ),
-                                    SlidableAction(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 16, 105, 140),
-                                      borderRadius: BorderRadius.circular(
-                                          screenSize.width * .05),
-                                      icon: Icons.calendar_month,
-                                      // label: "Make Appointment",
-                                      onPressed: (context) => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Appointment(
-                                                  index: index,
-                                                  docterPic: data.dPhoto,
-                                                  docterName: data.dName,
-                                                  docterspeciality:
-                                                      data.dSpeciality))),
-                                    )
-                                  ]),
-                              child: doctersCard(context,
-                                  picture: data.dPhoto,
-                                  name: data.dName,
-                                  speciality: data.dSpeciality));
-                        }),
-                  );
-          },
+        child: Column(
+          children: [
+            ValueListenableBuilder(
+              valueListenable: favouriteListNotifier,
+              builder: (context, fvrtItem, child) {
+                return fvrtItem.isEmpty
+                    ? Center(
+                        child: Lottie.asset('asset/empty.json'),
+                      )
+                    : Expanded(
+                        child: ListView.separated(
+                            separatorBuilder: (context, index) => SizedBox(
+                                  height: 10,
+                                ),
+                            itemCount: fvrtItem.length,
+                            itemBuilder: (context, index) {
+                              final data = fvrtItem[index];
+                              return Slidable(
+                                  startActionPane: ActionPane(
+                                      motion: StretchMotion(),
+                                      children: [
+                                        SlidableAction(
+                                          backgroundColor:
+                                              Color.fromARGB(255, 121, 0, 0),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          onPressed: (context) {
+                                            deleteFromFvrt(index);
+                                          },
+                                          icon: Icons.delete,
+                                        ),
+                                        // SizedBox(
+                                        //   width: screenSize.width * .02,
+                                        // ),
+                                        SlidableAction(
+                                          backgroundColor:
+                                              Color.fromARGB(255, 16, 105, 140),
+                                          borderRadius: BorderRadius.circular(
+                                              screenSize.width * .05),
+                                          icon: Icons.calendar_month,
+                                          // label: "Make Appointment",
+                                          onPressed: (context) => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Appointment(
+                                                          index: index,
+                                                          docterPic:
+                                                              data.dPhoto,
+                                                          docterName:
+                                                              data.dName,
+                                                          docterspeciality: data
+                                                              .dSpeciality))),
+                                        )
+                                      ]),
+                                  child: doctersCard(context,
+                                      picture: data.dPhoto,
+                                      name: data.dName,
+                                      speciality: data.dSpeciality));
+                            }),
+                      );
+              },
+            ),
+          ],
         ),
       ),
     );

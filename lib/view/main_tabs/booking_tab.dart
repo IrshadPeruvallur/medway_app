@@ -3,14 +3,9 @@ import 'package:medway_app/view/booking_tabs/canceled.dart';
 import 'package:medway_app/view/booking_tabs/upcoming.dart';
 import 'package:medway_app/view/search/search_paitent.dart';
 
-class BookingTab extends StatefulWidget {
+class BookingTab extends StatelessWidget {
   const BookingTab({super.key});
 
-  @override
-  State<BookingTab> createState() => _BookingTabState();
-}
-
-class _BookingTabState extends State<BookingTab> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

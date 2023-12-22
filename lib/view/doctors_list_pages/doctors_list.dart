@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/controller/providers/doctors_list_provider.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
+import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';
 
 class DoctorsList extends StatelessWidget {
@@ -8,7 +9,9 @@ class DoctorsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final getProvider = Provider.of<DoctorsListProvider>(context);
+    final getProvider =
+        Provider.of<DoctorsListProvider>(context, listen: false);
+
     return Scaffold(
       appBar: titleAppBar(title: "Doctors List"),
       body: Column(
@@ -29,29 +32,31 @@ class DoctorsList extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: getProvider.doctorsname.length,
-              itemBuilder: (context, index) {
-                if (getProvider.doctorsname[index]
-                        .toLowerCase()
-                        .contains(getProvider.serchedList) ||
-                    getProvider.doctorsSpeciality[index]
-                        .toLowerCase()
-                        .contains(getProvider.serchedList)) {
-                  return getProvider.DoctorCard(
-                    context,
-                    index: index,
-                    imagepath: getProvider.doctersimage[index],
-                    name: getProvider.doctorsname[index],
-                    speciality: getProvider.doctorsSpeciality[index],
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            ),
-          ),
+          Consumer<DoctorsListProvider>(builder: (context, value, child) {
+            return Expanded(
+              child: ListView.builder(
+                itemCount: getProvider.doctorsname.length,
+                itemBuilder: (context, index) {
+                  if (getProvider.doctorsname[index]
+                          .toLowerCase()
+                          .contains(getProvider.serchedList) ||
+                      getProvider.doctorsSpeciality[index]
+                          .toLowerCase()
+                          .contains(getProvider.serchedList)) {
+                    return DoctorCard(
+                      context,
+                      index: index,
+                      imagepath: value.doctersimage[index],
+                      name: value.doctorsname[index],
+                      speciality: value.doctorsSpeciality[index],
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+            );
+          }),
         ],
       ),
     );

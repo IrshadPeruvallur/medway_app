@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/controller/functions/favourite_controller.dart';
-import 'package:medway_app/controller/functions/normal_controller.dart';
 import 'package:medway_app/controller/functions/patient_controller.dart';
-import 'package:medway_app/view/appointments_pages/appointment.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 import 'package:medway_app/view/main_tabs/booking_tab.dart';
 import 'package:medway_app/view/doctors_list_pages/doctors_list.dart';
@@ -10,14 +7,10 @@ import 'package:medway_app/view/settings_tabs/favourite_screen.dart';
 import 'package:medway_app/view/search/search_paitent.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 
-class HomeTab extends StatefulWidget {
+// ignore: must_be_immutable
+class HomeTab extends StatelessWidget {
   HomeTab({Key? key});
 
-  @override
-  State<HomeTab> createState() => _HomeTabState();
-}
-
-class _HomeTabState extends State<HomeTab> {
   List<String> doctorsName = [
     'Dr. Emily Mitchell - MBBS, ',
     'Dr. Ethan Reynolds - MBChB,',
@@ -208,6 +201,7 @@ class _HomeTabState extends State<HomeTab> {
                       itemCount: doctorsName.length,
                       itemBuilder: (context, index) {
                         return DoctorCard(
+                          context,
                           index: index,
                           imagepath: doctersimage[index],
                           name: doctorsName[index],
@@ -219,128 +213,6 @@ class _HomeTabState extends State<HomeTab> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget DoctorCard(
-      {required int index,
-      required String name,
-      required String speciality,
-      required String imagepath}) {
-    var screenSize = MediaQuery.of(context).size;
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          ListTile(
-            leading: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(imagepath),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius:
-                    BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
-                color: const Color.fromARGB(255, 19, 19, 19),
-              ),
-              height: screenSize.width * 0.2,
-              width: screenSize.width * 0.15,
-            ),
-            title: Text(
-              name,
-              style: TextStyle(
-                fontSize: screenSize.width * .05,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  speciality,
-                  style: TextStyle(fontSize: screenSize.width * .03),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: List.generate(
-                    5,
-                    (index) => Icon(
-                      Icons.star,
-                      size: screenSize.width * 0.05,
-                      color: Colors.yellow,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            trailing: IconButton(
-              icon: IsDoctorInFvrt(name)
-                  ? Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    )
-                  : Icon(Icons.favorite_border),
-              onPressed: () {
-                setState(() {
-                  if (IsDoctorInFvrt(name)) {
-                    final snackBar = SnackBar(
-                      content: Text("Doctor is already in the favorite list."),
-                      backgroundColor: const Color.fromARGB(255, 116, 10, 2),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  } else {
-                    onAddToFvrt(name, imagepath, speciality);
-                    final snackBar = SnackBar(
-                      content:
-                          Text("Doctor has been added to the favorite list."),
-                      backgroundColor: Color.fromARGB(255, 19, 19, 19),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
-                });
-              },
-            ),
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: screenSize.width * .18,
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => Appointment(
-                      index: index,
-                      docterPic: imagepath,
-                      docterName: name,
-                      docterspeciality: speciality,
-                    ),
-                  ));
-                },
-                child: Text(
-                  'Make Appointment ',
-                  style: TextStyle(
-                    fontSize: screenSize.width * .05,
-                    color: Color.fromARGB(255, 16, 105, 140),
-                  ),
-                ),
-                style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(screenSize.width * .03),
-                  )),
-                  backgroundColor: MaterialStateProperty.all(
-                    Color.fromARGB(255, 223, 246, 255),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

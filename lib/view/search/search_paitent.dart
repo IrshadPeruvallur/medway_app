@@ -1,47 +1,16 @@
 import 'package:flutter/material.dart';
-
 import 'package:lottie/lottie.dart';
-import 'package:medway_app/controller/functions/patient_controller.dart';
-import 'package:medway_app/model/patient_model/patient_model.dart';
+import 'package:medway_app/controller/providers/search_provider.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
+import 'package:provider/provider.dart';
 
-class SearchPatient extends StatefulWidget {
+class SearchPatient extends StatelessWidget {
   const SearchPatient({Key? key}) : super(key: key);
 
   @override
-  State<SearchPatient> createState() => _SearchPatientState();
-}
-
-class _SearchPatientState extends State<SearchPatient> {
-  List<PatientModel> _searchedPatient = [];
-
-  loadFood() async {
-    final allfood = patientListNotifier.value;
-    setState(() {
-      _searchedPatient = allfood;
-    });
-  }
-
-  _filter(String enteredName) {
-    List<PatientModel> result = [];
-
-    if (enteredName.isEmpty) {
-      result = patientListNotifier.value;
-    } else {
-      result = patientListNotifier.value
-          .where((PatientModel patient) =>
-              patient.name.toLowerCase().contains(enteredName.toLowerCase()))
-          .toList();
-    }
-
-    setState(() {
-      _searchedPatient = result;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final getProvider = Provider.of<SearchProvider>(context);
     return Scaffold(
       appBar: titleAppBar(title: 'Search'),
       body: Container(
@@ -53,7 +22,7 @@ class _SearchPatientState extends State<SearchPatient> {
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
               child: TextFormField(
-                onChanged: (value) => _filter(value),
+                onChanged: (value) => getProvider.filter(value),
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(10),
                   border: OutlineInputBorder(
@@ -78,18 +47,20 @@ class _SearchPatientState extends State<SearchPatient> {
               height: 50,
             ),
             Expanded(
-              child: _searchedPatient.isEmpty
+              child: getProvider.searchedPatient.isEmpty
                   ? Center(
                       child:
                           Lottie.asset("asset/Animation - 1702105823848.json"),
                     )
-                  : ListView.builder(
-                      itemCount: _searchedPatient.length,
-                      itemBuilder: (context, index) {
-                        final data = _searchedPatient[index];
-                        return appointmentCard(data, context, index);
-                      },
-                    ),
+                  : Consumer<SearchProvider>(builder: (context, value, child) {
+                      return ListView.builder(
+                        itemCount: value.searchedPatient.length,
+                        itemBuilder: (context, index) {
+                          final data = value.searchedPatient[index];
+                          return appointmentCard(data, context, index);
+                        },
+                      );
+                    }),
             ),
           ],
         ),

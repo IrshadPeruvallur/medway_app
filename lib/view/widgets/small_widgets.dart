@@ -5,10 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:medway_app/controller/functions/favourite_controller.dart';
 import 'package:medway_app/controller/functions/normal_controller.dart';
 import 'package:medway_app/controller/functions/patient_controller.dart';
+import 'package:medway_app/controller/providers/doctors_list_provider.dart';
+import 'package:medway_app/controller/providers/search_provider.dart';
 import 'package:medway_app/view/appointments_pages/appointment.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
 import 'package:medway_app/view/doctors_list_pages/doctors_list.dart';
+import 'package:provider/provider.dart';
 
 captiontext(context, {required text, required}) {
   return Padding(
@@ -677,6 +680,117 @@ appointmentCard(data, context, index) {
           )
         ],
       ),
+    ),
+  );
+}
+
+Widget DoctorCard(context,
+    {required int index,
+    required String name,
+    required String speciality,
+    required String imagepath}) {
+  var screenSize = MediaQuery.of(context).size;
+  final getProvider = Provider.of<DoctorsListProvider>(context, listen: false);
+  print("Print DoctorCard");
+  return Card(
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    child: Column(
+      children: [
+        SizedBox(
+          height: 10,
+        ),
+        ListTile(
+          leading: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(imagepath),
+                fit: BoxFit.cover,
+              ),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(screenSize.width * 0.02)),
+              color: const Color.fromARGB(255, 19, 19, 19),
+            ),
+            height: screenSize.width * 0.2,
+            width: screenSize.width * 0.15,
+          ),
+          title: Text(
+            name,
+            style: TextStyle(
+              fontSize: screenSize.width * .05,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                speciality,
+                style: TextStyle(fontSize: screenSize.width * .03),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(
+                  5,
+                  (index) => Icon(
+                    Icons.star,
+                    size: screenSize.width * 0.05,
+                    color: Colors.yellow,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          trailing:
+              Consumer<DoctorsListProvider>(builder: (context, value, child) {
+            print("Print Fvrt");
+            return IconButton(
+              icon: value.iconColor(name),
+              onPressed: () {
+                getProvider.toFvrt(
+                    context: context,
+                    imagepath: imagepath,
+                    name: name,
+                    speciality: speciality);
+              },
+            );
+          }),
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: screenSize.width * .18,
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Appointment(
+                    index: index,
+                    docterPic: imagepath,
+                    docterName: name,
+                    docterspeciality: speciality,
+                  ),
+                ));
+              },
+              child: Text(
+                'Make Appointment ',
+                style: TextStyle(
+                  fontSize: screenSize.width * .05,
+                  color: Color.fromARGB(255, 16, 105, 140),
+                ),
+              ),
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.all(0),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(screenSize.width * .03),
+                )),
+                backgroundColor: MaterialStateProperty.all(
+                  Color.fromARGB(255, 223, 246, 255),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     ),
   );
 }

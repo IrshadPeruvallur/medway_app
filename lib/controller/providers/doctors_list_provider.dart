@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/controller/functions/favourite_controller.dart';
 import 'package:medway_app/controller/functions/normal_controller.dart';
-import 'package:medway_app/view/appointments_pages/appointment.dart';
 
 class DoctorsListProvider extends ChangeNotifier {
   final List doctorsSpeciality = [
@@ -78,130 +77,30 @@ class DoctorsListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Widget DoctorCard(context,
-      {required int index,
-      required String name,
-      required String speciality,
-      required String imagepath}) {
-    var screenSize = MediaQuery.of(context).size;
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            ListTile(
-              leading: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(imagepath),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(screenSize.width * 0.02)),
-                  color: const Color.fromARGB(255, 19, 19, 19),
-                ),
-                height: screenSize.width * 0.2,
-                width: screenSize.width * 0.15,
-              ),
-              title: Text(
-                name,
-                style: TextStyle(
-                  fontSize: screenSize.width * .05,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    speciality,
-                    style: TextStyle(fontSize: screenSize.width * .03),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(
-                      5,
-                      (index) => Icon(
-                        Icons.star,
-                        size: screenSize.width * 0.05,
-                        color: Colors.yellow,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              trailing: IconButton(
-                icon: IsDoctorInFvrt(name)
-                    ? const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      )
-                    : const Icon(Icons.favorite_border),
-                onPressed: () {
-                  if (IsDoctorInFvrt(name)) {
-                    // deleteFromFvrt(index);
-                    const snackBar = SnackBar(
-                      content: Text("Doctor is already in the favorite list."),
-                      backgroundColor: Color.fromARGB(255, 116, 10, 2),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  } else {
-                    onAddToFvrt(name, imagepath, speciality);
-                    const snackBar = SnackBar(
-                      content:
-                          Text("Doctor has been added to the favorite list."),
-                      backgroundColor: Color.fromARGB(255, 19, 19, 19),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
-                  notifyListeners();
-                },
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: screenSize.width * .18,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Appointment(
-                        index: index,
-                        docterPic: imagepath,
-                        docterName: name,
-                        docterspeciality: speciality,
-                      ),
-                    ));
-                  },
-                  // ignore: sort_child_properties_last
-                  child: Text(
-                    'Make Appointment ',
-                    style: TextStyle(
-                      fontSize: screenSize.width * .05,
-                      color: const Color.fromARGB(255, 16, 105, 140),
-                    ),
-                  ),
-                  style: ButtonStyle(
-                    elevation: MaterialStateProperty.all(0),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(screenSize.width * .03),
-                    )),
-                    backgroundColor: MaterialStateProperty.all(
-                      const Color.fromARGB(255, 223, 246, 255),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  void toFvrt({context, name, imagepath, speciality}) {
+    if (IsDoctorInFvrt(name)) {
+      final snackBar = SnackBar(
+        content: Text("Doctor is already in the favorite list."),
+        backgroundColor: const Color.fromARGB(255, 116, 10, 2),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      onAddToFvrt(name, imagepath, speciality);
+      final snackBar = SnackBar(
+        content: Text("Doctor has been added to the favorite list."),
+        backgroundColor: Color.fromARGB(255, 19, 19, 19),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    notifyListeners();
+  }
+
+  Widget iconColor(name) {
+    return IsDoctorInFvrt(name)
+        ? Icon(
+            Icons.favorite,
+            color: Colors.red,
+          )
+        : Icon(Icons.favorite_border);
   }
 }
