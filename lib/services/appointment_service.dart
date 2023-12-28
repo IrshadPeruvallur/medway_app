@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 ValueNotifier<List<PatientModel>> patientListNotifier = ValueNotifier([]);
 
+// class AppointmentService {
 addAppointment(PatientModel value) async {
   // patientListNotifier.value.add(value);
   final patientDB = await Hive.openBox<PatientModel>('patient_db');
@@ -76,3 +77,4 @@ updateAppointment(int index, drname, drspeciality, drpic) async {
     getAllAppoitnment();
   }
 }
+// }
