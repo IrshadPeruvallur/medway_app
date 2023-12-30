@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class MyAppointment extends StatelessWidget {
@@ -132,10 +134,21 @@ class MyAppointment extends StatelessWidget {
                                       },
                                       child: const Text("Cancel")),
                                   TextButton(
-                                      onPressed: () {
-                                        cancelAppointment(index);
+                                      onPressed: () async {
+                                        await Provider.of<DBAppointment>(
+                                                context,
+                                                listen: false)
+                                            .cancelAppointment(index);
+
                                         Navigator.pop(context);
                                         Navigator.pop(context);
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                                'Appointment canceled successfully!'),
+                                          ),
+                                        );
                                       },
                                       child: const Text("Yes, Cancel")),
                                 ],

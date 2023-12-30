@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 import 'package:medway_app/view/main_tabs/booking_tab.dart';
@@ -6,6 +7,7 @@ import 'package:medway_app/view/doctors_list_pages/doctors_list.dart';
 import 'package:medway_app/view/settings_tabs/favourite_screen.dart';
 import 'package:medway_app/view/search/search_paitent.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class HomeTab extends StatelessWidget {
@@ -99,10 +101,10 @@ class HomeTab extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: 1,
                       itemBuilder: (context, index) {
-                        return ValueListenableBuilder(
-                          valueListenable: patientListNotifier,
-                          builder: (context, patientList, child) {
-                            if (patientList.isEmpty) {
+                        return Consumer<DBAppointment>(
+                          // valueListenable: patientListNotifier,
+                          builder: (context, value, child) {
+                            if (value.patientList.isEmpty) {
                               return SizedBox(
                                 width: double.infinity,
                                 // height: screenSize.width * .3,
@@ -113,7 +115,8 @@ class HomeTab extends StatelessWidget {
                               );
                             }
 
-                            final data = patientList[patientList.length - 1];
+                            final data =
+                                value.patientList[value.patientList.length - 1];
                             return Column(
                               children: [
                                 WSpaceBetweenText(

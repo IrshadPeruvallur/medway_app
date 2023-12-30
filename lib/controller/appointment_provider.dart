@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/model/patient_model/patient_model.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
+import 'package:provider/provider.dart';
 
 class AppointmentProvider extends ChangeNotifier {
   final nameController = TextEditingController();
@@ -61,13 +63,6 @@ class AppointmentProvider extends ChangeNotifier {
     final gender = genderController.text.trim();
     final time = timeController.text.trim();
     final date = dateController.text.trim();
-    nameController.clear();
-    ageController.clear();
-    phoneController.clear();
-    problemController.clear();
-    genderController.clear();
-    timeController.clear();
-    dateController.clear();
 
     if (name.isEmpty ||
         age.isEmpty ||
@@ -77,6 +72,7 @@ class AppointmentProvider extends ChangeNotifier {
         time.isEmpty) {
       return;
     }
+
     final _patient = PatientModel(
         doctorpic: docterPic,
         doctorname: docterName,
@@ -88,21 +84,27 @@ class AppointmentProvider extends ChangeNotifier {
         problem: problem,
         time: time,
         date: date);
-    addAppointment(_patient);
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-      return MyAppointment(
-          index: index,
-          doctorname: docterName,
-          doctorspeciality: docterspeciality,
-          doctorspicture: docterPic,
-          name: name,
-          phone: phone,
-          gender: gender,
-          age: age,
-          problem: problem,
-          date: date,
-          time: time);
-    }));
-    notifyListeners();
+
+    try {
+      // Use AppointmentService to add the patient
+      await AppointmentService().addAppointment(_patient);
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return MyAppointment(
+            index: index,
+            doctorname: docterName,
+            doctorspeciality: docterspeciality,
+            doctorspicture: docterPic,
+            name: name,
+            phone: phone,
+            gender: gender,
+            age: age,
+            problem: problem,
+            date: date,
+            time: time);
+      }));
+    } catch (error) {
+      print("Error adding appointment: $error");
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/controller/db_providers/db_cancel.dart';
 import 'package:medway_app/services/cancel_service.dart';
 import 'package:medway_app/services/favourite_service.dart';
 import 'package:medway_app/main.dart';
@@ -7,6 +8,7 @@ import 'package:medway_app/model/favourite_model/fvrt_model.dart';
 import 'package:medway_app/view/welcome_pages/login_screen.dart';
 import 'package:medway_app/view/welcome_pages/main_screen.dart';
 import 'package:medway_app/view/welcome_pages/welcome_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // bottomSheet(context) {
@@ -91,56 +93,58 @@ onAddToFvrt(name, imagepath, speciality) async {
   addToFavourite(favourite);
 }
 
-void onAddToCancel({
-  required String doctorName,
-  required String doctorSpeciality,
-  required String doctorPic,
-  required String name,
-  required String phone,
-  required String age,
-  required String gender,
-  required String problem,
-  required String time,
-  required String date,
-}) {
-  final canceld = CanceldModel(
-    doctorname: doctorName,
-    doctorspecality: doctorSpeciality,
-    doctorpic: doctorPic,
-    name: name,
-    phone: phone,
-    age: age,
-    gender: gender,
-    problem: problem,
-    time: time,
-    date: date,
-  );
-  addToCancel(canceld);
-}
+// void onAddToCancel(context,{
+  
+//   required String doctorName,
+//   required String doctorSpeciality,
+//   required String doctorPic,
+//   required String name,
+//   required String phone,
+//   required String age,
+//   required String gender,
+//   required String problem,
+//   required String time,
+//   required String date,
+// }) {
+//   final canceld = CanceldModel(
+//     doctorname: doctorName,
+//     doctorspecality: doctorSpeciality,
+//     doctorpic: doctorPic,
+//     name: name,
+//     phone: phone,
+//     age: age,
+//     gender: gender,
+//     problem: problem,
+//     time: time,
+//     date: date,
+//   );
+//    Provider.of<DbCancel>(context).addToCancel(canceld);
+// }
 
-void onAddToComplete({
-  required String doctorName,
-  required String doctorSpeciality,
-  required String doctorPic,
-  required String name,
-  required String phone,
-  required String age,
-  required String gender,
-  required String problem,
-  required String time,
-  required String date,
-}) {
-  final canceld = CanceldModel(
-    doctorname: doctorName,
-    doctorspecality: doctorSpeciality,
-    doctorpic: doctorPic,
-    name: name,
-    phone: phone,
-    age: age,
-    gender: gender,
-    problem: problem,
-    time: time,
-    date: date,
-  );
-  addToCancel(canceld);
-}
+// void onAddToComplete(context,{
+  
+//   required String doctorName,
+//   required String doctorSpeciality,
+//   required String doctorPic,
+//   required String name,
+//   required String phone,
+//   required String age,
+//   required String gender,
+//   required String problem,
+//   required String time,
+//   required String date,
+// }) {
+//   final canceld = CanceldModel(
+//     doctorname: doctorName,
+//     doctorspecality: doctorSpeciality,
+//     doctorpic: doctorPic,
+//     name: name,
+//     phone: phone,
+//     age: age,
+//     gender: gender,
+//     problem: problem,
+//     time: time,
+//     date: date,
+//   );
+//    Provider.of<DbCancel>(context).addToCancel(canceld);
+// }

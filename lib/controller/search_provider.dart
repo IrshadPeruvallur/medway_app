@@ -3,28 +3,28 @@ import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/model/patient_model/patient_model.dart';
 
 class SearchProvider extends ChangeNotifier {
-  List<PatientModel> searchedPatient = [];
+  // List<PatientModel> searchedPatient = [];
 
-  loadFood() async {
-    final allfood = patientListNotifier.value;
+  // loadFood() async {
+  //   final allfood = patientListNotifier.value;
 
-    searchedPatient = allfood;
-    notifyListeners();
-  }
+  //   searchedPatient = allfood;
+  //   notifyListeners();
+  // }
 
-  void filter(String enteredName) {
-    List<PatientModel> result = [];
+  // void filter(String enteredName) {
+  //   List<PatientModel> result = [];
 
-    if (enteredName.isEmpty) {
-      result = patientListNotifier.value;
-    } else {
-      result = patientListNotifier.value
-          .where((PatientModel patient) =>
-              patient.name.toLowerCase().contains(enteredName.toLowerCase()))
-          .toList();
-    }
+  //   if (enteredName.isEmpty) {
+  //     result = patientListNotifier.value;
+  //   } else {
+  //     result = patientListNotifier.value
+  //         .where((PatientModel patient) =>
+  //             patient.name.toLowerCase().contains(enteredName.toLowerCase()))
+  //         .toList();
+  //   }
 
-    searchedPatient = result;
-    notifyListeners();
-  }
+  //   searchedPatient = result;
+  //   notifyListeners();
+  // }
 }

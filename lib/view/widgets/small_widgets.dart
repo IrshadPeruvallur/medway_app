@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/services/favourite_service.dart';
 import 'package:medway_app/services/normal_service.dart';
 import 'package:medway_app/services/appointment_service.dart';
@@ -637,7 +638,8 @@ appointmentCard(data, context, index) {
                                 child: const Text("Cancel")),
                             TextButton(
                                 onPressed: () {
-                                  cancelAppointment(index);
+                                  Provider.of<DBAppointment>(context)
+                                      .cancelAppointment(index);
                                   Navigator.pop(context);
                                 },
                                 child: const Text("Yes, Cancel")),

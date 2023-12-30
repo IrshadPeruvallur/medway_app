@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:medway_app/controller/db_providers/db_appointment.dart';
+import 'package:medway_app/controller/db_providers/db_cancel.dart';
+import 'package:medway_app/model/cancel_model/canceled_model.dart';
+import 'package:medway_app/services/cancel_service.dart';
 import 'package:medway_app/services/normal_service.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
+import 'package:provider/provider.dart';
 
 class UpComingTab extends StatelessWidget {
   const UpComingTab({Key? key});
@@ -13,21 +18,24 @@ class UpComingTab extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ValueListenableBuilder(
-        valueListenable: patientListNotifier,
-        builder: (context, patientList, child) {
-          return patientList.isEmpty
+        padding: const EdgeInsets.all(8.0),
+        child: Consumer<DBAppointment>(
+            // child: ValueListenableBuilder(
+            //   valueListenable: patientListNotifier,
+
+            builder: (context, value, child) {
+          final consumervalue = value.patientList;
+          return value.patientList.isEmpty
               ? Lottie.asset('asset/empty.json')
               : ListView.separated(
                   shrinkWrap: true,
                   separatorBuilder: (context, index) => SizedBox(
                     height: 15,
                   ),
-                  itemCount: patientList.length,
+                  itemCount: consumervalue.length,
                   itemBuilder: (context, index) {
-                    final reversedIndex = patientList.length - 1 - index;
-                    final data = patientList[reversedIndex];
+                    // final reversedIndex = patientList.length - 1 - index;
+                    final data = consumervalue[index];
                     return Card(
                       elevation: 0,
                       shape: RoundedRectangleBorder(
@@ -41,7 +49,7 @@ class UpComingTab extends StatelessWidget {
                           children: [
                             captiontext(
                               context,
-                              text: '${data.date} | ${data.time}',
+                              text: '${data.time} | ${data.time}',
                             ),
                             Divider(
                               color: Colors.black,
@@ -128,7 +136,7 @@ class UpComingTab extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    onPressed: () {
+                                    onPressed: () async {
                                       showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
@@ -149,7 +157,7 @@ class UpComingTab extends StatelessWidget {
                                               captiontext(
                                                 context,
                                                 text:
-                                                    'Are you sure you want to cancel the Appointment? ',
+                                                    'Are you sure you want to cancel the Appointment?',
                                               ),
                                             ],
                                           ),
@@ -161,22 +169,52 @@ class UpComingTab extends StatelessWidget {
                                               child: Text("Cancel"),
                                             ),
                                             TextButton(
-                                              onPressed: () {
-                                                cancelAppointment(index);
-                                                Navigator.pop(context);
-                                                onAddToCancel(
-                                                  doctorName: data.doctorname,
-                                                  doctorSpeciality:
-                                                      data.doctorspecality,
-                                                  doctorPic: data.doctorpic,
-                                                  name: data.name,
-                                                  phone: data.phone,
-                                                  age: data.age,
-                                                  gender: data.gender,
-                                                  problem: data.problem,
-                                                  time: data.time,
-                                                  date: data.date,
-                                                );
+                                              onPressed: () async {
+                                                try {
+                                                  final addCancel =
+                                                      CanceldModel(
+                                                    doctorname: data.doctorname,
+                                                    doctorspecality:
+                                                        data.doctorspecality,
+                                                    doctorpic: data.doctorpic,
+                                                    name: data.name,
+                                                    phone: data.phone,
+                                                    age: data.age,
+                                                    gender: data.gender,
+                                                    problem: data.problem,
+                                                    time: data.time,
+                                                    date: data.date,
+                                                  );
+                                                  Provider.of<DbCancel>(context,
+                                                          listen: false)
+                                                      .addCanceled(addCancel);
+
+                                                  await Provider.of<
+                                                              DBAppointment>(
+                                                          context,
+                                                          listen: false)
+                                                      .cancelAppointment(index);
+                                                  Navigator.pop(context);
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                          'Appointment canceled successfully!'),
+                                                    ),
+                                                  );
+                                                } catch (error) {
+                                                  print(
+                                                      "Error canceling appointment: $error");
+                                                  Navigator.pop(
+                                                      context); // Close the dialog
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                          'Failed to cancel appointment. Please try again.'),
+                                                    ),
+                                                  );
+                                                }
                                               },
                                               child: Text("Yes, Cancel"),
                                             ),
@@ -234,8 +272,7 @@ class UpComingTab extends StatelessWidget {
                     );
                   },
                 );
-        },
-      ),
-    );
+        }));
+    // );
   }
 }

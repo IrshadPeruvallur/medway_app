@@ -10,7 +10,7 @@ class SearchPatient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final getProvider = Provider.of<SearchProvider>(context);
+    // final getProvider = Provider.of<SearchProvider>(context);
     return Scaffold(
       appBar: titleAppBar(title: 'Search'),
       body: Container(
@@ -22,7 +22,7 @@ class SearchPatient extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
               child: TextFormField(
-                onChanged: (value) => getProvider.filter(value),
+                // onChanged: (value) => getProvider.filter(value),
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(10),
                   border: OutlineInputBorder(
@@ -46,22 +46,22 @@ class SearchPatient extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            Expanded(
-              child: getProvider.searchedPatient.isEmpty
-                  ? Center(
-                      child:
-                          Lottie.asset("asset/Animation - 1702105823848.json"),
-                    )
-                  : Consumer<SearchProvider>(builder: (context, value, child) {
-                      return ListView.builder(
-                        itemCount: value.searchedPatient.length,
-                        itemBuilder: (context, index) {
-                          final data = value.searchedPatient[index];
-                          return appointmentCard(data, context, index);
-                        },
-                      );
-                    }),
-            ),
+            // Expanded(
+            //   // child: getProvider.searchedPatient.isEmpty
+            //   //     ? Center(
+            //   //         child:
+            //   //             Lottie.asset("asset/Animation - 1702105823848.json"),
+            //   //       )
+            //   //     : Consumer<SearchProvider>(builder: (context, value, child) {
+            //   //         return ListView.builder(
+            //   //           itemCount: value.searchedPatient.length,
+            //   //           itemBuilder: (context, index) {
+            //   //             final data = value.searchedPatient[index];
+            //   //             return appointmentCard(data, context, index);
+            //   //           },
+            //   //         );
+            //   //       }),
+            // ),
           ],
         ),
       ),

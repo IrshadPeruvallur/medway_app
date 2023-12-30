@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:medway_app/controller/db_providers/db_appointment.dart';
+import 'package:medway_app/model/patient_model/patient_model.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/controller/appointment_provider.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
@@ -64,8 +66,9 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
 
   @override
   Widget build(BuildContext context) {
-    final getProvider =
-        Provider.of<AppointmentProvider>(context, listen: false);
+    final getProvider = Provider.of<AppointmentProvider>(
+      context,
+    );
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: WNormalAppBar(context),
@@ -222,11 +225,32 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: WElevatedButton(context, text: 'Reshedule',
-                      navigator: () {
+                      navigator: () async {
                     if (_formKey.currentState!.validate()) {
-                      updateAppointment(widget.index, widget.doctorname,
-                          widget.doctorspeciaility, widget.doctorpic);
-                      Navigator.pop(context);
+                      try {
+                        final patient = PatientModel(
+                          index: widget.index,
+                          doctorpic: widget.doctorpic,
+                          doctorname: widget.doctorname,
+                          doctorspecality: widget.doctorspeciaility,
+                          name: widget.name,
+                          phone: widget.phone,
+                          age: widget.age,
+                          gender: widget.gender,
+                          problem: widget.problem,
+                          time: widget.time,
+                          date: widget.date,
+                        );
+
+                        final dbAppointment =
+                            Provider.of<DBAppointment>(context, listen: false);
+                        await dbAppointment.updateAppointment(
+                            patient, patient.index);
+
+                        Navigator.pop(context);
+                      } catch (error) {
+                        print("Error updating appointment: $error");
+                      }
                     }
                   }),
                 ),

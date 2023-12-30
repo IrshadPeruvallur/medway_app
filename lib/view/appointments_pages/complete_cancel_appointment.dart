@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class CancelAppointment extends StatelessWidget {
@@ -89,94 +91,95 @@ class CancelAppointment extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      width: 150,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: const MaterialStatePropertyAll(
-                                  Color.fromARGB(255, 16, 105, 140)),
-                              shape: MaterialStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          screenSize.width * 5)))),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                backgroundColor: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                            screenSize.width * 0.05))),
-                                title: Column(
-                                  children: [
-                                    WTitleText(
-                                      context,
-                                      text: 'Cancel',
-                                      size: 0.05,
-                                    ),
-                                    captiontext(context,
-                                        text:
-                                            '''Are you sure you want to cancel the Appointment? ''')
-                                  ],
-                                ),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text("Cancel")),
-                                  TextButton(
-                                      onPressed: () {
-                                        cancelAppointment(index);
-                                        Navigator.pop(context);
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text("Yes, Cancel")),
-                                ],
-                              ),
-                            );
-                          },
-                          child: const Text('Cancel')),
-                    ),
-                    SizedBox(
-                      width: 150,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: const MaterialStatePropertyAll(
-                                  Color.fromARGB(255, 16, 105, 140)),
-                              shape: MaterialStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          screenSize.width * 5)))),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return ReSheduleAppointment(
-                                    index: index,
-                                    doctorname: doctorname,
-                                    doctorpic: doctorspicture,
-                                    doctorspeciaility: doctorspeciality,
-                                    name: name,
-                                    age: age,
-                                    phone: phone,
-                                    gender: gender,
-                                    problem: problem,
-                                    date: date,
-                                    time: time);
-                              },
-                            ));
-                          },
-                          child: const Text('Reshedule')),
-                    ),
-                  ],
-                ),
-              )
+              // Align(
+              //   alignment: Alignment.bottomCenter,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: [
+              //       SizedBox(
+              //         width: 150,
+              //         child: ElevatedButton(
+              //             style: ButtonStyle(
+              //                 backgroundColor: const MaterialStatePropertyAll(
+              //                     Color.fromARGB(255, 16, 105, 140)),
+              //                 shape: MaterialStatePropertyAll(
+              //                     RoundedRectangleBorder(
+              //                         borderRadius: BorderRadius.circular(
+              //                             screenSize.width * 5)))),
+              //             onPressed: () {
+              //               showDialog(
+              //                 context: context,
+              //                 builder: (context) => AlertDialog(
+              //                   backgroundColor: Colors.white,
+              //                   shape: RoundedRectangleBorder(
+              //                       borderRadius: BorderRadius.all(
+              //                           Radius.circular(
+              //                               screenSize.width * 0.05))),
+              //                   title: Column(
+              //                     children: [
+              //                       WTitleText(
+              //                         context,
+              //                         text: 'Cancel',
+              //                         size: 0.05,
+              //                       ),
+              //                       captiontext(context,
+              //                           text:
+              //                               '''Are you sure you want to cancel the Appointment? ''')
+              //                     ],
+              //                   ),
+              //                   actions: [
+              //                     TextButton(
+              //                         onPressed: () {
+              //                           Navigator.pop(context);
+              //                         },
+              //                         child: const Text("Cancel")),
+              //                     TextButton(
+              //                         onPressed: () {
+              //                           Provider.of<DBAppointment>(context)
+              //                               .cancelAppointment(index);
+              //                           Navigator.pop(context);
+              //                           Navigator.pop(context);
+              //                         },
+              //                         child: const Text("Yes, Cancel")),
+              //                   ],
+              //                 ),
+              //               );
+              //             },
+              //             child: const Text('Cancel')),
+              //       ),
+              //       SizedBox(
+              //         width: 150,
+              //         child: ElevatedButton(
+              //             style: ButtonStyle(
+              //                 backgroundColor: const MaterialStatePropertyAll(
+              //                     Color.fromARGB(255, 16, 105, 140)),
+              //                 shape: MaterialStatePropertyAll(
+              //                     RoundedRectangleBorder(
+              //                         borderRadius: BorderRadius.circular(
+              //                             screenSize.width * 5)))),
+              //             onPressed: () {
+              //               Navigator.push(context, MaterialPageRoute(
+              //                 builder: (context) {
+              //                   return ReSheduleAppointment(
+              //                       index: index,
+              //                       doctorname: doctorname,
+              //                       doctorpic: doctorspicture,
+              //                       doctorspeciaility: doctorspeciality,
+              //                       name: name,
+              //                       age: age,
+              //                       phone: phone,
+              //                       gender: gender,
+              //                       problem: problem,
+              //                       date: date,
+              //                       time: time);
+              //                 },
+              //               ));
+              //             },
+              //             child: const Text('Reshedule')),
+              //       ),
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),
