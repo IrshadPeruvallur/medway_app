@@ -5,10 +5,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:medway_app/controller/db_providers/db_profile.dart';
 import 'package:medway_app/services/profile_service.dart';
 import 'package:medway_app/model/profile_model/profile_model.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
+import 'package:provider/provider.dart';
 
 final nameController = TextEditingController();
 final phoneController = TextEditingController();
@@ -167,7 +169,7 @@ class _CreateProfileState extends State<EditProfile> {
                   context,
                   text: 'Submit',
                   navigator: () {
-                    updateProfile(widget.index);
+                    // Provider.of<DBProfile>(context, listen: false).updateUser(widget.index);
                     Navigator.pop(context);
                   },
                 )
@@ -194,7 +196,7 @@ class _CreateProfileState extends State<EditProfile> {
         email: _email,
         dob: _dob,
         image: picked?.path ?? '');
-    addUser(_user);
+    Provider.of<DBProfile>(context, listen: false).addUser(_user);
   }
 
   updateImage(ImageSource source) async {

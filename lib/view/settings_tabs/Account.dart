@@ -57,7 +57,7 @@ We value your privacy and are here to assist you. If you have any concerns or re
                       child: Text("Cancel")),
                   TextButton(
                       onPressed: () {
-                        deleteAccount(context);
+                        // deleteAccount(context);
                       },
                       child: Text("Yes, Delete")),
                 ],
