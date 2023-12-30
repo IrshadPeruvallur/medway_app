@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medway_app/controller/db_providers/db_appointment.dart';
+import 'package:medway_app/controller/db_providers/db_favourite.dart';
 import 'package:medway_app/services/favourite_service.dart';
-import 'package:medway_app/services/normal_service.dart';
+import 'package:medway_app/controller/normal_controller.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/controller/doctors_list_provider.dart';
 import 'package:medway_app/controller/search_provider.dart';
@@ -282,6 +283,7 @@ Widget doctorsList(
   required int index,
 }) {
   var screenSize = MediaQuery.of(context).size;
+  final getProvider = Provider.of<DBFavourite>(context);
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     child: Column(
@@ -330,33 +332,35 @@ Widget doctorsList(
               ),
             ],
           ),
-          trailing: IconButton(
-            icon: IsDoctorInFvrt(name)
-                ? const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  )
-                : const Icon(Icons.favorite_border),
-            onPressed: () {
-              if (IsDoctorInFvrt(name)) {
-                deleteFromFvrt(index);
-                const snackBar = SnackBar(
-                  content:
-                      Text("Doctor has been removed from the favorite list"),
-                  backgroundColor: Color.fromARGB(255, 116, 10, 2),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              } else {
-                onAddToFvrt(name, imagepath, speciality);
-                // ignore: prefer_const_declarations
-                final snackBar = const SnackBar(
-                  content: Text("Doctor has been added to the favorite list"),
-                  backgroundColor: Color.fromARGB(255, 19, 19, 19),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }
-            },
-          ),
+          trailing: Consumer<DBFavourite>(builder: (context, value, child) {
+            return IconButton(
+              icon: value.IsDoctorInFvrt(name)
+                  ? const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    )
+                  : const Icon(Icons.favorite_border),
+              onPressed: () {
+                if (value.IsDoctorInFvrt(name)) {
+                  value.deleterFromFvrt(index);
+                  const snackBar = SnackBar(
+                    content:
+                        Text("Doctor has been removed from the favorite list"),
+                    backgroundColor: Color.fromARGB(255, 116, 10, 2),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                } else {
+                  onAddToFvrt(name, imagepath, speciality, context);
+                  // ignore: prefer_const_declarations
+                  final snackBar = const SnackBar(
+                    content: Text("Doctor has been added to the favorite list"),
+                    backgroundColor: Color.fromARGB(255, 19, 19, 19),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
+            );
+          }),
         ),
         SizedBox(
           width: double.infinity,
@@ -746,7 +750,7 @@ Widget DoctorCard(context,
               Consumer<DoctorsListProvider>(builder: (context, value, child) {
             print("Print Fvrt");
             return IconButton(
-              icon: value.iconColor(name),
+              icon: value.iconColor(name, context),
               onPressed: () {
                 getProvider.toFvrt(
                     context: context,

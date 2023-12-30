@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medway_app/services/normal_service.dart';
+import 'package:medway_app/controller/normal_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -4,7 +4,7 @@ import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/controller/db_providers/db_cancel.dart';
 import 'package:medway_app/model/cancel_model/canceled_model.dart';
 import 'package:medway_app/services/cancel_service.dart';
-import 'package:medway_app/services/normal_service.dart';
+import 'package:medway_app/controller/normal_controller.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';

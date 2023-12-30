@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medway_app/services/normal_service.dart';
+import 'package:medway_app/controller/normal_controller.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 
 class LoginScreen extends StatelessWidget {

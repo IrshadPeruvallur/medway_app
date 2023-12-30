@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/controller/db_providers/db_cancel.dart';
+import 'package:medway_app/controller/db_providers/db_favourite.dart';
 import 'package:medway_app/services/cancel_service.dart';
 import 'package:medway_app/services/favourite_service.dart';
 import 'package:medway_app/main.dart';
@@ -10,24 +11,6 @@ import 'package:medway_app/view/welcome_pages/main_screen.dart';
 import 'package:medway_app/view/welcome_pages/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-// bottomSheet(context) {
-//   return showBottomSheet(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return Container(
-//         // Customize the appearance of the bottom sheet
-//         height: 200,
-//         child: Center(
-//           child: Text(
-//             'This is a Bottom Sheet!',
-//             style: TextStyle(fontSize: 20),
-//           ),
-//         ),
-//       );
-//     },
-//   );
-// }
 
 checklogin(context, controller1, controller2) async {
   final _email = controller1.text;
@@ -87,64 +70,8 @@ fsignout(BuildContext context) async {
       (route) => false);
 }
 
-onAddToFvrt(name, imagepath, speciality) async {
+onAddToFvrt(name, imagepath, speciality, context) async {
   final favourite =
       FavouriteModel(dName: name, dSpeciality: speciality, dPhoto: imagepath);
-  addToFavourite(favourite);
+  Provider.of<DBFavourite>(context, listen: false).addToFvrt(favourite);
 }
-
-// void onAddToCancel(context,{
-  
-//   required String doctorName,
-//   required String doctorSpeciality,
-//   required String doctorPic,
-//   required String name,
-//   required String phone,
-//   required String age,
-//   required String gender,
-//   required String problem,
-//   required String time,
-//   required String date,
-// }) {
-//   final canceld = CanceldModel(
-//     doctorname: doctorName,
-//     doctorspecality: doctorSpeciality,
-//     doctorpic: doctorPic,
-//     name: name,
-//     phone: phone,
-//     age: age,
-//     gender: gender,
-//     problem: problem,
-//     time: time,
-//     date: date,
-//   );
-//    Provider.of<DbCancel>(context).addToCancel(canceld);
-// }
-
-// void onAddToComplete(context,{
-  
-//   required String doctorName,
-//   required String doctorSpeciality,
-//   required String doctorPic,
-//   required String name,
-//   required String phone,
-//   required String age,
-//   required String gender,
-//   required String problem,
-//   required String time,
-//   required String date,
-// }) {
-//   final canceld = CanceldModel(
-//     doctorname: doctorName,
-//     doctorspecality: doctorSpeciality,
-//     doctorpic: doctorPic,
-//     name: name,
-//     phone: phone,
-//     age: age,
-//     gender: gender,
-//     problem: problem,
-//     time: time,
-//     date: date,
-//   );
-//    Provider.of<DbCancel>(context).addToCancel(canceld);
-// }
