@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:medway_app/controller/db_providers/db_profile.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/services/profile_service.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
+import 'package:provider/provider.dart';
 
 class DeleteAccount extends StatelessWidget {
   DeleteAccount({super.key});
@@ -57,7 +59,8 @@ We value your privacy and are here to assist you. If you have any concerns or re
                       child: Text("Cancel")),
                   TextButton(
                       onPressed: () {
-                        // deleteAccount(context);
+                        Provider.of<DBProfile>(context, listen: false)
+                            .deleteAccount(context);
                       },
                       child: Text("Yes, Delete")),
                 ],
