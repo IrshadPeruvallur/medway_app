@@ -6,18 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medway_app/controller/db_providers/db_profile.dart';
+import 'package:medway_app/controller/edit_profile_provider.dart';
 import 'package:medway_app/services/profile_service.dart';
 import 'package:medway_app/model/profile_model/profile_model.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';
-
-final nameController = TextEditingController();
-final phoneController = TextEditingController();
-final emailController = TextEditingController();
-final dobController = TextEditingController();
-final imagePicker = ImagePicker();
-File? picked;
 
 class EditProfile extends StatefulWidget {
   final String name;
@@ -42,16 +36,20 @@ class EditProfile extends StatefulWidget {
 class _CreateProfileState extends State<EditProfile> {
   @override
   void initState() {
+    final getProvider =
+        Provider.of<EditProfileProvider>(context, listen: false);
     super.initState();
-    nameController.text = widget.name;
-    phoneController.text = widget.number;
-    dobController.text = widget.dob;
-    emailController.text = widget.email;
-    picked = widget.image != null ? File(widget.image) : null;
+    getProvider.nameController.text = widget.name;
+    getProvider.phoneController.text = widget.number;
+    getProvider.dobController.text = widget.dob;
+    getProvider.emailController.text = widget.email;
+    getProvider.picked = widget.image != null ? File(widget.image) : null;
   }
 
   @override
   Widget build(BuildContext context) {
+    final getProvider =
+        Provider.of<EditProfileProvider>(context, listen: false);
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: titleAppBar(title: "Edit Profile"),
@@ -88,7 +86,8 @@ class _CreateProfileState extends State<EditProfile> {
                                         elevation:
                                             const MaterialStatePropertyAll(02)),
                                     onPressed: () {
-                                      updateImage(ImageSource.camera);
+                                      getProvider
+                                          .updateImage(ImageSource.camera);
                                       Navigator.pop(context);
                                     },
                                     icon: const Icon(Icons.camera_alt),
@@ -110,7 +109,8 @@ class _CreateProfileState extends State<EditProfile> {
                                         elevation:
                                             const MaterialStatePropertyAll(02)),
                                     onPressed: () {
-                                      updateImage(ImageSource.gallery);
+                                      getProvider
+                                          .updateImage(ImageSource.gallery);
                                     },
                                     icon: const Icon(Icons.image),
                                     label: const Text("Gallery"))
@@ -122,12 +122,12 @@ class _CreateProfileState extends State<EditProfile> {
                   child: CircleAvatar(
                     radius: screenSize.width * 0.15,
                     backgroundColor: Colors.white,
-                    child: picked == null
+                    child: getProvider.picked == null
                         ? const Image(
                             image: AssetImage('asset/addprofile icon.png'))
                         : ClipOval(
                             child: Image.file(
-                            picked!,
+                            getProvider.picked!,
                             fit: BoxFit.cover,
                             height: 200,
                             width: 200,
@@ -138,7 +138,7 @@ class _CreateProfileState extends State<EditProfile> {
                     keyboardType: TextInputType.name,
                     inputformat:
                         FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
-                    controller: nameController,
+                    controller: getProvider.nameController,
                     label: "Name",
                     hint: "Name"),
                 WTextformField(context,
@@ -146,7 +146,7 @@ class _CreateProfileState extends State<EditProfile> {
                     keyboardType: TextInputType.phone,
                     prificsText: '+91',
                     maxlength: 10,
-                    controller: phoneController,
+                    controller: getProvider.phoneController,
                     label: "Phone",
                     hint: "Phone"),
                 WTextformField(context,
@@ -154,23 +154,24 @@ class _CreateProfileState extends State<EditProfile> {
                     keyboardType: TextInputType.number,
                     label: "DOB",
                     hint: "DOB",
-                    controller: dobController),
+                    controller: getProvider.dobController),
                 WTextformField(context,
                     inputformat: FilteringTextInputFormatter.allow(
                         RegExp(r'[0-9a-zA-Z]')),
                     keyboardType: TextInputType.emailAddress,
                     label: "Email",
                     hint: "Email",
-                    controller: emailController),
+                    controller: getProvider.emailController),
                 SizedBox(
                   height: screenSize.width * 0.05,
                 ),
                 WElevatedButton(
                   context,
                   text: 'Submit',
-                  navigator: () {
+                  navigator: () async {
                     // Provider.of<DBProfile>(context, listen: false).updateUser(widget.index);
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                    await editProfile();
                   },
                 )
               ],
@@ -181,28 +182,60 @@ class _CreateProfileState extends State<EditProfile> {
     );
   }
 
-  onAddUserButtonClicked() async {
-    final _name = nameController.text.trim();
-    final _phone = phoneController.text.trim();
-    final _email = emailController.text.trim();
-    final _dob = dobController.text.trim();
+  // Future<void> editProfile() async {
+  //   final editProvider =
+  //       Provider.of<EditProfileProvider>(context, listen: false);
+  //   final user = UserModel(
+  //       index: widget.index,
+  //       image: editProvider.imagePicker,
+  //       name: editProvider.nameController.text,
+  //       phone: editProvider.phoneController.text,
+  //       email: editProvider.emailController.text,
+  //       dob: editProvider.dobController.text);
 
-    // if (_name.isEmpty || _phone.isEmpty || _email.isEmpty || _dob.isEmpty) {
-    //   return;
-    // }
-    final _user = UserModel(
-        name: _name,
-        phone: _phone,
-        email: _email,
-        dob: _dob,
-        image: picked?.path ?? '');
-    Provider.of<DBProfile>(context, listen: false).addUser(_user);
+  //   await Provider.of<DBProfile>(context, listen: false)
+  //       .updateUser(user.index!, user);
+  //   Navigator.pop(context);
+  // }
+  Future<void> editProfile() async {
+    final editProvider =
+        Provider.of<EditProfileProvider>(context, listen: false);
+    final user = UserModel(
+      index: widget.index,
+      image: editProvider.picked?.path ?? widget.image,
+      name: editProvider.nameController.text,
+      phone: editProvider.phoneController.text,
+      email: editProvider.emailController.text,
+      dob: editProvider.dobController.text,
+    );
+
+    await Provider.of<DBProfile>(context, listen: false)
+        .updateUser(user.index!, user);
+    Navigator.pop(context);
   }
 
-  updateImage(ImageSource source) async {
-    var img = await imagePicker.pickImage(source: source);
-    setState(() {
-      picked = File(img!.path);
-    });
-  }
+  // onAddUserButtonClicked() async {
+  //   final _name = nameController.text.trim();
+  //   final _phone = phoneController.text.trim();
+  //   final _email = emailController.text.trim();
+  //   final _dob = dobController.text.trim();
+
+  //   // if (_name.isEmpty || _phone.isEmpty || _email.isEmpty || _dob.isEmpty) {
+  //   //   return;
+  //   // }
+  //   final _user = UserModel(
+  //       name: _name,
+  //       phone: _phone,
+  //       email: _email,
+  //       dob: _dob,
+  //       image: picked?.path ?? '');
+  //   Provider.of<DBProfile>(context, listen: false).addUser(_user);
+  // }
+
+  // updateImage(ImageSource source) async {
+  //   var img = await imagePicker.pickImage(source: source);
+  //   setState(() {
+  //     picked = File(img!.path);
+  //   });
+  // }
 }

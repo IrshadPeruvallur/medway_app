@@ -6,6 +6,7 @@ import 'package:medway_app/controller/db_providers/db_cancel.dart';
 import 'package:medway_app/controller/db_providers/db_favourite.dart';
 import 'package:medway_app/controller/db_providers/db_profile.dart';
 import 'package:medway_app/controller/doctors_list_provider.dart';
+import 'package:medway_app/controller/edit_profile_provider.dart';
 import 'package:medway_app/controller/search_provider.dart';
 import 'package:medway_app/controller/main_screen_provider.dart';
 import 'package:medway_app/controller/update_provider.dart';
@@ -69,9 +70,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<DBProfile>(
           create: (context) => DBProfile(),
         ),
-        // ChangeNotifierProvider<UpdateProvider>(
-        //   create: (context) => UpdateProvider(),
-        // ),
+        ChangeNotifierProvider<UpdateProvider>(
+          create: (context) => UpdateProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => EditProfileProvider(),
+        )
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

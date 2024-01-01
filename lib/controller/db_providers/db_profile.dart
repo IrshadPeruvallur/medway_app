@@ -18,6 +18,7 @@ class DBProfile extends ChangeNotifier {
 
   Future<void> updateUser(int index, UserModel value) async {
     await _profileServices.updateProfile(value, index);
+    notifyListeners();
     getAllUser();
   }
 

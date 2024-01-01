@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:medway_app/controller/db_providers/db_appointment.dart';
+import 'package:medway_app/controller/update_provider.dart';
 import 'package:medway_app/model/patient_model/patient_model.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/controller/appointment_provider.dart';
@@ -9,13 +10,13 @@ import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';
 
-final rnameController = TextEditingController();
-final rphoneController = TextEditingController();
-final rageController = TextEditingController();
-final rproblemController = TextEditingController();
-final rdateController = TextEditingController();
-final rtimeController = TextEditingController();
-final rgenderController = TextEditingController();
+// final rnameController = TextEditingController();
+// final rphoneController = TextEditingController();
+// final rageController = TextEditingController();
+// final rproblemController = TextEditingController();
+// final rdateController = TextEditingController();
+// final rtimeController = TextEditingController();
+// final rgenderController = TextEditingController();
 
 class ReSheduleAppointment extends StatefulWidget {
   final int index;
@@ -53,15 +54,16 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
   final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
+    final getProvider = Provider.of<UpdateProvider>(context, listen: false);
     // TODO: implement initState
     super.initState();
-    rnameController.text = widget.name;
-    rageController.text = widget.age;
-    rphoneController.text = widget.phone;
-    rproblemController.text = widget.problem;
-    rgenderController.text = widget.gender;
-    rdateController.text = widget.date;
-    rtimeController.text = widget.time;
+    getProvider.rnameController.text = widget.name;
+    getProvider.rageController.text = widget.age;
+    getProvider.rphoneController.text = widget.phone;
+    getProvider.rproblemController.text = widget.problem;
+    getProvider.rgenderController.text = widget.gender;
+    getProvider.rdateController.text = widget.date;
+    getProvider.rtimeController.text = widget.time;
   }
 
   @override
@@ -69,6 +71,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
     final getProvider = Provider.of<AppointmentProvider>(
       context,
     );
+    final editProvider = Provider.of<UpdateProvider>(context, listen: false);
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: WNormalAppBar(context),
@@ -91,14 +94,14 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   inputformat:
                       FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
                   keyboardType: TextInputType.name,
-                  controller: rnameController,
+                  controller: editProvider.rnameController,
                   context,
                   label: 'Name',
                 ),
                 WTextformField(
                   inputformat: FilteringTextInputFormatter.digitsOnly,
                   keyboardType: TextInputType.number,
-                  controller: rphoneController,
+                  controller: editProvider.rphoneController,
                   context,
                   label: 'Phone',
                 ),
@@ -128,7 +131,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   isExpanded: true,
                   value: dropdownvalue,
                   onChanged: (String? newvalue) {
-                    getProvider.changeGender;
+                    getProvider.changeGender(newvalue);
                   },
                   items: const [
                     DropdownMenuItem(
@@ -141,7 +144,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                 WTextformField(
                   inputformat: FilteringTextInputFormatter.digitsOnly,
                   keyboardType: TextInputType.number,
-                  controller: rageController,
+                  controller: editProvider.rageController,
                   context,
                   label: 'Age',
                 ),
@@ -151,7 +154,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                 WTextformField(
                   inputformat:
                       FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
-                  controller: rproblemController,
+                  controller: editProvider.rproblemController,
                   keyboardType: TextInputType.text,
                   context,
                   label: 'Problem',
@@ -168,7 +171,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                       return null;
                     }
                   },
-                  controller: rtimeController,
+                  controller: editProvider.rtimeController,
                   keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
                     labelText: 'Time',
@@ -199,7 +202,7 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                       return null;
                     }
                   },
-                  controller: rdateController,
+                  controller: editProvider.rdateController,
                   keyboardType: TextInputType.datetime,
                   decoration: InputDecoration(
                     labelText: 'Date',
@@ -223,42 +226,40 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
                   height: screenSize.width * 0.04,
                 ),
                 Align(
-                  alignment: Alignment.bottomCenter,
-                  child: WElevatedButton(context, text: 'Reshedule',
-                      navigator: () async {
-                    if (_formKey.currentState!.validate()) {
-                      try {
-                        final patient = PatientModel(
-                          index: widget.index,
-                          doctorpic: widget.doctorpic,
-                          doctorname: widget.doctorname,
-                          doctorspecality: widget.doctorspeciaility,
-                          name: widget.name,
-                          phone: widget.phone,
-                          age: widget.age,
-                          gender: widget.gender,
-                          problem: widget.problem,
-                          time: widget.time,
-                          date: widget.date,
-                        );
-
-                        final dbAppointment =
-                            Provider.of<DBAppointment>(context, listen: false);
-                        await dbAppointment.updateAppointment(
-                            patient, patient.index);
-
-                        Navigator.pop(context);
-                      } catch (error) {
-                        print("Error updating appointment: $error");
+                    alignment: Alignment.bottomCenter,
+                    child: WElevatedButton(context, text: 'Reschedule',
+                        navigator: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await reshedule();
                       }
-                    }
-                  }),
-                ),
+                    })),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> reshedule() async {
+    final editProvider = Provider.of<UpdateProvider>(context, listen: false);
+    final patient = PatientModel(
+      index: widget.index,
+      doctorname: widget.doctorname,
+      doctorspecality: widget.doctorspeciaility,
+      doctorpic: widget.doctorpic,
+      name: editProvider.rnameController.text,
+      phone: editProvider.rphoneController.text,
+      age: editProvider.rageController.text,
+      gender: editProvider.rgenderController.text,
+      problem: editProvider.rproblemController.text,
+      time: editProvider.rtimeController.text,
+      date: editProvider.rdateController.text,
+    );
+
+    await Provider.of<DBAppointment>(context, listen: false)
+        .updateAppointment(patient, patient.index);
+
+    Navigator.pop(context);
   }
 }

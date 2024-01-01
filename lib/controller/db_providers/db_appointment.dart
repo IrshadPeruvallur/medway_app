@@ -23,6 +23,7 @@ class DBAppointment extends ChangeNotifier {
 
   Future<void> updateAppointment(PatientModel value, index) async {
     await _appointmentService.updateAppointment(value, index);
+    notifyListeners();
     await getAllAppointment();
   }
 }
