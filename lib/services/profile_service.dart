@@ -3,13 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/model/cancel_model/canceled_model.dart';
 import 'package:medway_app/model/favourite_model/fvrt_model.dart';
 import 'package:medway_app/model/patient_model/patient_model.dart';
 import 'package:medway_app/model/profile_model/profile_model.dart';
-import 'package:medway_app/view/welcome_pages/welcome_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileServices extends ChangeNotifier {
@@ -29,6 +26,7 @@ class ProfileServices extends ChangeNotifier {
   }
 
   deleteAccount(BuildContext context) async {
+    // ignore: no_leading_underscores_for_local_identifiers
     final _shardPrfs = await SharedPreferences.getInstance();
     await _shardPrfs.clear();
     final patientDB = await Hive.openBox<PatientModel>('patient_db');

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
 import 'package:medway_app/controller/db_providers/db_cancel.dart';
-import 'package:medway_app/services/cancel_service.dart';
-import 'package:medway_app/view/appointments_pages/complete_cancel_appointment.dart';
+import 'package:medway_app/view/appointments_pages/cancel_appointment.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +26,7 @@ class CanceledTab extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.separated(
-                        separatorBuilder: (context, index) => SizedBox(
+                        separatorBuilder: (context, index) => const SizedBox(
                               height: 15,
                             ),
                         itemCount: getProvider.canceledList.length,
@@ -37,7 +36,7 @@ class CanceledTab extends StatelessWidget {
                               builder: (context, value, child) {
                             return Slidable(
                               startActionPane: ActionPane(
-                                  motion: StretchMotion(),
+                                  motion: const StretchMotion(),
                                   children: [
                                     SlidableAction(
                                       onPressed: (context) {
@@ -69,7 +68,8 @@ class CanceledTab extends StatelessWidget {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                           screenSize.width * .03)),
-                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
@@ -77,7 +77,7 @@ class CanceledTab extends StatelessWidget {
                                         captiontext(context,
                                             text:
                                                 '${data.date}  |  ${data.time}'),
-                                        Divider(
+                                        const Divider(
                                           color: Colors.black,
                                         ),
                                         Row(

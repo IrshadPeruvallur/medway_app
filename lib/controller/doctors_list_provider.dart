@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:medway_app/controller/db_providers/db_favourite.dart';
-import 'package:medway_app/services/favourite_service.dart';
 import 'package:medway_app/controller/normal_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -81,14 +80,14 @@ class DoctorsListProvider extends ChangeNotifier {
 
   void toFvrt({context, name, imagepath, speciality}) {
     if (Provider.of<DBFavourite>(context, listen: false).IsDoctorInFvrt(name)) {
-      final snackBar = SnackBar(
+      const snackBar = SnackBar(
         content: Text("Doctor is already in the favorite list."),
-        backgroundColor: const Color.fromARGB(255, 116, 10, 2),
+        backgroundColor: Color.fromARGB(255, 116, 10, 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       onAddToFvrt(name, imagepath, speciality, context);
-      final snackBar = SnackBar(
+      const snackBar = SnackBar(
         content: Text("Doctor has been added to the favorite list."),
         backgroundColor: Color.fromARGB(255, 19, 19, 19),
       );
@@ -99,10 +98,10 @@ class DoctorsListProvider extends ChangeNotifier {
 
   Widget iconColor(name, context) {
     return Provider.of<DBFavourite>(context).IsDoctorInFvrt(name)
-        ? Icon(
+        ? const Icon(
             Icons.favorite,
             color: Colors.red,
           )
-        : Icon(Icons.favorite_border);
+        : const Icon(Icons.favorite_border);
   }
 }

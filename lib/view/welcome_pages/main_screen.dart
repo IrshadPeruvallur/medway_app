@@ -3,15 +3,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:medway_app/controller/db_providers/db_appointment.dart';
-import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/controller/main_screen_provider.dart';
-import 'package:medway_app/view/main_tabs/booking_tab.dart';
-import 'package:medway_app/view/main_tabs/home_tab.dart';
-import 'package:medway_app/view/main_tabs/profile_tab.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
-  MainScreen({Key? key});
+  // ignore: use_key_in_widget_constructors
+  const MainScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {

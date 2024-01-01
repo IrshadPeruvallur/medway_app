@@ -1,10 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/controller/update_provider.dart';
 import 'package:medway_app/model/patient_model/patient_model.dart';
-import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/controller/appointment_provider.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
@@ -55,7 +55,6 @@ class _ReSheduleAppointmentState extends State<ReSheduleAppointment> {
   @override
   void initState() {
     final getProvider = Provider.of<UpdateProvider>(context, listen: false);
-    // TODO: implement initState
     super.initState();
     getProvider.rnameController.text = widget.name;
     getProvider.rageController.text = widget.age;

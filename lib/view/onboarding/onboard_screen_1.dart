@@ -15,7 +15,7 @@ class OnboardScreen1 extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image(
+              const Image(
                 image: AssetImage('asset/MED_prescription_preview.jpg'),
                 width: double.infinity,
               ),
@@ -47,14 +47,14 @@ class OnboardScreen1 extends StatelessWidget {
             height: MediaQuery.of(context).size.width * 0.15,
             child: ElevatedButton(
               style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(
+                  backgroundColor: const MaterialStatePropertyAll(
                       Color.fromARGB(255, 16, 105, 140)),
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(screenSize.width * 0.5)))),
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => OnboardScreen2()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const OnboardScreen2()));
               },
               child: Icon(
                 Icons.arrow_forward_ios,

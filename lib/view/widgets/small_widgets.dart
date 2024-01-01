@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/controller/db_providers/db_favourite.dart';
-import 'package:medway_app/services/favourite_service.dart';
 import 'package:medway_app/controller/normal_controller.dart';
-import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/controller/doctors_list_provider.dart';
-import 'package:medway_app/controller/search_provider.dart';
 import 'package:medway_app/view/appointments_pages/appointment.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
@@ -283,7 +280,6 @@ Widget doctorsList(
   required int index,
 }) {
   var screenSize = MediaQuery.of(context).size;
-  final getProvider = Provider.of<DBFavourite>(context);
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     child: Column(
@@ -697,12 +693,11 @@ Widget DoctorCard(context,
     required String imagepath}) {
   var screenSize = MediaQuery.of(context).size;
   final getProvider = Provider.of<DoctorsListProvider>(context, listen: false);
-  print("Print DoctorCard");
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
     child: Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         ListTile(
@@ -748,7 +743,6 @@ Widget DoctorCard(context,
           ),
           trailing:
               Consumer<DoctorsListProvider>(builder: (context, value, child) {
-            print("Print Fvrt");
             return IconButton(
               icon: value.iconColor(name, context),
               onPressed: () {
@@ -781,7 +775,7 @@ Widget DoctorCard(context,
                 'Make Appointment ',
                 style: TextStyle(
                   fontSize: screenSize.width * .05,
-                  color: Color.fromARGB(255, 16, 105, 140),
+                  color: const Color.fromARGB(255, 16, 105, 140),
                 ),
               ),
               style: ButtonStyle(
@@ -790,7 +784,7 @@ Widget DoctorCard(context,
                   borderRadius: BorderRadius.circular(screenSize.width * .03),
                 )),
                 backgroundColor: MaterialStateProperty.all(
-                  Color.fromARGB(255, 223, 246, 255),
+                  const Color.fromARGB(255, 223, 246, 255),
                 ),
               ),
             ),

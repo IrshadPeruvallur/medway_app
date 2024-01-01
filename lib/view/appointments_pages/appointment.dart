@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medway_app/controller/appointment_provider.dart';
 import 'package:medway_app/view/settings_tabs/favourite_screen.dart';
-import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 
 import 'package:provider/provider.dart';
@@ -36,14 +35,14 @@ class Appointment extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => FavouriteScreen(),
+                      builder: (context) => const FavouriteScreen(),
                     ));
               },
-              icon: Icon(Icons.favorite_border))
+              icon: const Icon(Icons.favorite_border))
         ],
         elevation: 0,
         backgroundColor: Colors.transparent,
-        foregroundColor: Color.fromARGB(255, 16, 105, 140),
+        foregroundColor: const Color.fromARGB(255, 16, 105, 140),
       ),
       body: SafeArea(
         child: Form(
@@ -54,7 +53,7 @@ class Appointment extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                       // height: screenSize.width * .054,
                       ),
                   doctersCard(context,

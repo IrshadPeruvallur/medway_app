@@ -1,4 +1,4 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, unnecessary_null_comparison
+// ignore_for_file: no_leading_underscores_for_local_identifiers, unnecessary_null_comparison, use_build_context_synchronously
 
 import 'dart:io';
 
@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medway_app/controller/db_providers/db_profile.dart';
 import 'package:medway_app/controller/edit_profile_provider.dart';
-import 'package:medway_app/services/profile_service.dart';
 import 'package:medway_app/model/profile_model/profile_model.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
@@ -169,8 +168,6 @@ class _CreateProfileState extends State<EditProfile> {
                   context,
                   text: 'Submit',
                   navigator: () async {
-                    // Provider.of<DBProfile>(context, listen: false).updateUser(widget.index);
-                    // Navigator.pop(context);
                     await editProfile();
                   },
                 )
@@ -182,21 +179,6 @@ class _CreateProfileState extends State<EditProfile> {
     );
   }
 
-  // Future<void> editProfile() async {
-  //   final editProvider =
-  //       Provider.of<EditProfileProvider>(context, listen: false);
-  //   final user = UserModel(
-  //       index: widget.index,
-  //       image: editProvider.imagePicker,
-  //       name: editProvider.nameController.text,
-  //       phone: editProvider.phoneController.text,
-  //       email: editProvider.emailController.text,
-  //       dob: editProvider.dobController.text);
-
-  //   await Provider.of<DBProfile>(context, listen: false)
-  //       .updateUser(user.index!, user);
-  //   Navigator.pop(context);
-  // }
   Future<void> editProfile() async {
     final editProvider =
         Provider.of<EditProfileProvider>(context, listen: false);
@@ -213,29 +195,4 @@ class _CreateProfileState extends State<EditProfile> {
         .updateUser(user.index!, user);
     Navigator.pop(context);
   }
-
-  // onAddUserButtonClicked() async {
-  //   final _name = nameController.text.trim();
-  //   final _phone = phoneController.text.trim();
-  //   final _email = emailController.text.trim();
-  //   final _dob = dobController.text.trim();
-
-  //   // if (_name.isEmpty || _phone.isEmpty || _email.isEmpty || _dob.isEmpty) {
-  //   //   return;
-  //   // }
-  //   final _user = UserModel(
-  //       name: _name,
-  //       phone: _phone,
-  //       email: _email,
-  //       dob: _dob,
-  //       image: picked?.path ?? '');
-  //   Provider.of<DBProfile>(context, listen: false).addUser(_user);
-  // }
-
-  // updateImage(ImageSource source) async {
-  //   var img = await imagePicker.pickImage(source: source);
-  //   setState(() {
-  //     picked = File(img!.path);
-  //   });
-  // }
 }

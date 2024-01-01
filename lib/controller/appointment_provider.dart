@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/model/patient_model/patient_model.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
-import 'package:provider/provider.dart';
 
 class AppointmentProvider extends ChangeNotifier {
   final nameController = TextEditingController();
@@ -73,6 +71,7 @@ class AppointmentProvider extends ChangeNotifier {
       return;
     }
 
+    // ignore: no_leading_underscores_for_local_identifiers
     final _patient = PatientModel(
         doctorpic: docterPic,
         doctorname: docterName,
@@ -104,6 +103,7 @@ class AppointmentProvider extends ChangeNotifier {
             time: time);
       }));
     } catch (error) {
+      // ignore: avoid_print
       print("Error adding appointment: $error");
     }
   }

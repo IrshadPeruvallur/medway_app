@@ -20,21 +20,21 @@ class SettingsTab extends StatelessWidget {
     'Delete Account',
   ];
   final List profileIcons = [
-    Icon(Icons.person_2_outlined),
-    Icon(Icons.favorite_border),
-    Icon(Icons.settings),
-    Icon(Icons.help),
-    Icon(Icons.lock_outline),
-    Icon(Icons.delete_rounded),
+    const Icon(Icons.person_2_outlined),
+    const Icon(Icons.favorite_border),
+    const Icon(Icons.settings),
+    const Icon(Icons.help),
+    const Icon(Icons.lock_outline),
+    const Icon(Icons.delete_rounded),
   ];
 
   final List profileTabs = [
     MyProfile(),
-    FavouriteScreen(),
+    const FavouriteScreen(),
     Settings(),
     HelpCenter(),
-    PrivacyPolicy(),
-    DeleteAccount()
+    const PrivacyPolicy(),
+    const DeleteAccount()
   ];
 
   @override
@@ -42,7 +42,7 @@ class SettingsTab extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: const Text("Profile"),
         centerTitle: true,
         actions: [
           IconButton(
@@ -66,21 +66,21 @@ class SettingsTab extends StatelessWidget {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text("Cancel")),
+                          child: const Text("Cancel")),
                       TextButton(
                           onPressed: () {
                             fsignout(context);
                           },
-                          child: Text("Log out")),
+                          child: const Text("Log out")),
                     ],
                   ),
                 );
               },
-              icon: Icon(Icons.logout_outlined))
+              icon: const Icon(Icons.logout_outlined))
         ],
         elevation: 0,
         backgroundColor: Colors.white,
-        foregroundColor: Color.fromARGB(255, 0, 0, 0),
+        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
       ),
       body: SafeArea(
         child: Padding(
@@ -94,7 +94,7 @@ class SettingsTab extends StatelessWidget {
                   )),
               Expanded(
                 child: ListView.separated(
-                  separatorBuilder: (context, index) => SizedBox(
+                  separatorBuilder: (context, index) => const SizedBox(
                     height: 10,
                   ),
                   itemCount: profileList.length,

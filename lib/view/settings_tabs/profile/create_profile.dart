@@ -6,14 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medway_app/controller/db_providers/db_profile.dart';
-import 'package:medway_app/services/profile_service.dart';
 import 'package:medway_app/model/profile_model/profile_model.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';
 
 class CreateProfile extends StatefulWidget {
-  CreateProfile({super.key});
+  const CreateProfile({super.key});
 
   @override
   State<CreateProfile> createState() => _CreateProfileState();

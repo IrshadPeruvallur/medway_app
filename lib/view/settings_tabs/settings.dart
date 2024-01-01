@@ -23,7 +23,7 @@ class Settings extends StatelessWidget {
             child: ListView.separated(
               // physics: NeverScrollableScrollPhysics(),
               // shrinkWrap: true,
-              separatorBuilder: (context, index) => SizedBox(
+              separatorBuilder: (context, index) => const SizedBox(
                 height: 10,
               ),
               itemCount: text.length,

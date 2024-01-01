@@ -1,6 +1,7 @@
+// ignore_for_file: avoid_unnecessary_containers, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:medway_app/controller/db_providers/db_appointment.dart';
-import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 import 'package:medway_app/view/main_tabs/booking_tab.dart';
 import 'package:medway_app/view/doctors_list_pages/doctors_list.dart';
@@ -39,7 +40,7 @@ class HomeTab extends StatelessWidget {
       extendBody: true,
       appBar: AppBar(
         toolbarHeight: 60,
-        leading: Image(
+        leading: const Image(
           image: AssetImage('asset/medcalway-white-logo.png'),
           width: 20,
           color: Color.fromARGB(255, 16, 105, 140),
@@ -50,37 +51,37 @@ class HomeTab extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => FavouriteScreen(),
+                  builder: (context) => const FavouriteScreen(),
                 ),
               );
             },
-            icon: Icon(Icons.favorite_outline),
+            icon: const Icon(Icons.favorite_outline),
           ),
           IconButton(
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SearchPatient(),
+                  builder: (context) => const SearchPatient(),
                 ),
               );
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           )
         ],
         elevation: 0,
         centerTitle: true,
         title: Image(
-          image: AssetImage('asset/medway Text.png'),
+          image: const AssetImage('asset/medway Text.png'),
           width: screenSize.width * 0.3,
         ),
         backgroundColor: Colors.transparent,
-        foregroundColor: Color.fromARGB(255, 16, 105, 140),
+        foregroundColor: const Color.fromARGB(255, 16, 105, 140),
       ),
       body: SafeArea(
         child: Container(
           height: screenSize.height * 1,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('asset/background.jpg'),
               fit: BoxFit.cover,
@@ -97,7 +98,7 @@ class HomeTab extends StatelessWidget {
                   Container(
                     // height: screenSize.width * 0.4,
                     child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: 1,
                       itemBuilder: (context, index) {
@@ -105,7 +106,7 @@ class HomeTab extends StatelessWidget {
                           // valueListenable: patientListNotifier,
                           builder: (context, value, child) {
                             if (value.patientList.isEmpty) {
-                              return SizedBox(
+                              return const SizedBox(
                                 width: double.infinity,
                                 // height: screenSize.width * .3,
                                 child: Image(
@@ -126,7 +127,8 @@ class HomeTab extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => BookingTab(),
+                                        builder: (context) =>
+                                            const BookingTab(),
                                       ),
                                     );
                                   },
@@ -165,7 +167,7 @@ class HomeTab extends StatelessWidget {
                       },
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   WSpaceBetweenText(
                     context,
                     text: 'Doctor Speciality',
@@ -173,7 +175,7 @@ class HomeTab extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DoctorsList(),
+                          builder: (context) => const DoctorsList(),
                         ),
                       );
                     },
@@ -194,12 +196,12 @@ class HomeTab extends StatelessWidget {
                     navigator: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
-                        return DoctorsList();
+                        return const DoctorsList();
                       }));
                     },
                   ),
                   ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: doctorsName.length,
                       itemBuilder: (context, index) {

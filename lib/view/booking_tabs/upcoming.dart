@@ -1,11 +1,10 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:medway_app/controller/db_providers/db_appointment.dart';
 import 'package:medway_app/controller/db_providers/db_cancel.dart';
 import 'package:medway_app/model/cancel_model/canceled_model.dart';
-import 'package:medway_app/services/cancel_service.dart';
-import 'package:medway_app/controller/normal_controller.dart';
-import 'package:medway_app/services/appointment_service.dart';
 import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 import 'package:medway_app/view/appointments_pages/reshedule_appointment.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
@@ -29,7 +28,7 @@ class UpComingTab extends StatelessWidget {
               ? Lottie.asset('asset/empty.json')
               : ListView.separated(
                   shrinkWrap: true,
-                  separatorBuilder: (context, index) => SizedBox(
+                  separatorBuilder: (context, index) => const SizedBox(
                     height: 15,
                   ),
                   itemCount: consumervalue.length,
@@ -42,7 +41,7 @@ class UpComingTab extends StatelessWidget {
                         borderRadius:
                             BorderRadius.circular(screenSize.width * .03),
                       ),
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: const Color.fromARGB(255, 255, 255, 255),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -51,7 +50,7 @@ class UpComingTab extends StatelessWidget {
                               context,
                               text: '${data.time} | ${data.time}',
                             ),
-                            Divider(
+                            const Divider(
                               color: Colors.black,
                             ),
                             GestureDetector(
@@ -126,7 +125,8 @@ class UpComingTab extends StatelessWidget {
                                   width: 150,
                                   child: ElevatedButton(
                                     style: ButtonStyle(
-                                      backgroundColor: MaterialStatePropertyAll(
+                                      backgroundColor:
+                                          const MaterialStatePropertyAll(
                                         Color.fromARGB(255, 16, 105, 140),
                                       ),
                                       shape: MaterialStatePropertyAll(
@@ -166,7 +166,7 @@ class UpComingTab extends StatelessWidget {
                                               onPressed: () {
                                                 Navigator.pop(context);
                                               },
-                                              child: Text("Cancel"),
+                                              child: const Text("Cancel"),
                                             ),
                                             TextButton(
                                               onPressed: () async {
@@ -197,7 +197,7 @@ class UpComingTab extends StatelessWidget {
                                                   Navigator.pop(context);
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
-                                                    SnackBar(
+                                                    const SnackBar(
                                                       content: Text(
                                                           'Appointment canceled successfully!'),
                                                     ),
@@ -209,27 +209,28 @@ class UpComingTab extends StatelessWidget {
                                                       context); // Close the dialog
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(
-                                                    SnackBar(
+                                                    const SnackBar(
                                                       content: Text(
                                                           'Failed to cancel appointment. Please try again.'),
                                                     ),
                                                   );
                                                 }
                                               },
-                                              child: Text("Yes, Cancel"),
+                                              child: const Text("Yes, Cancel"),
                                             ),
                                           ],
                                         ),
                                       );
                                     },
-                                    child: Text('Cancel'),
+                                    child: const Text('Cancel'),
                                   ),
                                 ),
                                 SizedBox(
                                   width: 150,
                                   child: ElevatedButton(
                                     style: ButtonStyle(
-                                      backgroundColor: MaterialStatePropertyAll(
+                                      backgroundColor:
+                                          const MaterialStatePropertyAll(
                                         Color.fromARGB(255, 16, 105, 140),
                                       ),
                                       shape: MaterialStatePropertyAll(
@@ -261,7 +262,7 @@ class UpComingTab extends StatelessWidget {
                                         ),
                                       );
                                     },
-                                    child: Text('Reschedule'),
+                                    child: const Text('Reschedule'),
                                   ),
                                 ),
                               ],

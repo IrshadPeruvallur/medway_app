@@ -14,7 +14,7 @@ class OnboardScreen3 extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Image(
+              const Image(
                 image: AssetImage(
                     'asset/modern-flat-illustration-doctor-wearing-mask-stethoscope_115122-1428.jpg'),
                 width: double.infinity,
@@ -49,7 +49,7 @@ class OnboardScreen3 extends StatelessWidget {
               height: MediaQuery.of(context).size.width * 0.15,
               child: ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: const MaterialStatePropertyAll(
                         Color.fromARGB(255, 16, 105, 140)),
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50)))),
@@ -67,7 +67,7 @@ class OnboardScreen3 extends StatelessWidget {
               height: MediaQuery.of(context).size.width * 0.15,
               child: ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: const MaterialStatePropertyAll(
                         Color.fromARGB(255, 16, 105, 140)),
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                         borderRadius:

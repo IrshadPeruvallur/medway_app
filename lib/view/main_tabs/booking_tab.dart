@@ -15,7 +15,7 @@ class BookingTab extends StatelessWidget {
           // leading: IconButton(
           //     onPressed: () => Navigator.pop(context),
           //     icon: Icon(Icons.arrow_back_ios)),
-          bottom: TabBar(
+          bottom: const TabBar(
               labelColor: Color.fromARGB(255, 16, 105, 140),
               indicatorColor: Color.fromARGB(255, 16, 105, 140),
               tabs: [
@@ -33,29 +33,29 @@ class BookingTab extends StatelessWidget {
           automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: Colors.white,
-          foregroundColor: Color.fromARGB(255, 16, 105, 140),
-          title: Text('My Booking'),
+          foregroundColor: const Color.fromARGB(255, 16, 105, 140),
+          title: const Text('My Booking'),
           actions: [
             IconButton(
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SearchPatient(),
+                        builder: (context) => const SearchPatient(),
                       ));
                 },
-                icon: Icon(Icons.search))
+                icon: const Icon(Icons.search))
           ],
         ),
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('asset/background.jpg'),
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
             ),
           ),
-          child: TabBarView(
+          child: const TabBarView(
               children: [UpComingTab(), /*  CompletedTab(), */ CanceledTab()]),
         ),
       ),

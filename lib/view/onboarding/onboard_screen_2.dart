@@ -14,7 +14,7 @@ class OnboardScreen2 extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Image(
+              const Image(
                 image: AssetImage('asset/istockphoto-1333890585-612x612.jpg'),
                 width: double.infinity,
               ),
@@ -48,7 +48,7 @@ class OnboardScreen2 extends StatelessWidget {
               height: MediaQuery.of(context).size.width * 0.15,
               child: ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: const MaterialStatePropertyAll(
                         Color.fromARGB(255, 16, 105, 140)),
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                         borderRadius:
@@ -67,14 +67,14 @@ class OnboardScreen2 extends StatelessWidget {
               height: MediaQuery.of(context).size.width * 0.15,
               child: ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: const MaterialStatePropertyAll(
                         Color.fromARGB(255, 16, 105, 140)),
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(screenSize.width * 0.5)))),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => OnboardScreen3()));
+                      builder: (context) => const OnboardScreen3()));
                 },
                 child: Icon(
                   Icons.arrow_forward_ios,

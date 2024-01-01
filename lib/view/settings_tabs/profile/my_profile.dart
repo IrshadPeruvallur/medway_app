@@ -1,8 +1,9 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:medway_app/controller/db_providers/db_profile.dart';
-import 'package:medway_app/services/profile_service.dart';
 import 'package:medway_app/view/settings_tabs/profile/create_profile.dart';
 import 'package:medway_app/view/settings_tabs/profile/edit_profile.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
@@ -21,7 +22,7 @@ class MyProfile extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Profile"),
+        title: const Text("My Profile"),
         centerTitle: true,
         // actions: [
         //   IconButton(
@@ -36,7 +37,7 @@ class MyProfile extends StatelessWidget {
         // ],
         elevation: 0,
         backgroundColor: Colors.white,
-        foregroundColor: Color.fromARGB(255, 0, 0, 0),
+        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
       ),
       body: SafeArea(
         child: Padding(
@@ -44,7 +45,7 @@ class MyProfile extends StatelessWidget {
             child: getProvider.profileList.isEmpty
                 ? Column(
                     children: [
-                      Center(
+                      const Center(
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
                           backgroundImage:
@@ -61,10 +62,10 @@ class MyProfile extends StatelessWidget {
                           onTap: () =>
                               Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return CreateProfile();
+                              return const CreateProfile();
                             },
                           )),
-                          title: Text("Complete your Profile"),
+                          title: const Text("Complete your Profile"),
                           trailing: Icon(
                             Icons.arrow_forward_ios,
                             size: screenSize.width * 0.05,
@@ -84,7 +85,7 @@ class MyProfile extends StatelessWidget {
                             backgroundColor: Colors.white,
                             backgroundImage: data.image != null
                                 ? FileImage(File(data.image))
-                                : AssetImage('asset/profile_icons.png')
+                                : const AssetImage('asset/profile_icons.png')
                                     as ImageProvider<Object>?,
                           ),
                           WTitleText(context,
@@ -113,9 +114,11 @@ class MyProfile extends StatelessWidget {
                           ElevatedButton(
                               style: ButtonStyle(
                                   backgroundColor:
-                                      MaterialStatePropertyAll(Colors.white),
+                                      const MaterialStatePropertyAll(
+                                          Colors.white),
                                   foregroundColor:
-                                      MaterialStatePropertyAll(Colors.black),
+                                      const MaterialStatePropertyAll(
+                                          Colors.black),
                                   shape: MaterialStatePropertyAll(
                                       RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
@@ -134,7 +137,7 @@ class MyProfile extends StatelessWidget {
                                   },
                                 ));
                               },
-                              child: Text("Edit Profile")),
+                              child: const Text("Edit Profile")),
                         ],
                       );
                     },

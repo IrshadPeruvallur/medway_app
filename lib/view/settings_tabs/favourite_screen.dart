@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:lottie/lottie.dart';
 import 'package:medway_app/controller/db_providers/db_favourite.dart';
-import 'package:medway_app/services/favourite_service.dart';
 import 'package:medway_app/view/appointments_pages/appointment.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';
 
 class FavouriteScreen extends StatelessWidget {
-  FavouriteScreen({super.key});
+  const FavouriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class FavouriteScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.separated(
-                        separatorBuilder: (context, index) => SizedBox(
+                        separatorBuilder: (context, index) => const SizedBox(
                               height: 10,
                             ),
                         itemCount: getProvider.favouritedList.length,
@@ -36,13 +35,13 @@ class FavouriteScreen extends StatelessWidget {
                           final data = getProvider.favouritedList[index];
                           return Slidable(
                               startActionPane: ActionPane(
-                                  motion: StretchMotion(),
+                                  motion: const StretchMotion(),
                                   children: [
                                     SlidableAction(
                                       backgroundColor:
-                                          Color.fromARGB(255, 121, 0, 0),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
+                                          const Color.fromARGB(255, 121, 0, 0),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(20)),
                                       onPressed: (context) {
                                         getProvider.deleterFromFvrt(index);
                                       },
@@ -52,8 +51,8 @@ class FavouriteScreen extends StatelessWidget {
                                     //   width: screenSize.width * .02,
                                     // ),
                                     SlidableAction(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 16, 105, 140),
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 16, 105, 140),
                                       borderRadius: BorderRadius.circular(
                                           screenSize.width * .05),
                                       icon: Icons.calendar_month,

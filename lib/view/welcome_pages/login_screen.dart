@@ -49,8 +49,6 @@ class LoginScreen extends StatelessWidget {
                     text: 'Login',
                     navigator: () {
                       if (_formKey.currentState!.validate()) {
-                        // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        //     builder: (context) => MainScreen()));
                         checklogin(
                             context, _emailController, _passwordController);
                       }

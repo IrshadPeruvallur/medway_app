@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:medway_app/model/patient_model/patient_model.dart';
-import 'package:medway_app/services/appointment_service.dart';
-import 'package:medway_app/view/appointments_pages/my_appointment_screen.dart';
 
 class UpdateProvider extends ChangeNotifier {
   final rnameController = TextEditingController();

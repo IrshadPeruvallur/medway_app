@@ -1,13 +1,13 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:medway_app/controller/db_providers/db_profile.dart';
-import 'package:medway_app/services/appointment_service.dart';
-import 'package:medway_app/services/profile_service.dart';
 import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';
 
 class DeleteAccount extends StatelessWidget {
-  DeleteAccount({super.key});
+  const DeleteAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ App Access: You will no longer have access to Medway services.
 If you are certain about deleting your account, please enter your password to confirm. If not, you can cancel this action to retain your account and data.
 
 We value your privacy and are here to assist you. If you have any concerns or require support, please contact our customer service at [support@medway.com].'''),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           WElevatedButton(context, navigator: () {
@@ -56,13 +56,13 @@ We value your privacy and are here to assist you. If you have any concerns or re
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: Text("Cancel")),
+                      child: const Text("Cancel")),
                   TextButton(
                       onPressed: () {
                         Provider.of<DBProfile>(context, listen: false)
                             .deleteAccount(context);
                       },
-                      child: Text("Yes, Delete")),
+                      child: const Text("Yes, Delete")),
                 ],
               ),
             );

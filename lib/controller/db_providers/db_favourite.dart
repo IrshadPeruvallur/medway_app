@@ -20,6 +20,7 @@ class DBFavourite extends ChangeNotifier {
     getAllFavourite();
   }
 
+  // ignore: non_constant_identifier_names
   bool IsDoctorInFvrt(dName) {
     return favouritedList.any((item) => item.dName == dName);
   }
