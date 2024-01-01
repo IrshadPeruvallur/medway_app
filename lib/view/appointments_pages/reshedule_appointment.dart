@@ -10,14 +10,6 @@ import 'package:medway_app/view/widgets/main_widgets.dart';
 import 'package:medway_app/view/widgets/small_widgets.dart';
 import 'package:provider/provider.dart';
 
-// final rnameController = TextEditingController();
-// final rphoneController = TextEditingController();
-// final rageController = TextEditingController();
-// final rproblemController = TextEditingController();
-// final rdateController = TextEditingController();
-// final rtimeController = TextEditingController();
-// final rgenderController = TextEditingController();
-
 class ReSheduleAppointment extends StatefulWidget {
   final int index;
   final String doctorname;
